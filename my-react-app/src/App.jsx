@@ -3,6 +3,7 @@ import Input from "./components/Input";
 import ListGroup from "./components/ListGroup";
 import { Fragment, useState } from "react";
 import { ParseExpression } from "./utils/ParseExpressionUtil";
+import "./App.css";
 
 function App() {
     const [output, setOutput] = useState("");
