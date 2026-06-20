@@ -3,9 +3,11 @@ import Input from "./components/Input";
 import ListGroup from "./components/ListGroup";
 import { Fragment, useState } from "react";
 import { ParseExpression } from "./utils/ParseExpressionUtil";
+import { GetDailyNumbers } from "./utils/DailyNumbers";
 import "./App.css";
 
 function App() {
+    const { start, continuing, target } = GetDailyNumbers();
     const [output, setOutput] = useState("");
     const [valid, setValidity] = useState(false);
 
@@ -36,6 +38,9 @@ function App() {
         {/*on the left top, tells user what the starting, continuing and target numbers are*/}
         <div className="info-bracket">
             <h5>TODAY'S NUMBERS</h5>
+            <p>Start: {start}</p>
+            <p>Continuing: {continuing}</p>
+            <p>Target: {target}</p>
         </div>
 
         {/*on the left bottom, includes valid operations*/}
@@ -46,12 +51,12 @@ function App() {
 
         {/*on the right top, scrollable*/}
         <div className="scoreboard">
-
+            <p>scoreboard placeholder</p>
         </div>
 
         {/*on the right bottom*/}
         <div className="nameInput">
-
+            <p>nameInput placeholder</p>
         </div>
         </div>
     );

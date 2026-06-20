@@ -1,6 +1,9 @@
 import { all, create, exp } from "mathjs";
+import { GetDailyNumbers } from "./DailyNumbers";
+
 const math = create(all);
 const limitedEvaluate = math.evaluate;
+const { start, continuing, target } = GetDailyNumbers();
 
 math.import(
     {
@@ -33,9 +36,9 @@ export function evaluate(expression) {
 // will return an array: [0] is the output string, [1] is the number of continuing digits (-1 if output didnt meet all requirements)
 export function ParseExpression(expression) {
     let output;
-    let startingNumber = 2;
-    let continuingNumber = 5;
-    let targetNumber = 10;
+    let startingNumber = start;
+    let continuingNumber = continuing;
+    let targetNumber = target;
 
     // Check if its legit math
     const trimmedExpr = expression.replace(/\s/g, "");
