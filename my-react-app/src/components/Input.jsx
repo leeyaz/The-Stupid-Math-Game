@@ -8,7 +8,7 @@ function Input({onSubmit}) {
         <>
             <input
                 type="text"
-                placeholder="Enter the MATH"
+                placeholder="Enter the MATH EXPRESSION"
                 value={currInput}
                 onChange={(e) => {
                     setCurrInput(e.target.value)
