@@ -55,8 +55,8 @@ export function ParseExpression(expression) {
             b: Only contains the continuing number afterwards
     */
 
-    const numbersFound = trimmedExpr.match(/\d+/g);
-    const regEx = new RegExp(`^${continuingNumber}+$`);
+    const numbersFound = trimmedExpr.match(/-?\d+/g);
+    const regEx = new RegExp(`^-?${Math.abs(continuingNumber)}+$`);
 
     for (let i = 0; i < numbersFound.length; i++) {
         const currentNum = numbersFound[i];

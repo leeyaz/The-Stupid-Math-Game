@@ -41,6 +41,7 @@ function App() {
             <p>Start: {start}</p>
             <p>Continuing: {continuing}</p>
             <p>Target: {target}</p>
+            <p>Available Operations: +, -, *, /, (, )</p>
         </div>
 
         {/*on the left bottom, includes valid operations*/}
