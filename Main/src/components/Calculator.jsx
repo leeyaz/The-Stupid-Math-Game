@@ -11,11 +11,10 @@ function Calculator() {
         const [output, numContinuing] = ParseExpression(value);
 
         if (numContinuing !== -1) {
-            const score = 200 / (numContinuing + 1);
-            setOutput(
-                "Yay you did it! Your score was " +
-                    Math.round(score).toString(),
-            );
+            const noWhiteSpace = value.replace(/\s/g, "");
+            const score = Math.round(50000 / noWhiteSpace.length ** 2);
+            console.log(noWhiteSpace.length);
+            setOutput("Yay you did it! Your score was " + score.toString());
             setValidity(true);
         } else {
             setOutput(output);

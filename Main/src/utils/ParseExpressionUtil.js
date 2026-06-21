@@ -29,10 +29,37 @@ math.import(
     { override: true },
 );
 
+const restrictedConstants = [
+    "pi",
+    "PI",
+    "e",
+    "E",
+    "LN2",
+    "LN10",
+    "LOG10E",
+    "NaN",
+    "null",
+    "phi",
+    "SQRT1_2",
+    "SQRT2",
+    "tau",
+    "version",
+];
+
+const restrictConstantsScope = Object.fromEntries(
+    restrictedConstants.map((key) => [
+        key,
+        () => {
+            throw new Error(key + " is not allowed!");
+        },
+    ]),
+);
+
 export function evaluate(expression) {
-    const result = limitedEvaluate(expression);
-    if (typeof result === "object" || typeof result === "function") {
-        throw new Error("invalid expression");
+    // Remove restrictConstantsScope below, or change the restrictedConstants array if needed.
+    const result = limitedEvaluate(expression, restrictConstantsScope);
+    if (typeof result !== "number") {
+        throw new Error("Invalid expression!");
     }
     return result.toString();
 }
