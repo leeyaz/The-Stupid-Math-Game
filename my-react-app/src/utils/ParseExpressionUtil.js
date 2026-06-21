@@ -32,7 +32,7 @@ math.import(
 export function evaluate(expression) {
     const result = limitedEvaluate(expression);
     if (typeof result === "object") {
-        throw new Error("invalid expression")
+        throw new Error("invalid expression");
     }
     return result.toString();
 }
@@ -59,12 +59,12 @@ export function ParseExpression(expression) {
             b: Only contains the continuing number afterwards
     */
 
-    const numbersFound = trimmedExpr.match(/-?\d+/g) || [];
+    const numbersFound = trimmedExpr.match(/\d+/g) || []; //trimmedExpr.match(/-?\d+/g) || [];
     if (numbersFound.length === 0) {
         return ["No numbers found in expression", -1];
     }
 
-    const regEx = new RegExp(`^-?${Math.abs(continuingNumber)}+$`);
+    const regEx = new RegExp(`^${continuingNumber}+$`); //new RegExp(`^-?${Math.abs(continuingNumber)}+$`);
 
     for (let i = 0; i < numbersFound.length; i++) {
         const currentNum = numbersFound[i];
@@ -85,7 +85,7 @@ export function ParseExpression(expression) {
 
     // check if output equals the target number
     if (output !== targetNumber.toString()) {
-        return ["Didn't reach target of "+targetNumber.toString(), -1];
+        return ["Didn't reach target of " + targetNumber.toString(), -1];
     }
 
     return [output, numbersFound.length - 1];
