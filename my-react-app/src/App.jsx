@@ -1,9 +1,16 @@
 import Calculator from "./components/Calculator";
 import { GetDailyNumbers } from "./utils/DailyNumbers";
+import { saveScore, getScores } from "./utils/Scoreboard";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
     const { start, continuing, target } = GetDailyNumbers();
+    const [scores, setScores] = useState([]);
+
+    useEffect(() => {
+        getScores().then(data => setScores(data));
+    }, []);
 
     return (
         <div className="container">
@@ -21,13 +28,13 @@ function App() {
             {/*on the left top, tells user what the starting, continuing and target numbers are*/}
             <div className="info-bracket">
                 <h5>TODAY'S NUMBERS</h5>
-                <p>Start: {start}</p>
-                <p>Continuing: {continuing}</p>
-                <p>Target: {target}</p>
+                <p>Start: <b>{start}</b></p>
+                <p>Continuing: <b>{continuing}</b></p>
+                <p>Target: <b>{target}</b></p>
                 <p>
                     Available Operations: +, -, *, /, (, ), ^ (power), %
                     (modulus or percentage), ! (factorial), sin, cos, tan, sec,
-                    csc, cot, floor, pi, e, ...and more. Check out{" "}
+                    csc, cot, floor, abs, pi, e, ...and more. Check out{" "}
                     <a href="https://mathjs.org/docs/expressions/syntax.html">
                         this website
                     </a>{" "}
@@ -50,13 +57,33 @@ function App() {
                     expression, your goal is to find the shortest expression.
                     All number combinations are possible. See above for
                     available operations, numbers randomize from 0 to 100 every
-                    day. Have fun playing!! :)
+                    day, and the scoreboard also resets every day. Have fun playing!! :)
                 </p>
             </div>
 
             {/*on the right top, scrollable*/}
             <div className="scoreboard">
-                <p>scoreboard placeholder</p>
+                <h5>SCOREBOARD</h5>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {scores.map((entry, i) => (
+                            <tr key={i}>
+                                <td>{i+1}</td>
+                                <td>{entry.name}</td>
+                                <td>{entry.score}</td>
+                                <td>{entry.time}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
 
             {/*on the right bottom*/}
