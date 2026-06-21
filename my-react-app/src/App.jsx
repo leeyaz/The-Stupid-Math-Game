@@ -54,7 +54,7 @@ function App() {
                 </p>
             </div>
 
-            {/*on the right top, scrollable*/}
+            {/*on the right top, scrollable. Currently the scoreboard should work perfectly.*/}
             <div className="scoreboard">
                 <p>scoreboard placeholder</p>
             </div>
