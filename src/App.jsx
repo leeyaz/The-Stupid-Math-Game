@@ -9,7 +9,7 @@ function App() {
     const [scores, setScores] = useState([]);
 
     useEffect(() => {
-        getScores().then(data => setScores(data));
+        getScores().then((data) => setScores(data));
     }, []);
 
     return (
@@ -28,9 +28,15 @@ function App() {
             {/*on the left top, tells user what the starting, continuing and target numbers are*/}
             <div className="info-bracket">
                 <h5>TODAY'S NUMBERS</h5>
-                <p>Start: <b>{start}</b></p>
-                <p>Continuing: <b>{continuing}</b></p>
-                <p>Target: <b>{target}</b></p>
+                <p>
+                    Start: <b>{start}</b>
+                </p>
+                <p>
+                    Continuing: <b>{continuing}</b>
+                </p>
+                <p>
+                    Target: <b>{target}</b>
+                </p>
                 <p>
                     Available Operations: +, -, *, /, (, ), ^ (power), %
                     (modulus or percentage), ! (factorial), sin, cos, tan, sec,
@@ -57,7 +63,8 @@ function App() {
                     expression, your goal is to find the shortest expression.
                     All number combinations are possible. See above for
                     available operations, numbers randomize from 0 to 100 every
-                    day, and the scoreboard also resets every day. Have fun playing!! :)
+                    day, and the scoreboard also resets every day. Have fun
+                    playing!! :)
                 </p>
             </div>
 
@@ -76,7 +83,7 @@ function App() {
                     <tbody>
                         {scores.map((entry, i) => (
                             <tr key={i}>
-                                <td>{i+1}</td>
+                                <td>{i + 1}</td>
                                 <td>{entry.name}</td>
                                 <td>{entry.score}</td>
                                 <td>{entry.time}</td>
