@@ -31,7 +31,7 @@ math.import(
 
 export function evaluate(expression) {
     const result = limitedEvaluate(expression);
-    if (typeof result === "object") {
+    if (typeof result === "object" || typeof result === "function") {
         throw new Error("invalid expression");
     }
     return result.toString();
@@ -61,7 +61,7 @@ export function ParseExpression(expression) {
 
     const numbersFound = trimmedExpr.match(/\d+/g) || []; //trimmedExpr.match(/-?\d+/g) || [];
     if (numbersFound.length === 0) {
-        return ["No numbers found in expression", -1];
+        return ["No relevant numbers found in expression", -1]; // may need to revisit cuz of e and pi
     }
 
     const regEx = new RegExp(`^${continuingNumber}+$`); //new RegExp(`^-?${Math.abs(continuingNumber)}+$`);
