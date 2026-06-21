@@ -41,7 +41,9 @@ function App() {
             <p>Start: {start}</p>
             <p>Continuing: {continuing}</p>
             <p>Target: {target}</p>
-            <p>Available Operations: +, -, *, /, (, )</p>
+            <p>Available Operations: +, -, *, /, (, ), ^ (power), % (modulus or percentage), ! (factorial), sin, cos, tan, sec, csc, cot,
+                ...and more. Check https://mathjs.org/docs/expressions/syntax.html for more information.
+            </p>
         </div>
 
         {/*on the left bottom, includes valid operations*/}

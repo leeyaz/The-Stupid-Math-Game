@@ -30,7 +30,11 @@ math.import(
 );
 
 export function evaluate(expression) {
-    return limitedEvaluate(expression);
+    const result = limitedEvaluate(expression);
+    if (typeof result === "object") {
+        throw new Error("invalid expression")
+    }
+    return result.toString();
 }
 
 // will return an array: [0] is the output string, [1] is the number of continuing digits (-1 if output didnt meet all requirements)
@@ -55,7 +59,11 @@ export function ParseExpression(expression) {
             b: Only contains the continuing number afterwards
     */
 
-    const numbersFound = trimmedExpr.match(/-?\d+/g);
+    const numbersFound = trimmedExpr.match(/-?\d+/g) || [];
+    if (numbersFound.length === 0) {
+        return ["No numbers found in expression", -1];
+    }
+
     const regEx = new RegExp(`^-?${Math.abs(continuingNumber)}+$`);
 
     for (let i = 0; i < numbersFound.length; i++) {
