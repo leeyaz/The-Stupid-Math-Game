@@ -1,31 +1,9 @@
-import Display from "./components/Display";
-import Input from "./components/Input";
-import ListGroup from "./components/ListGroup";
-import { Fragment, useState } from "react";
-import { ParseExpression } from "./utils/ParseExpressionUtil";
+import Calculator from "./components/Calculator";
 import { GetDailyNumbers } from "./utils/DailyNumbers";
 import "./App.css";
 
 function App() {
     const { start, continuing, target } = GetDailyNumbers();
-    const [output, setOutput] = useState("");
-    const [valid, setValidity] = useState(false);
-
-    const handleSubmit = (value) => {
-        const [output, numContinuing] = ParseExpression(value);
-
-        if (numContinuing !== -1) {
-            const score = 200 / (numContinuing + 1);
-            setOutput(
-                "Yay you did it! Your score was " +
-                    Math.round(score).toString(),
-            );
-            setValidity(true);
-        } else {
-            setOutput(output);
-            setValidity(false);
-        }
-    };
 
     return (
         <div className="container">
@@ -38,10 +16,7 @@ function App() {
             </div>
 
             {/*at the centre*/}
-            <div className="calculator">
-                <Input onSubmit={handleSubmit}></Input>
-                <Display value={output} valid={valid}></Display>
-            </div>
+            <Calculator />
 
             {/*on the left top, tells user what the starting, continuing and target numbers are*/}
             <div className="info-bracket">

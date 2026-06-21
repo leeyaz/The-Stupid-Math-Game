@@ -48,7 +48,7 @@ export function ParseExpression(expression) {
     const trimmedExpr = expression.replace(/\s/g, "");
 
     try {
-        output = limitedEvaluate(expression).toString();
+        output = evaluate(expression).toString();
     } catch (error) {
         return ["Error in Math Expression", -1];
     }
