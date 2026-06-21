@@ -20,11 +20,16 @@ export function GetDailyNumbers() {
         if (date === today) return numbers;
     }*/
 
-    const numbers = {
-        start: Math.floor(rand() * 101) - 0,
-        continuing: Math.floor(rand() * 101) - 0,
-        target: Math.floor(rand() * 101) - 0,
+    let numbers = {
+        start: Math.floor(rand() * 101),
+        continuing: Math.floor(rand() * 101),
+        target: Math.floor(rand() * 101),
     };
+
+    // ensure that the solution can never just be the starting number
+    if (numbers.target === numbers.start) {
+        numbers.target = numbers.start + 1;
+    }
 
     /* localStorage.setItem(
         "dailyNumbers",
