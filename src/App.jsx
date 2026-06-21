@@ -2,7 +2,7 @@ import Calculator from "./components/Calculator";
 import { GetDailyNumbers } from "./utils/DailyNumbers";
 import { saveScore, getScores } from "./utils/Scoreboard";
 import { useState, useEffect } from "react";
-import "./App.css";
+//import "./App.css";
 
 function App() {
     const { start, continuing, target } = GetDailyNumbers();
@@ -16,102 +16,39 @@ function App() {
             const updated = await getScores();
             setScores(updated);
         }
-    }
+    };
 
     useEffect(() => {
         getScores().then((data) => setScores(data));
     }, []);
 
     return (
-        <div className="container">
-            <div className="title">
-                <h1>
-                    <b>STUPID MATH</b>
-                    <span style={{ fontSize: "10px" }}> the </span>
-                    <b>GAME</b>™
-                </h1>
-            </div>
+        <div className="container text-center">
+            <div className="row">
+                <div className="col"></div>
+                <div className="col-5">
+                    <div className="title p-4">
+                        <h1>
+                            <b>STUPID MATH</b>
+                            <span style={{ fontSize: "10px" }}> the </span>
+                            <b>GAME</b>™
+                        </h1>
+                    </div>
+                    
+                    <div className="info p-2">
+                        <button type="button" className="btn btn-warning m-2">How to Play</button>
+                        <h3>Todays Numbers:</h3>
+                        <div className="d-flex justify-content-evenly">
+                            <p>Starting: <b>{start}</b></p>
+                            <p>Continuing: <b>{continuing}</b></p>
+                            <p>Target: <b>{target}</b></p>
+                        </div>
+                    </div>
 
-            {/*at the centre*/}
-            <Calculator onSetLastScore={setLastScore}/>
-
-            {/*on the left top, tells user what the starting, continuing and target numbers are*/}
-            <div className="info-bracket">
-                <h5>TODAY'S NUMBERS</h5>
-                <p>
-                    Start: <b>{start}</b>
-                </p>
-                <p>
-                    Continuing: <b>{continuing}</b>
-                </p>
-                <p>
-                    Target: <b>{target}</b>
-                </p>
-                <p>
-                    Available Operations: +, -, *, /, (, ), ^ (power), %
-                    (modulus or percentage), ! (factorial), sin, cos, tan, sec,
-                    csc, cot, floor, abs, ...and more. Check out{" "}
-                    <a href="https://mathjs.org/docs/expressions/syntax.html">
-                        this website
-                    </a>{" "}
-                    for more information.
-                </p>
-            </div>
-
-            {/*on the left bottom, includes valid operations*/}
-            <div className="instructions">
-                <h6>
-                    <b>INSTRUCTIONS TO THE GAME</b>
-                </h6>
-                <p>
-                    Your expression MUST begin with the Start number once,
-                    today's is {start}. After {start}, you may only use the
-                    Continuing number, which is {continuing} today, which you
-                    may use any number of times. Your goal is to bring the
-                    operation to equal to the target number, that number is{" "}
-                    {target} today. Your score is counted by the length of your
-                    expression, your goal is to find the shortest expression.
-                    All number combinations are possible. See above for
-                    available operations, numbers randomize from 0 to 100 every
-                    day, and the scoreboard also resets every day. Have fun
-                    playing!! :)
-                </p>
-            </div>
-
-            {/*on the right top, scrollable. Currently the scoreboard should work perfectly.*/}
-            <div className="scoreboard">
-                <h5>SCOREBOARD</h5>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                            <th>Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {scores.map((entry, i) => (
-                            <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td>{entry.name}</td>
-                                <td>{entry.score}</td>
-                                <td>{entry.time}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            {/*on the right bottom*/}
-            <div className="nameInput">
-                <input
-                    type="text"
-                    placeholder="Enter your name!"
-                    value={playerName}
-                    onChange={(e) => setPlayerName(e.target.value)}
-                />
-                <button onClick={handleAddScore}>Add Score</button>
+                    {/*at the centre*/}
+                    <Calculator onSetLastScore={setLastScore} />
+                </div>
+                <div className="col"></div>
             </div>
         </div>
     );
