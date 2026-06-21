@@ -22,6 +22,8 @@ function App() {
         getScores().then((data) => setScores(data));
     }, []);
 
+    const [showInstructions, setShowInstructions] = useState(false);
+
     return (
         <div className="container text-center">
             <div className="row">
@@ -34,14 +36,61 @@ function App() {
                             <b>GAME</b>™
                         </h1>
                     </div>
-                    
+
                     <div className="info p-2">
-                        <button type="button" className="btn btn-warning m-2">How to Play</button>
+                        <button
+                            type="button"
+                            className="btn btn-warning m-2"
+                            data-bs-toggle="offcanvas"
+                            href="instructions"
+                            onClick={() => {
+                                setShowInstructions(true);
+                            }}
+                            aria-controls="instructions"
+                        >
+                            How to Play
+                        </button>
+                        <div
+                            className={
+                                "offcanvas offcanvas-start " +
+                                (showInstructions ? "show" : "")
+                            }
+                            tabIndex="-1"
+                            id="instructions"
+                        >
+                            <div className="offcanvas-header">
+                                <h5
+                                    className="offcanvas-title"
+                                    id="offcanvasExampleLabel"
+                                >
+                                    How to Play
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="offcanvas"
+                                    aria-label="Close"
+                                    onClick={() => {
+                                        setShowInstructions(false);
+                                    }}
+                                ></button>
+                            </div>
+                            <div className="offcanvas-body text-start">
+                                <div>Hello, these are the instructions</div>
+                            </div>
+                        </div>
+
                         <h3>Todays Numbers:</h3>
                         <div className="d-flex justify-content-evenly">
-                            <p>Starting: <b>{start}</b></p>
-                            <p>Continuing: <b>{continuing}</b></p>
-                            <p>Target: <b>{target}</b></p>
+                            <p>
+                                Starting: <b>{start}</b>
+                            </p>
+                            <p>
+                                Continuing: <b>{continuing}</b>
+                            </p>
+                            <p>
+                                Target: <b>{target}</b>
+                            </p>
                         </div>
                     </div>
 
