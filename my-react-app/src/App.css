@@ -16,6 +16,15 @@
   justify-content: center;
 }
 
+textarea {
+  width: 100%;
+  min-height: 45px;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  resize: vertical;
+  overflow: hidden;
+}
+
 .info-bracket {
   grid-column: 1;
   grid-row: 1;

@@ -6,12 +6,14 @@ function Input({onSubmit}) {
     const [currResult, setCurrResult] = useState("");
     return (
         <>
-            <input
+            <textarea
                 type="text"
                 placeholder="Enter the MATH EXPRESSION"
                 value={currInput}
                 onChange={(e) => {
-                    setCurrInput(e.target.value)
+                    setCurrInput(e.target.value);
+                    e.target.style.height = "auto";
+                    e.target.style.height = e.target.scrollHeight + "px";
 
                     try {
                         setCurrResult(evaluate(e.target.value))
@@ -20,7 +22,7 @@ function Input({onSubmit}) {
                     }
 
                 }}
-            ></input>
+            ></textarea>
             <button type="button" className="btn btn-primary" onClick={() => onSubmit(currInput)}>
                 Submit
             </button>
