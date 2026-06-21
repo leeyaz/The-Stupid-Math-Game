@@ -2,62 +2,64 @@ import { all, create, exp } from "mathjs";
 import { GetDailyNumbers } from "./DailyNumbers";
 
 const math = create(all);
-const limitedEvaluate = math.evaluate;
 const { start, continuing, target } = GetDailyNumbers();
 
-math.import(
-    {
-        import: function () {
-            throw new Error("Function import is disabled");
-        },
-        createUnit: function () {
-            throw new Error("Function createUnit is disabled");
-        },
-        evaluate: function () {
-            throw new Error("Function evaluate is disabled");
-        },
-        parse: function () {
-            throw new Error("Function parse is disabled");
-        },
-        simplify: function () {
-            throw new Error("Function simplify is disabled");
-        },
-        derivative: function () {
-            throw new Error("Function derivative is disabled");
-        },
-    },
-    { override: true },
-);
+const allowedOperations = new Set(["+", "-", "*", "/"]);
+const allowedFunctions = new Set([
+    "floor",
+    "ceil",
+    "round",
+    "abs",
+    "sqrt",
+    "cbrt",
+    "square",
+    "cube",
+    "log",
+    "sign",
+    "sin",
+    "cos",
+    "tan",
+    "csc",
+    "sec",
+    "cot",
+    "asin",
+    "acos",
+    "atan",
+    "acsc",
+    "asec",
+    "acot",
+]);
+const allowedConstants = allowedFunctions.union(new Set([])); // allowedFunctions.union(new Set(["pi", "e", ...]));
 
-const restrictedConstants = [
-    "pi",
-    "PI",
-    "e",
-    "E",
-    "LN2",
-    "LN10",
-    "LOG10E",
-    "NaN",
-    "null",
-    "phi",
-    "SQRT1_2",
-    "SQRT2",
-    "tau",
-    "version",
-];
+function containsOnlyAllowed(expression) {
+    let valid = true;
+    const nodeTree = math.parse(expression);
+    nodeTree.traverse((node) => {
+        console.log(node.type, node.name);
+        if (
+            (node.type === "FunctionNode" &&
+                !allowedFunctions.has(node.name)) ||
+            (node.type === "SymbolNode" && !allowedConstants.has(node.name)) ||
+            (node.type === "OperatorNode" && !allowedOperations.has(node.op))
+        ) {
+            // console.log(
+            //     "Disallowed node: ",
+            //     node.type === "OperatorNode" ? node.op : node.name,
+            // );
+            valid = false;
+        }
+    });
 
-const restrictConstantsScope = Object.fromEntries(
-    restrictedConstants.map((key) => [
-        key,
-        () => {
-            throw new Error(key + " is not allowed!");
-        },
-    ]),
-);
+    return valid;
+}
 
 export function evaluate(expression) {
     // Remove restrictConstantsScope below, or change the restrictedConstants array if needed.
-    const result = limitedEvaluate(expression, restrictConstantsScope);
+    if (!containsOnlyAllowed(expression)) {
+        throw new Error("Invalid Expression!");
+    }
+
+    const result = math.evaluate(expression);
     if (typeof result !== "number") {
         throw new Error("Invalid expression!");
     }
