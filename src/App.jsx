@@ -7,6 +7,16 @@ import "./App.css";
 function App() {
     const { start, continuing, target } = GetDailyNumbers();
     const [scores, setScores] = useState([]);
+    const [playerName, setPlayerName] = useState("");
+    const [lastScore, setLastScore] = useState(null);
+
+    const handleAddScore = async () => {
+        if (playerName && lastScore != null) {
+            await saveScore(playerName, lastScore);
+            const updated = await getScores();
+            setScores(updated);
+        }
+    }
 
     useEffect(() => {
         getScores().then((data) => setScores(data));
@@ -23,7 +33,7 @@ function App() {
             </div>
 
             {/*at the centre*/}
-            <Calculator />
+            <Calculator onSetLastScore={setLastScore}/>
 
             {/*on the left top, tells user what the starting, continuing and target numbers are*/}
             <div className="info-bracket">
@@ -40,7 +50,7 @@ function App() {
                 <p>
                     Available Operations: +, -, *, /, (, ), ^ (power), %
                     (modulus or percentage), ! (factorial), sin, cos, tan, sec,
-                    csc, cot, floor, abs, pi, e, ...and more. Check out{" "}
+                    csc, cot, floor, abs, ...and more. Check out{" "}
                     <a href="https://mathjs.org/docs/expressions/syntax.html">
                         this website
                     </a>{" "}
@@ -95,7 +105,13 @@ function App() {
 
             {/*on the right bottom*/}
             <div className="nameInput">
-                <p>nameInput placeholder</p>
+                <input
+                    type="text"
+                    placeholder="Enter your name!"
+                    value={playerName}
+                    onChange={(e) => setPlayerName(e.target.value)}
+                />
+                <button onClick={handleAddScore}>Add Score</button>
             </div>
         </div>
     );

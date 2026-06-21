@@ -3,7 +3,7 @@ import Display from "./Display";
 import { ParseExpression } from "../utils/ParseExpressionUtil";
 import { Fragment, useState } from "react";
 
-function Calculator() {
+function Calculator({ onSetLastScore }) {
     const [output, setOutput] = useState("");
     const [valid, setValidity] = useState(false);
 
@@ -16,6 +16,7 @@ function Calculator() {
             console.log(noWhiteSpace.length);
             setOutput("Yay you did it! Your score is " + score.toString());
             setValidity(true);
+            onSetLastScore(score);
         } else {
             setOutput(output);
             setValidity(false);
