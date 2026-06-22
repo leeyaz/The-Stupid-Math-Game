@@ -14,7 +14,7 @@ function Leaderboard(props) {
         getScores().then((data) => setScores(data));
     }, []);
     return (
-        <div className="leaderboard bg-white m-4 rounded-start-4">
+        <div className="leaderboard ">
             <table className="table table-striped table-sm">
                 <thead className="sticky-top">
                     <tr>

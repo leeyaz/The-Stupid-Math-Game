@@ -20,11 +20,12 @@ export async function saveScore(name, score) {
 
 export async function getScores() {
     const today = new Date().toDateString();
-    const q = query(
+    let q = query(
         collection(db, "scores"),
         where("date", "==", today),
-        orderBy("score", "desc"),
+        orderBy("score", "desc")
     );
+
     const snapshot = await getDocs(q);
     return snapshot.docs.map((doc) => doc.data());
 }
