@@ -36,7 +36,6 @@ function containsOnlyAllowed(expression) {
     let valid = true;
     const nodeTree = math.parse(expression);
     nodeTree.traverse((node) => {
-        console.log(node.type, node.name);
         if (
             (node.type === "FunctionNode" &&
                 !allowedFunctions.has(node.name)) ||
