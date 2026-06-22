@@ -5,10 +5,10 @@ import { useState, useEffect } from "react";
 function Leaderboard(props) {
     const [scores, setScores] = useState([]);
 
-    const handleRefresh = async () => {
-        const updated = await getScores();
-        setScores(updated);
-    };
+    // const handleRefresh = async () => {
+    //     const updated = await getScores();
+    //     setScores(updated);
+    // };
 
     useEffect(() => {
         getScores().then((data) => setScores(data));
@@ -23,7 +23,7 @@ function Leaderboard(props) {
                                 <h5 className="m-0 p-0">
                                     <b>LEADERBOARD</b>
                                 </h5>
-                                <Button
+                                {/* <Button
                                     variant="outline-dark"
                                     size="sm"
                                     onClick={handleRefresh}
@@ -31,7 +31,7 @@ function Leaderboard(props) {
                                     <small>
                                         <b>REFRESH</b>
                                     </small>
-                                </Button>
+                                </Button> */}
                             </div>
                         </th>
                     </tr>
@@ -44,7 +44,7 @@ function Leaderboard(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {scores.map((entry, i) => (
+                    {props.scores.map((entry, i) => (
                         <tr key={i}>
                             <td>{i + 1}</td>
                             <td>{entry.name}</td>

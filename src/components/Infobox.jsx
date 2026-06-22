@@ -75,7 +75,7 @@ function Infobox(props) {
             </div>
             <Collapse in={open}>
                 <div>
-                    <Leaderboard lastScore={props.lastScore} />
+                    <Leaderboard lastScore={props.lastScore} scores={props.scores} />
                 </div>
             </Collapse>
             

@@ -10,7 +10,6 @@ function Input({ onSubmit, showDisplay }) {
 
     const handleInputChange = (e) => {
         if (e.target.value.length == 0) {
-            console.log("FALSE!!");
             showDisplay(false);
         }
         setCurrInput(e.target.value);

@@ -9,11 +9,17 @@ import {
     where,
 } from "firebase/firestore";
 
+const timeFormatter = new Intl.DateTimeFormat('en-US', {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: true
+});
+
 export async function saveScore(name, score) {
     await addDoc(collection(db, "scores"), {
         name,
         score,
-        time: new Date().toLocaleTimeString(),
+        time: timeFormatter.format(new Date()),
         date: new Date().toDateString(),
     });
 }

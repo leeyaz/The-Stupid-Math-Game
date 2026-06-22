@@ -15,7 +15,7 @@ function Calculator({ onSetLastScore }) {
         if (numContinuing !== -1) {
             const noWhiteSpace = value.replace(/\s/g, "");
             const score = Math.round(50000 / noWhiteSpace.length ** 2);
-            console.log(noWhiteSpace.length);
+
             setOutput("Yay you did it! Your score is " + score.toString());
             setValidity(true);
             onSetLastScore(score);

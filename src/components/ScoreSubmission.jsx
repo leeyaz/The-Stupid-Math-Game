@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
-import { saveScore } from "../utils/Scoreboard";
+import { saveScore, getScores } from "../utils/Scoreboard";
 
 function ScoreSubmission(props) {
     const [showInput, setShowInput] = useState(false);
@@ -11,6 +11,8 @@ function ScoreSubmission(props) {
     const handleAddScore = async () => {
         if (playerName && props.lastScore != null) {
             await saveScore(playerName, props.lastScore);
+            const updated = await getScores();
+            props.onScoreAdded(updated); 
         }
     };
 
