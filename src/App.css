@@ -1,36 +1,44 @@
 * {
-    font-family: 'Consolas'
+    font-family: "Consolas";
 }
 
 .container {
-  height: 100vh;
-  padding: 20px;
-  gap: 10px;
+    max-width: 576px;
+    padding: 20px;
+    gap: 10px;
+}
+
+.title {
+    white-space: nowrap;
+}
+
+.daily-numbers {
+    white-space: nowrap;
 }
 
 Offcanvas.Header {
-    color: green
+    color: green;
 }
 
 textarea {
-  width: 100%;
-  min-height: 45px;
-  font-size: 1.2rem;
-  padding: 8px 12px;
-  resize: vertical;
-  overflow: hidden;
+    width: 100%;
+    min-height: 45px;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    resize: vertical;
+    overflow: hidden;
 }
 
 .info-bracket {
-  background-color: lightgreen;
-  padding: 10px;
-  border-radius: 8px;
+    background-color: lightgreen;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .instructions {
-  background-color: pink;
-  padding: 10px;
-  border-radius: 8px;
+    background-color: pink;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .scoreboard {
@@ -46,7 +54,8 @@ textarea {
     border-collapse: collapse;
 }
 
-.scoreboard th, .scoreboard td {
+.scoreboard th,
+.scoreboard td {
     border: 1px solid rgb(210, 191, 42);
     padding: 6px 10px;
     text-align: left;
