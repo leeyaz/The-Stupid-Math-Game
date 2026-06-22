@@ -20,6 +20,11 @@ body {
     white-space: nowrap;
 }
 
+.title h1 b {
+    font-family: "Cambria";
+    font-weight: 900;
+}
+
 .daily-numbers {
     white-space: nowrap;
 }
