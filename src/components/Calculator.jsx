@@ -6,8 +6,10 @@ import { Fragment, useState } from "react";
 function Calculator({ onSetLastScore }) {
     const [output, setOutput] = useState("");
     const [valid, setValidity] = useState(false);
+    const [displayActive, setDisplayActive] = useState(false);
 
     const handleSubmit = (value) => {
+        setDisplayActive(true);
         const [output, numContinuing] = ParseExpression(value);
 
         if (numContinuing !== -1) {
@@ -25,8 +27,11 @@ function Calculator({ onSetLastScore }) {
 
     return (
         <div className="calculator">
-            <Input onSubmit={handleSubmit}></Input>
-            <Display value={output} valid={valid}></Display>
+            <Input
+                onSubmit={handleSubmit}
+                showDisplay={setDisplayActive}
+            ></Input>
+            <Display value={displayActive && output} valid={valid}></Display>
         </div>
     );
 }

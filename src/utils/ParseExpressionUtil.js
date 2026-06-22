@@ -4,8 +4,8 @@ import { GetDailyNumbers } from "./DailyNumbers";
 const math = create(all);
 const { start, continuing, target } = GetDailyNumbers();
 
-const allowedOperations = new Set(["+", "-", "*", "/"]);
-const allowedFunctions = new Set([
+export const allowedOperations = new Set(["+", "-", "*", "/", "!", "%", "^", "&", "|"]);
+export const allowedFunctions = new Set([
     "floor",
     "ceil",
     "round",
@@ -29,7 +29,8 @@ const allowedFunctions = new Set([
     "asec",
     "acot",
 ]);
-const allowedConstants = allowedFunctions.union(new Set([])); // allowedFunctions.union(new Set(["pi", "e", ...]));
+export const allowedConstants = new Set(["pi", "e"]);
+const allowedSymbols = allowedFunctions.union(allowedConstants);
 
 function containsOnlyAllowed(expression) {
     let valid = true;
@@ -39,7 +40,7 @@ function containsOnlyAllowed(expression) {
         if (
             (node.type === "FunctionNode" &&
                 !allowedFunctions.has(node.name)) ||
-            (node.type === "SymbolNode" && !allowedConstants.has(node.name)) ||
+            (node.type === "SymbolNode" && !allowedSymbols.has(node.name)) ||
             (node.type === "OperatorNode" && !allowedOperations.has(node.op))
         ) {
             // console.log(

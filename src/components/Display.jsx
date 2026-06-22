@@ -2,7 +2,8 @@ function Display({ value, valid }) {
     if (value) {
         return (
             <div
-                className={"alert alert-" + (valid ? "success" : "danger")}
+                className={"submit-message alert alert-" + (valid ? "success" : "danger") + 
+                    " mx-auto"}
                 role="alert"
             >
                 {value}
