@@ -8,7 +8,7 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: "AIzaSyC9eAcE0PiyZ01atq1B3tuNlGNRxlryyBo",
   authDomain: "stupid-math-game.firebaseapp.com",
   databaseURL: "https://stupid-math-game-default-rtdb.firebaseio.com",
   projectId: "stupid-math-game",
