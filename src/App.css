@@ -6,7 +6,7 @@
     font-family: "Consolas";
 }
 
-#root {
+body {
     background-color: var(--backing)
 }
 
