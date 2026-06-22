@@ -2,7 +2,8 @@ import Calculator from "./components/Calculator";
 import { GetDailyNumbers } from "./utils/DailyNumbers";
 import { saveScore, getScores } from "./utils/Scoreboard";
 import { useState, useEffect } from "react";
-//import "./App.css";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
 function App() {
     const { start, continuing, target } = GetDailyNumbers();
@@ -38,18 +39,14 @@ function App() {
                     </div>
 
                     <div className="info p-2">
-                        <button
-                            type="button"
-                            className="btn btn-warning m-2"
-                            data-bs-toggle="offcanvas"
-                            href="instructions"
+                        <Button
+                            variant="warning m-2"
                             onClick={() => {
                                 setShowInstructions(true);
                             }}
-                            aria-controls="instructions"
                         >
                             How to Play
-                        </button>
+                        </Button>
 
                         <h3>Todays Numbers:</h3>
                         <div className="d-flex justify-content-evenly">
@@ -70,31 +67,19 @@ function App() {
                 </div>
                 <div className="col"></div>
             </div>
-            <div
-                className={
-                    "offcanvas offcanvas-start " +
-                    (showInstructions ? "show" : "")
-                }
-                tabIndex="-1"
-                id="instructions"
+            <Offcanvas
+                show={showInstructions}
+                onHide={() => {
+                    setShowInstructions(false);
+                }}
             >
-                <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-                        How to Play
-                    </h5>
-                    <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="offcanvas"
-                        onClick={() => {
-                            setShowInstructions(false);
-                        }}
-                    ></button>
-                </div>
-                <div className="offcanvas-body text-start">
-                    <div>Hello, these are the instructions</div>
-                </div>
-            </div>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>How to Play</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    These are the instructions you dumb idiot
+                </Offcanvas.Body>
+            </Offcanvas>
         </div>
     );
 }
