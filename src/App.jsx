@@ -2,10 +2,17 @@ import Calculator from "./components/Calculator";
 import Infobox from "./components/Infobox";
 import { useState, useEffect } from "react";
 import ScoreSubmission from "./components/ScoreSubmission";
+import { saveScore, getScores } from "./utils/Scoreboard";
+import Leaderboard from "./components/Leaderboard";
 
 function App() {
     
     const [lastScore, setLastScore] = useState(null);
+    const [scores, setScores] = useState([]);
+
+    useEffect(() => {
+        getScores().then((data) => setScores(data));
+    }, []);
 
     return (
         <>
@@ -18,11 +25,12 @@ function App() {
                     </h1>
                 </div>
 
-                <Infobox lastScore={lastScore} />
+                <Infobox lastScore={lastScore} scores={scores} />
                 {/*at the centre*/}
                 <Calculator onSetLastScore={setLastScore} />
 
-                <ScoreSubmission lastScore={lastScore} />
+                <ScoreSubmission lastScore={lastScore} onScoreAdded={(updated) => setScores(updated)} />
+                
             </div>
         </>
     );
