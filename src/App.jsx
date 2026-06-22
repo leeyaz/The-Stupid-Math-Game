@@ -2,16 +2,26 @@ import Calculator from "./components/Calculator";
 import Infobox from "./components/Infobox";
 import { useState, useEffect } from "react";
 import ScoreSubmission from "./components/ScoreSubmission";
-import { saveScore, getScores } from "./utils/Scoreboard";
-import Leaderboard from "./components/Leaderboard";
+// import { getScores } from "./utils/Scoreboard";
+import { onSnapshot, collection, orderBy, query, where } from "firebase/firestore";
+import { db } from "./utils/firebase";
 
 function App() {
-    
     const [lastScore, setLastScore] = useState(null);
     const [scores, setScores] = useState([]);
 
     useEffect(() => {
-        getScores().then((data) => setScores(data));
+        const today = new Date().toDateString();
+        const q = query(
+            collection(db, "scores"),
+            where("date", "==", today),
+            orderBy("score", "desc")
+        );
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const data = snapshot.docs.map(doc => doc.data());
+            setScores(data);
+        });
+        return () => unsubscribe();
     }, []);
 
     return (
