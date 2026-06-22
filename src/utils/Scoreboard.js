@@ -9,10 +9,11 @@ import {
     where,
 } from "firebase/firestore";
 
-const timeFormatter = new Intl.DateTimeFormat('en-US', {
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: true
+const timeFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Etc/GMT+7",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
 });
 
 export async function saveScore(name, score) {
@@ -29,7 +30,7 @@ export async function getScores() {
     let q = query(
         collection(db, "scores"),
         where("date", "==", today),
-        orderBy("score", "desc")
+        orderBy("score", "desc"),
     );
 
     const snapshot = await getDocs(q);
