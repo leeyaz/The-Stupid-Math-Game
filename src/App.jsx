@@ -6,6 +6,11 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import {
+    allowedConstants,
+    allowedFunctions,
+    allowedOperations,
+} from "./utils/ParseExpressionUtil";
 
 function App() {
     const { start, continuing, target } = GetDailyNumbers();
@@ -29,29 +34,32 @@ function App() {
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
-            Available Operations: +, -, *, /, (, ), ^ (power), % (modulus or
-            percentage), ! (factorial), sin, cos, tan, sec, csc, cot, floor,
-            abs, ...and more. Check out{" "}
-            <a href="https://mathjs.org/docs/expressions/syntax.html">
-                this website
-            </a>{" "}
-            for more information.
+            <div className="text-start">
+                <b>Operations</b>:{" "}
+                <small>{[...allowedOperations].join(", ")}</small>
+                <br></br>
+                <b>Functions</b>:{" "}
+                <small>{[...allowedFunctions].join(", ")}</small>
+                <br></br>
+                <b>Constants</b>:{" "}
+                <small>{[...allowedConstants].join(", ")}</small>
+            </div>
         </Tooltip>
     );
-    const [placement, setPlacement] = useState('right');
+    const [placement, setPlacement] = useState("right");
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 576) {
-                setPlacement('bottom');
+            if (window.innerWidth < 700) {
+                setPlacement("bottom");
             } else {
-                setPlacement('right');
+                setPlacement("right-start");
             }
         };
 
         handleResize();
-        window.addEventListener('resize', handleResize);
-            
-        return () => window.removeEventListener('resize', handleResize);
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     return (
@@ -76,8 +84,7 @@ function App() {
                     </Button>
                     <OverlayTrigger
                         placement={placement}
-
-                        trigger="focus"
+                        trigger="hover"
                         delay={{ show: 0, hide: 0 }}
                         overlay={renderTooltip}
                     >
