@@ -1,5 +1,5 @@
 :root {
-    --backing: #ececec;
+    --backing: #ffffff;
 }
 
 * {
@@ -33,7 +33,9 @@ body {
     background-color: var(--backing);
 }
 
-
+.modal-content {
+    background-color: var(--backing);
+}
 
 
 textarea {

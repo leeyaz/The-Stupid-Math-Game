@@ -51,7 +51,7 @@ function Infobox(props) {
     }, []);
 
     return (
-        <div className="info p-2">
+        <div className="info">
             <div className="top-buttons d-flex gap-3 justify-content-center mb-3">
                 <Button
                     variant="warning"
@@ -75,21 +75,17 @@ function Infobox(props) {
             </div>
             <Collapse in={open}>
                 <div>
-                    <Leaderboard lastScore={props.lastScore}/>
+                    <Leaderboard lastScore={props.lastScore} />
                 </div>
             </Collapse>
-
-            <h3>Todays Numbers:</h3>
-            <div className="daily-numbers d-flex justify-content-between flex-column flex-lg-row">
-                <p>
-                    Starting: <b>{start}</b>
-                </p>
-                <p>
-                    Continuing: <b>{continuing}</b>
-                </p>
-                <p>
-                    Target: <b>{target}</b>
-                </p>
+            
+            <div className="pt-5">
+                <h3><b>Todays Numbers</b></h3>
+                <div className="daily-numbers d-flex justify-content-evenly flex-column">
+                    <span>START: <b>{start}</b></span>
+                    <span>PROPAGATE: <b>{continuing}</b></span>
+                    <span>TARGET: <b>{target}</b></span>
+                </div>
             </div>
             <Instructions
                 show={showInstructions}

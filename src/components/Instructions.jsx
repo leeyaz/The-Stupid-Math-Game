@@ -6,23 +6,33 @@ const { start, continuing, target } = GetDailyNumbers();
 function Instructions(props) {
     return (
         <Modal {...props} size="lg" centered>
-            <Modal.Header closeButton>
+            <Modal.Header className="bg-warning" closeButton>
                 <Modal.Title>How to Play</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <p>
-                    Your expression MUST begin with the Start number once,
-                    today's is <mark>{start}</mark>. After <mark>{start}</mark>, you may
-                    only use the Continuing number, which is <mark>{continuing}</mark>{" "}
-                    today, which you may use any number of times. Your goal is
-                    to bring the operation to equal to the target number, that
-                    number is <mark>{target}</mark> today. Your score is counted by
-                    the length of your expression, your goal is to find the
-                    shortest expression. All number combinations are possible.
-                    See above for available operations, numbers randomize from 0
-                    to 100 every day, and the scoreboard also resets every day.
-                    Have fun playing!! :)
-                </p>
+            <Modal.Body className="text-center">
+                The goal is to use the <i>START</i> number, along with the{" "}
+                <i>PROPAGATE</i> number, to reach the <i>TARGET</i> with the{" "}
+                <b>shortest</b> mathematical expression you can find.
+                <br></br>
+                <br></br>
+                <img src="/Ins1.png" className="figure-img p-3 img-fluid"></img>
+                <br></br>
+                <br></br>
+                <mark>
+                    Today, the first number that appears in your expression must
+                    be <b>{start}</b> and all subsequent numbers must be{" "}
+                    <b>{continuing}</b>. The result of your expression must
+                    equal <b>{target}</b>.
+                </mark>
+                <br></br>
+                <br></br>
+                You have a wide selection of functions and operators available
+                to you so go crazy! <br></br>
+                <span style={{ fontSize: 13 }}>
+                    <i>
+                        To see the list of available symbols, see "What's Allowed?"
+                    </i>
+                </span>
             </Modal.Body>
         </Modal>
     );

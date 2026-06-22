@@ -25,7 +25,7 @@ function Input({ onSubmit, showDisplay }) {
     };
 
     return (
-        <div className="d-flex flex-column p-2">
+        <div className="d-flex flex-column">
             <textarea
                 type="text"
                 className="text-center"
