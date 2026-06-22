@@ -113,6 +113,10 @@ function App() {
                 />
                 <button onClick={handleAddScore}>Add Score</button>
             </div>
+
+            <div className="nameInputDisclaimer">
+                <p>Please do not spam! It takes time to load.</p>
+            </div>
         </div>
     );
 }

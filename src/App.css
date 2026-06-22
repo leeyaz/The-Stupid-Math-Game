@@ -83,6 +83,7 @@ textarea {
     display: flex;
     flex-direction: row;
     gap: 8px;
+    height: 7vh;
 }
 
 .nameInput input {
@@ -92,4 +93,11 @@ textarea {
 
 .nameInput button {
     padding: 6px 12px;
+    font-size: 0.7rem;
+}
+
+.nameInputDisclaimer {
+    grid-column: 3;
+    grid-row: 4;
+    margin-top: -4vh;
 }
