@@ -50,35 +50,6 @@ function App() {
                         >
                             How to Play
                         </button>
-                        <div
-                            className={
-                                "offcanvas offcanvas-start " +
-                                (showInstructions ? "show" : "")
-                            }
-                            tabIndex="-1"
-                            id="instructions"
-                        >
-                            <div className="offcanvas-header">
-                                <h5
-                                    className="offcanvas-title"
-                                    id="offcanvasExampleLabel"
-                                >
-                                    How to Play
-                                </h5>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="offcanvas"
-                                    aria-label="Close"
-                                    onClick={() => {
-                                        setShowInstructions(false);
-                                    }}
-                                ></button>
-                            </div>
-                            <div className="offcanvas-body text-start">
-                                <div>Hello, these are the instructions</div>
-                            </div>
-                        </div>
 
                         <h3>Todays Numbers:</h3>
                         <div className="d-flex justify-content-evenly">
@@ -98,6 +69,31 @@ function App() {
                     <Calculator onSetLastScore={setLastScore} />
                 </div>
                 <div className="col"></div>
+            </div>
+            <div
+                className={
+                    "offcanvas offcanvas-start " +
+                    (showInstructions ? "show" : "")
+                }
+                tabIndex="-1"
+                id="instructions"
+            >
+                <div className="offcanvas-header">
+                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+                        How to Play
+                    </h5>
+                    <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="offcanvas"
+                        onClick={() => {
+                            setShowInstructions(false);
+                        }}
+                    ></button>
+                </div>
+                <div className="offcanvas-body text-start">
+                    <div>Hello, these are the instructions</div>
+                </div>
             </div>
         </div>
     );

@@ -1,7 +1,9 @@
 import { Fragment, useState } from "react";
 import { evaluate, ParseExpression } from "../utils/ParseExpressionUtil.js";
+import { GetDailyNumbers } from "../utils/DailyNumbers.js"
 
 function Input({ onSubmit }) {
+    const { start, continuing, target } = GetDailyNumbers();
     const [currInput, setCurrInput] = useState("");
     const [currResult, setCurrResult] = useState("~");
 
@@ -15,8 +17,8 @@ function Input({ onSubmit }) {
         } catch (e) {
             setCurrResult("~");
         }
-    }
-    let target = 32
+    };
+
     return (
         <div className="d-flex flex-column p-2">
             <textarea
@@ -26,7 +28,22 @@ function Input({ onSubmit }) {
                 value={currInput}
                 onChange={handleInputChange}
             ></textarea>
-            <p className="m-2"> {currResult.length === 0 ? "" : "="} <b style={{color:currResult == target ? "green" : "red"}}>{currResult}</b></p>
+            <p className="m-2">
+                {" "}
+                {currResult.length === 0 ? "" : "="}{" "}
+                <b
+                    style={{
+                        color:
+                            currResult === "~"
+                                ? "gray"
+                                : currResult == target
+                                  ? "green"
+                                  : "red",
+                    }}
+                >
+                    {currResult}
+                </b>
+            </p>
             <div>
                 <button
                     type="button"
