@@ -4,7 +4,7 @@ import { GetDailyNumbers } from "./DailyNumbers";
 const math = create(all);
 const { start, continuing, target } = GetDailyNumbers();
 
-export const allowedOperations = new Set(["+", "-", "*", "/", "!", "%", "^"]);
+export const allowedOperations = new Set(["+", "-", "*", "/", "!", "%", "^", "&", "|"]);
 export const allowedFunctions = new Set([
     "floor",
     "ceil",
