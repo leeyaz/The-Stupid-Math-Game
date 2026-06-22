@@ -1,13 +1,18 @@
 import { Fragment, useState } from "react";
 import { evaluate, ParseExpression } from "../utils/ParseExpressionUtil.js";
-import { GetDailyNumbers } from "../utils/DailyNumbers.js"
+import { GetDailyNumbers } from "../utils/DailyNumbers.js";
+import { Button } from "react-bootstrap";
 
-function Input({ onSubmit }) {
+function Input({ onSubmit, showDisplay }) {
     const { start, continuing, target } = GetDailyNumbers();
     const [currInput, setCurrInput] = useState("");
     const [currResult, setCurrResult] = useState("~");
 
     const handleInputChange = (e) => {
+        if (e.target.value.length == 0) {
+            console.log("FALSE!!");
+            showDisplay(false);
+        }
         setCurrInput(e.target.value);
         e.target.style.height = "auto";
         e.target.style.height = e.target.scrollHeight + "px";
@@ -45,13 +50,13 @@ function Input({ onSubmit }) {
                 </b>
             </p>
             <div>
-                <button
-                    type="button"
-                    className="btn btn-primary"
+                <Button
+                    variant="primary"
                     onClick={() => onSubmit(currInput)}
+                    disabled={currInput == ""}
                 >
                     Submit
-                </button>
+                </Button>
             </div>
         </div>
     );

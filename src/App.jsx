@@ -77,7 +77,17 @@ function App() {
                     <Offcanvas.Title>How to Play</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    These are the instructions you dumb idiot
+                    Your expression MUST begin with the Start number once,
+                    today's is <b>{start}</b>. After <b>{start}</b>, you may only use the
+                    Continuing number, which is <b>{continuing}</b> today, which you
+                    may use any number of times. Your goal is to bring the
+                    operation to equal to the target number, that number is{" "} 
+                    <b>{ target}</b> today. Your score is counted by the length of your
+                    expression, your goal is to find the shortest expression.
+                    All number combinations are possible. See above for
+                    available operations, numbers randomize from 0 to 100 every
+                    day, and the scoreboard also resets every day. Have fun
+                    playing!! :)
                 </Offcanvas.Body>
             </Offcanvas>
         </div>
