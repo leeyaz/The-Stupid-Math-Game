@@ -1,5 +1,5 @@
 :root {
-    --backing: #ececec
+    --backing: #ececec;
 }
 
 * {
@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: var(--backing)
+    background-color: var(--backing);
 }
 
 .body {

@@ -14,29 +14,33 @@ function Leaderboard(props) {
         getScores().then((data) => setScores(data));
     }, []);
     return (
-        <div className="leaderboard bg-white p-4 rounded-start-4">
-            <div className="row align-items-center">
-                <div className="col-4"></div>
-                <div className="col-4">
-                    <h5 className="m-0 p-0">
-                        <b>LEADERBOARD</b>
-                    </h5>
-                </div>
-                <div className="col-4">
-                    <Button variant="outline-secondary" onClick={handleRefresh}>
-                        <small>
-                            <b>REFRESH</b>
-                        </small>
-                    </Button>
-                </div>
-            </div>
+        <div className="leaderboard bg-white m-4 rounded-start-4">
             <table className="table table-striped table-sm">
-                <thead>
+                <thead className="sticky-top">
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Score</th>
-                        <th>Time</th>
+                        <th colSpan={4} className="p-0 border-0">
+                            <div className="bg-info p-2 m d-flex align-items-center justify-content-between">
+                                <h5 className="m-0 p-0">
+                                    <b>LEADERBOARD</b>
+                                </h5>
+                                <Button
+                                    variant="outline-dark"
+                                    size="sm"
+                                    onClick={handleRefresh}
+                                >
+                                    <small>
+                                        <b>REFRESH</b>
+                                    </small>
+                                </Button>
+                            </div>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th className="bg-secondary-subtle">#</th>
+                        <th className="bg-secondary-subtle">Name</th>
+                        <th className="bg-secondary-subtle">Score</th>
+                        <th className="bg-secondary-subtle">Time</th>
                     </tr>
                 </thead>
                 <tbody>
