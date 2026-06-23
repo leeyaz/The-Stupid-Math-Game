@@ -17,6 +17,9 @@ const timeFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 export async function saveScore(name, score) {
+    if (name.length > 32) {
+        throw new Error("Name must be less than 32 characters long.");
+    }
     await addDoc(collection(db, "scores"), {
         name,
         score,

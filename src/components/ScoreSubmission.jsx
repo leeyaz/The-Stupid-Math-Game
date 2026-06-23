@@ -7,14 +7,43 @@ import { saveScore, getScores } from "../utils/Scoreboard";
 function ScoreSubmission(props) {
     const [showInput, setShowInput] = useState(false);
     const [playerName, setPlayerName] = useState("");
+    const [valid, setValid] = useState(false);
 
     const handleAddScore = async () => {
         if (playerName && props.lastScore != null) {
             await saveScore(playerName, props.lastScore);
             const updated = await getScores();
-            props.onScoreAdded(updated); 
+            props.onScoreAdded(updated);
         }
     };
+
+    const handleChange = (e) => {
+        if (valid) {
+            setValid(false);
+        }
+        setPlayerName(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        const form = e.currentTarget;
+
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+            e.preventDefault();
+            setValid(true);
+        } else {
+            setValid(false);
+        }
+        // setShowInput(false);
+        // handleAddScore();
+    };
+
+    //     onClick={() => {
+    //     if (playerName.length < 32) {
+    //         setShowInput(false);
+    //         handleAddScore();
+    //     }
+    // }}
 
     return (
         <div className="score-submission-box d-flex justify-content-evenly mx-auto align-items-center pt-3 gap-4">
@@ -34,26 +63,23 @@ function ScoreSubmission(props) {
                     <Modal.Title>Submit to Leaderboard</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form noValidate onSubmit={handleSubmit} validated={valid}>
                         <Form.Control
+                            required
+                            maxLength={32}
                             type="name"
                             placeholder="your name here"
                             autoFocus
-                            onChange={(e) => setPlayerName(e.target.value)}
+                            onChange={handleChange}
                         />
+                        <Form.Control.Feedback type="invalid">
+                            Please input a name.
+                        </Form.Control.Feedback>
+                        <Button type="submit" variant="primary">
+                            Submit
+                        </Button>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button
-                        variant="primary"
-                        onClick={() => {
-                            setShowInput(false);
-                            handleAddScore();
-                        }}
-                    >
-                        Submit
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </div>
     );
