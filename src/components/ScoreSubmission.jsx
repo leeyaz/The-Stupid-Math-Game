@@ -1,13 +1,15 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { saveScore, getScores } from "../utils/Scoreboard";
 
 function ScoreSubmission(props) {
     const [showInput, setShowInput] = useState(false);
     const [playerName, setPlayerName] = useState("");
     const [valid, setValid] = useState(false);
+
+    const formRef = useRef(null);
 
     const handleAddScore = async () => {
         if (playerName && props.lastScore != null) {
@@ -25,14 +27,15 @@ function ScoreSubmission(props) {
     };
 
     const handleSubmit = (e) => {
-        const form = e.currentTarget;
-
-        if (form.checkValidity() === false) {
-            e.stopPropagation();
-            e.preventDefault();
-            setValid(true);
-        } else {
-            setValid(false);
+        const form = formRef.current;
+        if (form) {
+            if (form.checkValidity() === false) {
+                setValid(true);
+            } else {
+                setValid(false);
+                setShowInput(false);
+                handleAddScore();
+            }
         }
         // setShowInput(false);
         // handleAddScore();
@@ -63,7 +66,7 @@ function ScoreSubmission(props) {
                     <Modal.Title>Submit to Leaderboard</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form noValidate onSubmit={handleSubmit} validated={valid}>
+                    <Form ref={formRef} noValidate validated={valid}>
                         <Form.Control
                             required
                             maxLength={32}
@@ -75,11 +78,13 @@ function ScoreSubmission(props) {
                         <Form.Control.Feedback type="invalid">
                             Please input a name.
                         </Form.Control.Feedback>
-                        <Button type="submit" variant="primary">
-                            Submit
-                        </Button>
                     </Form>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleSubmit}>
+                        Submit
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </div>
     );
