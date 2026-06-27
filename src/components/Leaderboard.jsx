@@ -47,7 +47,9 @@ function Leaderboard(props) {
                     {props.scores.map((entry, i) => (
                         <tr key={i}>
                             <td>{i + 1}</td>
-                            <td>{entry.name.slice(0, 31)}</td>
+                            <td className="text-break">
+                                {entry.name.slice(0, 39)}
+                            </td>
                             <td>{entry.score}</td>
                             <td>{entry.time}</td>
                         </tr>
