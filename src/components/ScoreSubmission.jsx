@@ -69,7 +69,7 @@ function ScoreSubmission(props) {
                     <Form ref={formRef} noValidate validated={valid}>
                         <Form.Control
                             required
-                            maxLength={32}
+                            maxLength={40}
                             type="name"
                             placeholder="your name here"
                             autoFocus
