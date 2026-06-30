@@ -15,7 +15,6 @@ export const allowedFunctions = new Set([
     "square",
     "cube",
     "log",
-    "sign",
     "sin",
     "cos",
     "tan",
@@ -28,9 +27,20 @@ export const allowedFunctions = new Set([
     "acsc",
     "asec",
     "acot",
+    // add any custom functions below here
+    "xten" 
 ]);
+
+const customFunctions = {
+    xten: function (a) {
+        return a * 10.0;
+    }
+}
+math.import(customFunctions);
+
 export const allowedConstants = new Set(["pi", "e"]);
 const allowedSymbols = allowedFunctions.union(allowedConstants);
+
 
 function containsOnlyAllowed(expression) {
     let valid = true;
