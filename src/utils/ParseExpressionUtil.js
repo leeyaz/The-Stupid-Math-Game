@@ -28,17 +28,20 @@ export const allowedFunctions = new Set([
     "asec",
     "acot",
     // add any custom functions below here
-    "xten" 
+    // "xten" 
 ]);
 
 const customFunctions = {
-    xten: function (a) {
-        return a * 10.0;
-    }
+    // xten: function (a) {
+    //     return a * 10.0;
+    // }
 }
 math.import(customFunctions);
 
-export const allowedConstants = new Set(["pi", "e"]);
+export const allowedNumConstants = new Set([10, Number(start), Number(continuing)]);
+export const allowedConstants = new Set(["pi", "e", 10]); // 10 does not get parsed as an allowed constant. it's here for the ui
+// it get filters out via allowedNumConstants (never gets checked for invalid number/etc)
+
 const allowedSymbols = allowedFunctions.union(allowedConstants);
 
 
@@ -50,7 +53,10 @@ function containsOnlyAllowed(expression) {
             (node.type === "FunctionNode" &&
                 !allowedFunctions.has(node.name)) ||
             (node.type === "SymbolNode" && !allowedSymbols.has(node.name)) ||
-            (node.type === "OperatorNode" && !allowedOperations.has(node.op))
+            (node.type === "OperatorNode" && !allowedOperations.has(node.op)) ||
+            (node.type == "ConstantNode" &&
+                typeof node.value === "number" &&
+                !allowedNumConstants.has(node.value))
         ) {
             // console.log(
             //     "Disallowed node: ",
@@ -98,7 +104,10 @@ export function ParseExpression(expression) {
             b: Only contains the continuing number afterwards
     */
 
-    const numbersFound = trimmedExpr.match(/\d+/g) || []; //trimmedExpr.match(/-?\d+/g) || [];
+    const numbersFound = (trimmedExpr.match(/\d+/g) || []).filter(
+    (n) => !allowedNumConstants.has(Number(n)) || Number(n) === startingNumber || Number(n) === continuingNumber);; 
+    //trimmedExpr.match(/-?\d+/g) || [];
+
     if (numbersFound.length === 0) {
         return ["No relevant numbers found in expression", -1]; // may need to revisit cuz of e and pi
     }
