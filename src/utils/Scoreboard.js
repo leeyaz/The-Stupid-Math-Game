@@ -28,14 +28,25 @@ export async function saveScore(name, score) {
     });
 }
 
-export async function getScores() {
-    const today = new Date().toDateString();
-    let q = query(
-        collection(db, "scores"),
-        where("date", "==", today),
-        orderBy("score", "desc"),
-    );
+// export async function getScores() {
+//     const today = new Date().toDateString();
+//     let q = query(
+//         collection(db, "scores"),
+//         where("date", "==", today),
+//         orderBy("score", "desc"),
+//     );
 
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map((doc) => doc.data());
-}
+//     const snapshot = await getDocs(q);
+//     let scores = snapshot.docs.map((doc) => doc.data());
+
+//     scores.sort((a, b) => {
+//         if (a.score > b.score) {
+//             return -1;
+//         }
+//         if (a.score == b.score) {
+//             return a.name < b.name;
+//         }
+//         return 1;
+//     });
+//     return scores;
+// }

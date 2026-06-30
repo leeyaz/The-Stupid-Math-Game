@@ -1,18 +1,20 @@
 import Button from "react-bootstrap/Button";
-import { getScores } from "../utils/Scoreboard";
+// import { getScores } from "../utils/Scoreboard";
 import { useState, useEffect } from "react";
 
 function Leaderboard(props) {
-    const [scores, setScores] = useState([]);
+    //    const [scores, setScores] = useState([]);
 
     // const handleRefresh = async () => {
     //     const updated = await getScores();
     //     setScores(updated);
     // };
 
-    useEffect(() => {
-        getScores().then((data) => setScores(data));
-    }, []);
+    //  useEffect(() => {
+    //      getScores().then((data) => setScores(data));
+    //  }, []);
+
+    // console.log(scores);
     return (
         <div className="leaderboard ">
             <table className="table table-striped table-sm">
