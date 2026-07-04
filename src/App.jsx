@@ -40,6 +40,18 @@ function App() {
             });
 
             setScores(data);
+
+            let rank = 0;
+            let lastScore = null;
+            const ranked = data.map((entry) => {
+                if (entry.score !== lastScore) {
+                    rank += 1;
+                    lastScore = entry.score;
+                }
+                return { ...entry, rank };
+            });
+
+            setScores(ranked);
         });
         return () => unsubscribe();
     }, []);

@@ -11,7 +11,7 @@ export const allowedFunctions = new Set([
     "abs",
     "sqrt",
     "cbrt",
-    "sqr",
+    "sqr", // in customFunctions
     "cube",
     "log",
     "sin",
@@ -26,9 +26,7 @@ export const allowedFunctions = new Set([
     "acsc",
     "asec",
     "acot",
-    "sum",
-    "map",
-    "summ", //a special case here
+    "summ", //a special case here, is a custom function outside of customFunctions
 
     // add any custom functions below here
 

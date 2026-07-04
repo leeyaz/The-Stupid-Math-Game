@@ -7,6 +7,7 @@ import {
     query,
     limit,
     where,
+    onSnapshot
 } from "firebase/firestore";
 
 const timeFormatter = new Intl.DateTimeFormat("en-US", {
@@ -28,6 +29,8 @@ export async function saveScore(name, score) {
     });
 }
 
+//below is in App.jsx now!!
+
 // export async function getScores() {
 //     const today = new Date().toDateString();
 //     let q = query(
@@ -37,16 +40,15 @@ export async function saveScore(name, score) {
 //     );
 
 //     const snapshot = await getDocs(q);
-//     let scores = snapshot.docs.map((doc) => doc.data());
+//     const scores = snapshot.docs.map((doc) => doc.data());
 
-//     scores.sort((a, b) => {
-//         if (a.score > b.score) {
-//             return -1;
+//     let rank = 0;
+//     let lastScore = null;
+//     return scores.map((entry) => {
+//         if (entry.score !== lastScore) {
+//             rank += 1;
+//             lastScore= entry.score;
 //         }
-//         if (a.score == b.score) {
-//             return a.name < b.name;
-//         }
-//         return 1;
-//     });
-//     return scores;
+//         return { ...entry, rank }
+//     })
 // }
