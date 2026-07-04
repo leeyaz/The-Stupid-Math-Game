@@ -4,15 +4,14 @@ import { GetDailyNumbers } from "./DailyNumbers";
 const math = create(all);
 const { start, continuing, target } = GetDailyNumbers();
 
-export const allowedOperations = new Set(["+", "-", "*", "/", "!", "%", "^", "&", "|"]);
+export const allowedOperations = new Set(["+", "-", "*", "/", "!", "%", "^", "~", "&", "|", ":"]);
 export const allowedFunctions = new Set([
     "floor",
     "ceil",
-    "round",
     "abs",
     "sqrt",
     "cbrt",
-    "square",
+    "sqr",
     "cube",
     "log",
     "sin",
@@ -27,19 +26,37 @@ export const allowedFunctions = new Set([
     "acsc",
     "asec",
     "acot",
+    "sum",
+    "map",
+    "summ", //a special case here
+
     // add any custom functions below here
-    // "xten" 
+
 ]);
 
 const customFunctions = {
-    // xten: function (a) {
-    //     return a * 10.0;
-    // }
+    sqr: function (a) {
+        return a*a;
+    }
 }
 math.import(customFunctions);
 
-export const allowedNumConstants = new Set([10, Number(start), Number(continuing)]);
-export const allowedConstants = new Set(["pi", "e", 10]); // 10 does not get parsed as an allowed constant. it's here for the ui
+function summ(args, math, scope) {
+    const rangeNode = args[0];
+    const exprNode = args[1];
+    const range = rangeNode.compile().evaluate(scope);
+    const arr = range.toArray ? range.toArray() : range;
+    let total = 0;
+    for (const k of arr) {
+        total += exprNode.compile().evaluate({ ...scope, k });
+    }
+    return total;
+}
+summ.rawArgs = true;
+math.import({ summ });
+
+export const allowedNumConstants = new Set([0, 10, Number(start), Number(continuing)]);
+export const allowedConstants = new Set(["pi", "e", "k", 0, 10]); // 10 does not get parsed as an allowed constant. it's here for the ui
 // it get filters out via allowedNumConstants (never gets checked for invalid number/etc)
 
 const allowedSymbols = allowedFunctions.union(allowedConstants);
@@ -95,6 +112,7 @@ export function ParseExpression(expression) {
     try {
         output = evaluate(expression).toString();
     } catch (error) {
+        console.log("evaluate error:", error);
         return ["Error in Math Expression", -1];
     }
 
