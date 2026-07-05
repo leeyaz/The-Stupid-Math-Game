@@ -104,9 +104,12 @@ body {
     background-color: var(--backing);
 }
 
-textarea {
+.math-input {
     width: 100%;
-    padding: 8px 12px;
+    border: 2px solid var(--main);
+    height: 3rem;
+    min-height: 3rem;
+    padding: 0.66rem;
     resize: vertical;
     overflow: hidden;
 }
