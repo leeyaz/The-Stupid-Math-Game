@@ -2,6 +2,7 @@ import Calculator from "./components/Calculator";
 import Infobox from "./components/Infobox";
 import { useState, useEffect } from "react";
 import ScoreSubmission from "./components/ScoreSubmission";
+import Header from "./components/Header";
 // import { getScores } from "./utils/Scoreboard";
 import {
     onSnapshot,
@@ -58,6 +59,7 @@ function App() {
 
     return (
         <>
+            <Header></Header>
             <div className="container body text-center vh-100 d-flex flex-column gap-3">
                 <div className="title p-4">
                     <h1>
@@ -71,9 +73,7 @@ function App() {
                 {/*at the centre*/}
                 <Calculator onSetLastScore={setLastScore} />
 
-                <ScoreSubmission
-                    lastScore={lastScore}
-                />
+                <ScoreSubmission lastScore={lastScore} />
             </div>
         </>
     );

@@ -75,16 +75,27 @@ function Infobox(props) {
             </div>
             <Collapse in={open}>
                 <div>
-                    <Leaderboard lastScore={props.lastScore} scores={props.scores} />
+                    <Leaderboard
+                        lastScore={props.lastScore}
+                        scores={props.scores}
+                    />
                 </div>
             </Collapse>
-            
+
             <div className="pt-5">
-                <h3><b>Todays Numbers</b></h3>
+                <h3>
+                    <b>Todays Numbers</b>
+                </h3>
                 <div className="daily-numbers d-flex justify-content-evenly flex-column">
-                    <span>START: <b>{start}</b></span>
-                    <span>PROPAGATE: <b>{continuing}</b></span>
-                    <span>TARGET: <b>{target}</b></span>
+                    <span>
+                        START: <b>{start}</b>
+                    </span>
+                    <span>
+                        PROPAGATE: <b>{continuing}</b>
+                    </span>
+                    <span>
+                        TARGET: <b>{target}</b>
+                    </span>
                 </div>
             </div>
             <Instructions

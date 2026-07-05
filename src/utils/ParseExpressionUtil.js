@@ -4,7 +4,18 @@ import { GetDailyNumbers } from "./DailyNumbers";
 const math = create(all);
 const { start, continuing, target } = GetDailyNumbers();
 
-export const allowedOperations = new Set(["+", "-", "*", "/", "!", "%", "^", "~", "&", "|", ":"]);
+export const allowedOperations = new Set([
+    "+",
+    "-",
+    "*",
+    "/",
+    "!",
+    "%",
+    "^",
+    "~",
+    "&",
+    "|",
+]);
 export const allowedFunctions = new Set([
     "floor",
     "ceil",
@@ -29,14 +40,13 @@ export const allowedFunctions = new Set([
     "summ", //a special case here, is a custom function outside of customFunctions
 
     // add any custom functions below here
-
 ]);
 
 const customFunctions = {
     sqr: function (a) {
-        return a*a;
-    }
-}
+        return a * a;
+    },
+};
 math.import(customFunctions);
 
 function summ(args, math, scope) {
@@ -53,12 +63,16 @@ function summ(args, math, scope) {
 summ.rawArgs = true;
 math.import({ summ });
 
-export const allowedNumConstants = new Set([0, 10, Number(start), Number(continuing)]);
+export const allowedNumConstants = new Set([
+    0,
+    10,
+    Number(start),
+    Number(continuing),
+]);
 export const allowedConstants = new Set(["pi", "e", "k", 0, 10]); // 10 does not get parsed as an allowed constant. it's here for the ui
 // it get filters out via allowedNumConstants (never gets checked for invalid number/etc)
 
 const allowedSymbols = allowedFunctions.union(allowedConstants);
-
 
 function containsOnlyAllowed(expression) {
     let valid = true;
@@ -121,7 +135,11 @@ export function ParseExpression(expression) {
     */
 
     const numbersFound = (trimmedExpr.match(/\d+/g) || []).filter(
-    (n) => !allowedNumConstants.has(Number(n)) || Number(n) === startingNumber || Number(n) === continuingNumber);; 
+        (n) =>
+            !allowedNumConstants.has(Number(n)) ||
+            Number(n) === startingNumber ||
+            Number(n) === continuingNumber,
+    );
     //trimmedExpr.match(/-?\d+/g) || [];
 
     if (numbersFound.length === 0) {
