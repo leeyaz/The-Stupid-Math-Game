@@ -10,19 +10,29 @@ function Calculator({ onSetLastScore }) {
 
     const handleSubmit = (value) => {
         setDisplayActive(true);
-        const [output, numContinuing] = ParseExpression(value);
-
-        if (numContinuing !== -1) {
+        try {
+            const [output, numContinuing] = ParseExpression(value);
             const noWhiteSpace = value.replace(/\s/g, "");
             const score = Math.round(50000 / noWhiteSpace.length ** 2);
 
             setOutput("Yay you did it! Your score is " + score.toString());
             setValidity(true);
             onSetLastScore(score);
-        } else {
-            setOutput(output);
+        } catch (err) {
+            setOutput(err.message);
             setValidity(false);
         }
+        // if (numContinuing !== -1) {
+        //     const noWhiteSpace = value.replace(/\s/g, "");
+        //     const score = Math.round(50000 / noWhiteSpace.length ** 2);
+
+        //     setOutput("Yay you did it! Your score is " + score.toString());
+        //     setValidity(true);
+        //     onSetLastScore(score);
+        // } else {
+        //     setOutput(output);
+        //     setValidity(false);
+        // }
     };
 
     return (
