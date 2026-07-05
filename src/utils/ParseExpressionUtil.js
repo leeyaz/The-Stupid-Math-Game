@@ -20,11 +20,14 @@ export const allowedFunctions = new Set([
     "floor",
     "ceil",
     "abs",
+
+    "sqr",
     "sqrt",
-    "cbrt",
-    "sqr", // in customFunctions
     "cube",
+    "cbrt",
+
     "log",
+
     "sin",
     "cos",
     "tan",
@@ -37,6 +40,7 @@ export const allowedFunctions = new Set([
     "acsc",
     "asec",
     "acot",
+
     "summ", //a special case here, is a custom function outside of customFunctions
 
     // add any custom functions below here
@@ -95,7 +99,7 @@ function checkAllowed(expression) {
                 break;
             case "OperatorNode":
                 if (!allowedOperations.has(node.op)) {
-                    throw new Error("'"+node.op + "' is not allowed!");
+                    throw new Error("'" + node.op + "' is not allowed!");
                 }
                 break;
             case "ConstantNode":
@@ -123,7 +127,7 @@ export function evaluate(expression) {
     }
 }
 
-// will return an array: [0] is the output string, [1] is the number of continuing digits (-1 if output didnt meet all requirements)
+// will return an array: [0] is the output string, [1] is the score
 export function ParseExpression(expression) {
     let output;
     let startingNumber = start;
@@ -139,6 +143,7 @@ export function ParseExpression(expression) {
         Checks if it...
             a: Starts with the starting number (must be solely that number, not meaning leading digit)
             b: Only contains the continuing number afterwards
+            c: Calculate score
     */
     const numbersFound = trimmedExpr.match(/\d+/g) || []; //trimmedExpr.match(/-?\d+/g) || [];
     if (numbersFound.length === 0) {
@@ -155,5 +160,45 @@ export function ParseExpression(expression) {
         throw new Error("Didn't reach target of " + targetNumber.toString());
     }
 
-    return [output, numbersFound.length - 1];
+    /*
+        SCORE SYSTEM |
+        =============
+        Good Things
+        - usually rare for scores to be the same
+
+        Problems
+        - 'ceil' has a monopoly on functions 
+            > all functions worth the same? so its based off the amount of tokens?
+        - not enough creativity (and too many options for functions)
+            > purge the functions list
+        - too much use with pi and e
+            > maybe remove pi and e?
+
+        > Maybe ignore parenthesis entirely?
+
+        > Maybe like a preferred function?
+    */
+    let score = 0;
+    const nodeTree = math.parse(expression);
+    nodeTree.traverse((node) => {
+        switch (node.type) {
+            case "FunctionNode":
+                score += 1;
+                break;
+            case "SymbolNode":
+                if (allowedConstants.has(node.name)) {
+                    // avoid double-counting functions
+                    score += 1;
+                }
+                break;
+            case "OperatorNode":
+                score += 1;
+                break;
+            case "ConstantNode":
+                score += 1;
+                break;
+        }
+    });
+
+    return [output, Math.round(5000 / score ** 0.5)];
 }

@@ -11,9 +11,9 @@ function Calculator({ onSetLastScore }) {
     const handleSubmit = (value) => {
         setDisplayActive(true);
         try {
-            const [output, numContinuing] = ParseExpression(value);
-            const noWhiteSpace = value.replace(/\s/g, "");
-            const score = Math.round(50000 / noWhiteSpace.length ** 2);
+            const [output, score] = ParseExpression(value);
+            // const noWhiteSpace = value.replace(/\s/g, "");
+            // const score = Math.round(50000 / noWhiteSpace.length ** 2);
 
             setOutput("Yay you did it! Your score is " + score.toString());
             setValidity(true);
