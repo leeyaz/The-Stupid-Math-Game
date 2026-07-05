@@ -1,10 +1,16 @@
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Modal from "react-bootstrap/Modal";
+import { useState } from "react";
+
 import { FaCalendar } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { FaFireAlt } from "react-icons/fa";
+import { FaRegCalendarCheck } from "react-icons/fa";
 import { TbExchange } from "react-icons/tb";
+
+import Changelog from "./Changelog";
+// https://react-icons.github.io/react-icons/search/
 
 function HeaderButton({ onClick, id, children }) {
     return (
@@ -36,14 +42,21 @@ function HeaderButton({ onClick, id, children }) {
 }
 
 function Header() {
+    const [showChangelog, setShowChangelog] = useState(false);
+    
     return (
-        <div className="Header  d-flex justify-content-start align-items-center border-bottom ">
-            <HeaderButton id="Changelog">
+        <div className="Header d-flex justify-content-start align-items-center border-bottom ">
+            <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
                 <TbExchange size={30} />
             </HeaderButton>
             <HeaderButton id="Daily Streak">
-                <FaFireAlt size={30} />
+                <FaRegCalendarCheck size={30} />
             </HeaderButton>
+
+            <Changelog
+                show={showChangelog}
+                onHide={() => setShowChangelog(false)}
+            />
         </div>
     );
 }

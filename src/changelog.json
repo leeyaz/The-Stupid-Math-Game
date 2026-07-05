@@ -1,0 +1,16 @@
+[
+    {
+        "version": "1",
+        "date": "July 4, 2026",
+        "description": "",
+        "added": ["Bum fart", "Your mother!"],
+        "fixed": ["poop"]
+    },
+    {
+        "version": "0",
+        "date": "July 1, 2026",
+        "description": "Finally Released!",
+        "added": [],
+        "fixed": []
+    }
+]

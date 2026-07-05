@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ScoreSubmission from "./components/ScoreSubmission";
 import Header from "./components/Header";
 // import { getScores } from "./utils/Scoreboard";
+
 import {
     onSnapshot,
     collection,
