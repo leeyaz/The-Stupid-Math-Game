@@ -27,10 +27,14 @@ function Input({ onSubmit, showDisplay }) {
         <div className="d-flex flex-column">
             <textarea
                 type="text"
-                className="text-center"
+                className="math-input text-center rounded-1"
                 placeholder="Enter the MATH EXPRESSION"
                 value={currInput}
                 onChange={handleInputChange}
+                spellCheck="false"
+                autoCorrect="off"
+                autoComplete="off"
+                autoCapitalize="none"
             ></textarea>
             <p className="m-2">
                 {" "}

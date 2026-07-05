@@ -2,39 +2,29 @@ import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 import { useState } from "react";
 
-import { FaCalendar } from "react-icons/fa";
-import { IconContext } from "react-icons";
+import { FaClockRotateLeft } from "react-icons/fa6";
+import { FaFireAlt } from "react-icons/fa";
 import { FaRegCalendarCheck } from "react-icons/fa";
-import { TbExchange } from "react-icons/tb";
+import { IoSettings } from "react-icons/io5";
 
 import Changelog from "./Changelog";
 // https://react-icons.github.io/react-icons/search/
 
-function HeaderButton({ onClick, id, children }) {
+function HeaderButton({ onClick, id, children, overlay }) {
     return (
         <OverlayTrigger
             overlay={<Tooltip id={id}>{id}</Tooltip>}
             placement={"bottom"}
+            delay={{ show: 500, hide: 0 }}
+            // below: hacky workaround the warnings in console...
+            // fine b/c tooltip isn't very important anyways
+            //trigger={["hover", "hover"]}
+            trigger="click"
         >
-            <Button
-                className="rounded-0"
-                onClick={onClick}
-                style={{
-                    height: "50px",
-                    width: "50px",
-                    padding: "0",
-                    border: "0",
-                    "--bs-btn-bg": "#fff",
-                    "--bs-btn-color": "#222",
-                    "--bs-btn-hover-bg": "#eee",
-                    "--bs-btn-hover-color": "#222",
-                    "--bs-btn-active-bg": "#ddd",
-                    "--bs-btn-active-color": "#222",
-                    transition: "all 0s ease",
-                }}
-            >
+            <Button className="header-button rounded-0" onClick={onClick}>
                 {children}
             </Button>
         </OverlayTrigger>
@@ -43,15 +33,16 @@ function HeaderButton({ onClick, id, children }) {
 
 function Header() {
     const [showChangelog, setShowChangelog] = useState(false);
-    
+
     return (
-        <div className="Header d-flex justify-content-start align-items-center border-bottom ">
+        <div className="header d-flex justify-content-start align-items-center">
             <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
-                <TbExchange size={30} />
+                <FaClockRotateLeft size={27} />
             </HeaderButton>
             <HeaderButton id="Daily Streak">
-                <FaRegCalendarCheck size={30} />
+                <FaFireAlt size={27} />
             </HeaderButton>
+            
 
             <Changelog
                 show={showChangelog}
