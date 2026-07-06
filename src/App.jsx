@@ -3,6 +3,7 @@ import Infobox from "./components/Infobox";
 import { useState, useEffect } from "react";
 import ScoreSubmission from "./components/ScoreSubmission";
 import Header from "./components/Header";
+import { refreshCookie, getStreak } from "./utils/Streak";
 // import { getScores } from "./utils/Scoreboard";
 
 import {
@@ -17,6 +18,11 @@ import { db } from "./utils/firebase";
 function App() {
     const [lastScore, setLastScore] = useState(null);
     const [scores, setScores] = useState([]);
+
+    useEffect(() => {
+        refreshCookie();
+        getStreak();
+    }, []);
 
     useEffect(() => {
         const today = new Date().toDateString();

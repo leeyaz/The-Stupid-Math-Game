@@ -13,6 +13,8 @@ import { IoSettings } from "react-icons/io5";
 import Changelog from "./Changelog";
 // https://react-icons.github.io/react-icons/search/
 
+import { getStreak } from "../utils/Streak";
+
 function HeaderButton({ onClick, id, children, overlay }) {
     return (
         <OverlayTrigger
@@ -33,14 +35,16 @@ function HeaderButton({ onClick, id, children, overlay }) {
 
 function Header() {
     const [showChangelog, setShowChangelog] = useState(false);
+    const streak = getStreak();
 
     return (
         <div className="header d-flex justify-content-start align-items-center">
             <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
-            <HeaderButton id="Daily Streak">
-                <FaFireAlt size={27} />
+            <HeaderButton id="Streak">
+                <FaFireAlt size={27} color={streak > 0 ? "orange" : "gray"}/>
+                {<span style={{ fontSize: "14px", marginLeft: "4px" }}>{streak}</span>}
             </HeaderButton>
             
 
