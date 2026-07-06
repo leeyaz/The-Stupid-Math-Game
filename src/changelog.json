@@ -3,8 +3,15 @@
         "version": "1",
         "date": "July 4, 2026",
         "description": "",
-        "added": ["Bum fart", "Your mother!"],
-        "fixed": ["poop"]
+        "added": ["Streak system is now here!",
+                    "The game will tell you  what's wrong with your expression...",
+                    "**New Constants**: 0, 10, k. k will be a stand in variable for functions that are iterative operators like 'summ'",
+                    "**New Operation**: '~' is now added for you nerds who want to do this bitwise (along with '&' and '|' that already exist)",
+                    "**New Function**: summ => usage: summation eg: summ(0:10, k+10) returns 0+10 + 1+10 + ... + 10+10"],
+        "fixed": ["Scoring system is now more lenient...",
+                    "Two of the same scores on the leaderboard will be given the same ranking, position is based on time first and then alphabet",
+                    "Autocorrect is now disabled for easier typing...",
+                    "The function 'sign' is removed because it does the same thing as '-'"]
     },
     {
         "version": "0",

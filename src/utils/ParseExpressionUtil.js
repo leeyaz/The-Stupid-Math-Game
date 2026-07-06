@@ -171,12 +171,21 @@ export function ParseExpression(expression) {
             > all functions worth the same? so its based off the amount of tokens?
         - not enough creativity (and too many options for functions)
             > purge the functions list
+            c: keep sin, cos, tan, but maybe the rest can go
+            c: sqr and cube are pretty redundant
         - too much use with pi and e
             > maybe remove pi and e?
+            c: certain funcs like sin cos tan or log would have further use with it still
+            c: may be less effective because forced ceil/floor
 
         > Maybe ignore parenthesis entirely?
+        c: could discourage people from using funcs if parathensis are counted
 
         > Maybe like a preferred function?
+        c: maybe some funcs are cheaper due to how useless it is?
+        c: realistically, probably base it off of parameters
+        c: if you think the game is getting too easy maybe we can expand the range to -1000, 1000
+        c: do you think difficulty modes are a good idea?
     */
     let score = 0;
     const nodeTree = math.parse(expression);
