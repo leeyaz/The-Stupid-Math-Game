@@ -44,7 +44,7 @@ function Header() {
             </HeaderButton>
             <HeaderButton id="Streak">
                 <FaFireAlt size={27} color={streak > 0 ? "orange" : "gray"}/>
-                {<span style={{ fontSize: "17px", fontWeight: "bold", marginLeft: "4px", marginTop: "10px" }}>{streak}</span>}
+                {<span style={{ fontSize: "17px", fontWeight: "bold", marginLeft: "4px", verticalAlign: "bottom" }}>{streak}</span>}
             </HeaderButton>
             
 
