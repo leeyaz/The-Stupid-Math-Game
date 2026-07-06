@@ -39,7 +39,7 @@ function Changelog({ show, onHide }) {
                             )}
                             {data.fixed.length > 0 && (
                                 <div>
-                                    Fixed:
+                                    <b>Fixed:</b>
                                     <ul>
                                         {data.fixed.map((d, i) => {
                                             return <li key={i}>{d}</li>;
