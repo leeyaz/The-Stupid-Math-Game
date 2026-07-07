@@ -2,6 +2,7 @@ import Modal from "react-bootstrap/Modal";
 import { useEffect } from "react";
 
 import changelogData from "../changelog.json";
+import { FaGithub } from "react-icons/fa";
 
 function Changelog({ show, onHide }) {
     return (
@@ -13,6 +14,9 @@ function Changelog({ show, onHide }) {
         >
             <Modal.Header closeButton>
                 <Modal.Title>Changelog</Modal.Title>
+                <a href="https://github.com/leeyaz/The-Stupid-Math-Game">
+                    <FaGithub className="mx-2" size={25} />
+                </a>
             </Modal.Header>
             <Modal.Body>
                 {changelogData.map((data, i) => {

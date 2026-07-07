@@ -172,7 +172,8 @@
     background-color: var(--backing);
 }
 
-.changelog .modal-content {
+.changelog .modal-content,
+.changelog a {
     color: var(--main);
 }
 
