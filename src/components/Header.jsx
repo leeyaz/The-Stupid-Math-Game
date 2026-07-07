@@ -14,7 +14,7 @@ import Changelog from "./Changelog";
 // https://react-icons.github.io/react-icons/search/
 import Popover from "react-bootstrap/Popover";
 
-import { getStreak } from "../utils/Streak";
+import { getStreak, hasPlayedToday } from "../utils/Streak";
 
 function HeaderButton({ onClick, id, children, overlay }) {
     return (
@@ -37,6 +37,7 @@ function HeaderButton({ onClick, id, children, overlay }) {
 function Header() {
     const [showChangelog, setShowChangelog] = useState(false);
     const streak = getStreak();
+    const playedToday = hasPlayedToday();
     const [darkMode, setDarkMode] = useState(() => {
         const saved = localStorage.getItem("theme");
         if (saved) return saved == "dark";
@@ -75,7 +76,7 @@ function Header() {
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
             <HeaderButton id="Streak">
-                <FaFireAlt size={27} color={streak > 0 ? "orange" : "gray"} />
+                <FaFireAlt size={27} color={playedToday ? "orange" : "gray"} />
                 {
                     <span
                         style={{

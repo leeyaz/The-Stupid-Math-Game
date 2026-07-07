@@ -71,3 +71,10 @@ export function refreshCookie() {
     const cookie = getCookie();
     if (cookie) setCookie(cookie); // rewrites same data with fresh expiry to make cookies last forever
 }
+
+export function hasPlayedToday() {
+    const today = new Date().toDateString();
+    const cookie = getCookie();
+    if (!cookie) return false;
+    return cookie.lastPlayed === today;
+}
