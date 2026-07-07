@@ -39,7 +39,7 @@ function Calculator({ onSetLastScore }) {
         //     setValidity(false);
         // }
     };
-
+    
     return (
         <div className="calculator">
             <Input

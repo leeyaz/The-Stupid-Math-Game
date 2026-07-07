@@ -86,6 +86,33 @@
     transition: all 0s ease;
 }
 
+@keyframes jump {
+    0%,
+    100% {
+        transform: scale(1, 1) rotate(-1deg);
+        filter: brightness(1);
+    }
+    30% {
+        transform: scale(1.05, 0.92);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(0.96, 1.1) rotate(2deg);
+
+        filter: brightness(1.3);
+    }
+    70% {
+        transform: scale(0.96, 1.1) rotate(2deg);
+
+        filter: brightness(1.3);
+    }
+}
+
+#streak-icon.animate {
+    animation: jump 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: bottom;
+}
+
 #settings {
     background-color: var(--backing);
     border-color: var(--faint);

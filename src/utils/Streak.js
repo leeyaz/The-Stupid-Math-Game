@@ -1,7 +1,9 @@
 const COOKIE_NAME = "streak";
 
 function getCookie() {
-    const match = document.cookie.split("; ").find(row => row.startsWith(COOKIE_NAME + "="));
+    const match = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith(COOKIE_NAME + "="));
     if (!match) return null;
     try {
         return JSON.parse(decodeURIComponent(match.split("=")[1]));
@@ -40,6 +42,13 @@ export function getStreak() {
 }
 
 export function updateStreak() {
+    const animateStreak = () => {
+        const streakFlame = document.getElementById("streak-icon");
+        if (streakFlame) {
+            streakFlame.classList.add("animate");
+        }
+    };
+
     const today = new Date().toDateString();
     const yesterday = new Date(Date.now() - 86400000).toDateString();
     const cookie = getCookie();
@@ -47,6 +56,7 @@ export function updateStreak() {
     if (!cookie) {
         // first time ever
         setCookie({ streak: 1, lastPlayed: today });
+        animateStreak();
         return 1;
     }
 
@@ -59,6 +69,7 @@ export function updateStreak() {
         // played yesterday, increment
         const newStreak = cookie.streak + 1;
         setCookie({ streak: newStreak, lastPlayed: today });
+        animateStreak();
         return newStreak;
     }
 

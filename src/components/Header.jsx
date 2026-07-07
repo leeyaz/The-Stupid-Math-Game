@@ -78,7 +78,7 @@ function Header() {
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
             <HeaderButton id="Streak">
-                <FaFireAlt size={27} color={playedToday ? "orange" : "gray"} />
+                <FaFireAlt size={27} color={playedToday ? "orange" : "gray"} id="streak-icon"/>
                 {
                     <span
                         style={{
