@@ -69,7 +69,7 @@ function ScoreSubmission(props) {
                             required
                             maxLength={40}
                             type="name"
-                            placeholder="your name here"
+                            placeholder="Your name here"
                             autoFocus
                             onChange={handleChange}
                         />

@@ -3,6 +3,7 @@
     --backing: #ffffff;
     --lines: #e2e4ff;
     --main: #312f2d;
+    --main-dark: #312f2d;
     --faint: #dfdfdf;
 }
 
@@ -18,7 +19,7 @@
     font-weight: 400;
 }
 
-body {
+.background {
     background-color: var(--backing);
     background-image:
         repeating-linear-gradient(
@@ -79,7 +80,7 @@ body {
     --bs-btn-hover-color: var(--main);
     --bs-btn-hover-border-color: var(--lines);
 
-    --bs-btn-active-bg: #eee;
+    --bs-btn-active-bg: var(--faint);
     --bs-btn-active-color: var(--main);
     --bs-btn-active-border-color: var(--lines);
     transition: all 0s ease;
@@ -111,6 +112,20 @@ body {
 .title h1 b {
     font-family: "Cambria";
     font-weight: 900;
+}
+
+.instructions .modal-header {
+    color: var(--main-dark);
+}
+
+.leaderboard-header th {
+    color: var(--main-dark);
+}
+
+#allowed-list-button {
+    background-color: var(--main);
+    color: var(--backing);
+    border-color: var(--faint);
 }
 
 .daily-numbers {
@@ -156,37 +171,6 @@ body {
 .btn-outline-dark {
     color: var(--main);
     border-color: var(--main);
-}
-
-.instructions {
-    background-color: pink;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.scoreboard {
-    margin-bottom: 10vh;
-    background-color: rgb(232, 226, 154);
-    padding: 10px;
-    border-radius: 8px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.scoreboard table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.scoreboard th,
-.scoreboard td {
-    border: 1px solid rgb(210, 191, 42);
-    padding: 6px 10px;
-    text-align: left;
-}
-
-.scoreboard th {
-    background-color: rgb(239, 234, 88);
 }
 
 .nameInput {

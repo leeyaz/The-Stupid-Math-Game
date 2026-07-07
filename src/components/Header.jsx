@@ -48,9 +48,11 @@ function Header() {
         const root = document.documentElement;
         if (darkMode) {
             root.classList.add("dark-mode");
+            root.setAttribute("data-bs-theme", "dark");
             localStorage.setItem("theme", "dark");
         } else {
             root.classList.remove("dark-mode");
+            root.setAttribute("data-bs-theme", "light");
             localStorage.setItem("theme", "light");
         }
     }, [darkMode]);
@@ -95,6 +97,7 @@ function Header() {
                 placement={"bottom"}
                 delay={{ show: 500, hide: 0 }}
                 trigger="click"
+                rootClose
             >
                 <Button className="header-button rounded-0">
                     <IoSettings size={27} />

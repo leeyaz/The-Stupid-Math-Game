@@ -70,7 +70,9 @@ function Infobox(props) {
                     delay={{ show: 0, hide: 0 }}
                     overlay={renderAllowed}
                 >
-                    <Button variant="outline-dark">What's Allowed?</Button>
+                    <Button variant="outline-dark" id="allowed-list-button">
+                        What's Allowed?
+                    </Button>
                 </OverlayTrigger>
             </div>
             <Collapse in={open}>

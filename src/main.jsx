@@ -4,7 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import App from "./App.jsx";
 
-createRoot(document.getElementById("root")).render(
+const root = document.getElementById("root");
+root.className = "background";
+
+createRoot(root).render(
     <StrictMode>
         <App />
     </StrictMode>,
