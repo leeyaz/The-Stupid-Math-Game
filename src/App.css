@@ -1,9 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
 :root {
     --backing: #ffffff;
-    --backing-hover: #cecece;
     --lines: #e2e4ff;
     --main: #312f2d;
+    --faint: #dfdfdf;
+}
+
+:root.dark-mode {
+    --backing: #1a191b;
+    --lines: #202027;
+    --main: #dfd7cf;
+    --faint: #333333;
 }
 
 * {
@@ -55,7 +62,7 @@ body {
 
 .header {
     background-color: var(--backing);
-    border-bottom: 1px solid rgb(238, 225, 225);
+    border-bottom: 1px solid var(--faint);
     color: var(--main);
 }
 
@@ -76,6 +83,25 @@ body {
     --bs-btn-active-color: var(--main);
     --bs-btn-active-border-color: var(--lines);
     transition: all 0s ease;
+}
+
+#settings {
+    background-color: var(--backing);
+    border-color: var(--faint);
+    border-radius: 8px;
+    border-width: 1px;
+}
+
+#settings .popover-body {
+    color: var(--main);
+}
+
+#settings .popover-arrow {
+    display: none !important;
+}
+
+#settings.fade {
+    transition: opacity 0s ease !important;
 }
 
 .title {
@@ -104,9 +130,16 @@ body {
     background-color: var(--backing);
 }
 
+.changelog .modal-content {
+    color: var(--main);
+}
+
 .math-input {
     width: 100%;
-    border: 2px solid var(--main);
+    background-color: var(--backing);
+    color: var(--main);
+    border: 1px solid var(--faint);
+    outline-color: var(--main);
     height: 3rem;
     min-height: 3rem;
     padding: 0.66rem;
@@ -118,6 +151,11 @@ body {
     background-color: lightgreen;
     padding: 10px;
     border-radius: 8px;
+}
+
+.btn-outline-dark {
+    color: var(--main);
+    border-color: var(--main);
 }
 
 .instructions {

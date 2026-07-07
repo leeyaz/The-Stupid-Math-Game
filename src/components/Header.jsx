@@ -3,7 +3,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { FaFireAlt } from "react-icons/fa";
@@ -12,6 +12,7 @@ import { IoSettings } from "react-icons/io5";
 
 import Changelog from "./Changelog";
 // https://react-icons.github.io/react-icons/search/
+import Popover from "react-bootstrap/Popover";
 
 import { getStreak } from "../utils/Streak";
 
@@ -24,7 +25,7 @@ function HeaderButton({ onClick, id, children, overlay }) {
             // below: hacky workaround the warnings in console...
             // fine b/c tooltip isn't very important anyways
             //trigger={["hover", "hover"]}
-            trigger="click"
+            // trigger="hover"
         >
             <Button className="header-button rounded-0" onClick={onClick}>
                 {children}
@@ -36,17 +37,68 @@ function HeaderButton({ onClick, id, children, overlay }) {
 function Header() {
     const [showChangelog, setShowChangelog] = useState(false);
     const streak = getStreak();
+    const [darkMode, setDarkMode] = useState(() => {
+        const saved = localStorage.getItem("theme");
+        if (saved) return saved == "dark";
+        return false;
+    });
 
+    useEffect(() => {
+        const root = document.documentElement;
+        if (darkMode) {
+            root.classList.add("dark-mode");
+            localStorage.setItem("theme", "dark");
+        } else {
+            root.classList.remove("dark-mode");
+            localStorage.setItem("theme", "light");
+        }
+    }, [darkMode]);
+
+    const settings = (
+        <Popover id="settings">
+            <Popover.Body className="p-2 d-flex flex-column align-items-center">
+                <Form.Check
+                    type="switch"
+                    id="dark-mode"
+                    label="Dark Mode"
+                    checked={darkMode}
+                    onChange={(e) => {
+                        setDarkMode(e.target.checked);
+                    }}
+                />
+            </Popover.Body>
+        </Popover>
+    );
     return (
         <div className="header d-flex justify-content-start align-items-center">
             <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
             <HeaderButton id="Streak">
-                <FaFireAlt size={27} color={streak > 0 ? "orange" : "gray"}/>
-                {<span style={{ fontSize: "17px", fontWeight: "bold", marginLeft: "4px", verticalAlign: "bottom" }}>{streak}</span>}
+                <FaFireAlt size={27} color={streak > 0 ? "orange" : "gray"} />
+                {
+                    <span
+                        style={{
+                            fontSize: "17px",
+                            fontWeight: "bold",
+                            marginLeft: "4px",
+                            verticalAlign: "bottom",
+                        }}
+                    >
+                        {streak}
+                    </span>
+                }
             </HeaderButton>
-            
+            <OverlayTrigger
+                overlay={settings}
+                placement={"bottom"}
+                delay={{ show: 500, hide: 0 }}
+                trigger="click"
+            >
+                <Button className="header-button rounded-0">
+                    <IoSettings size={27} />
+                </Button>
+            </OverlayTrigger>
 
             <Changelog
                 show={showChangelog}

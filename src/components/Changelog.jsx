@@ -5,7 +5,12 @@ import changelogData from "../changelog.json";
 
 function Changelog({ show, onHide }) {
     return (
-        <Modal show={show} fullscreen={false} onHide={onHide}>
+        <Modal
+            className="changelog"
+            show={show}
+            fullscreen={false}
+            onHide={onHide}
+        >
             <Modal.Header closeButton>
                 <Modal.Title>Changelog</Modal.Title>
             </Modal.Header>
