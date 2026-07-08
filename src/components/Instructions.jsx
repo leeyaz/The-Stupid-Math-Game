@@ -15,7 +15,11 @@ function Instructions(props) {
                 <b>shortest</b> mathematical expression you can find.
                 <br></br>
                 <br></br>
-                <div className="p-3 background m-auto" style={{width:"80%"}} inert>
+                <div
+                    className="p-3 background m-auto"
+                    style={{ width: "80%" }}
+                    inert
+                >
                     <div className="daily-numbers d-flex justify-content-evenly flex-column pb-3">
                         <span>
                             START: <b>36</b>
@@ -34,7 +38,7 @@ function Instructions(props) {
                             value="ceil(sqr(36)/33 + 33/33)"
                             rows="1"
                             style={{
-                                width: "70%",
+                                maxWidth: "500px",
                                 margin: "auto",
                             }}
                         ></textarea>

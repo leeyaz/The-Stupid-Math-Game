@@ -68,7 +68,7 @@ function App() {
         <>
             <Header></Header>
             <div className="container body text-center vh-100 d-flex flex-column gap-3">
-                <div className="title p-4">
+                <div className="title py-4">
                     <h1>
                         <b>STUPID MATH</b>
                         <span style={{ fontSize: "10px" }}> the </span>

@@ -16,7 +16,7 @@ import Popover from "react-bootstrap/Popover";
 
 import { getStreak, hasPlayedToday } from "../utils/Streak";
 
-function HeaderButton({ onClick, id, children, overlay }) {
+function HeaderButton({ onClick, id, children, overlay, className }) {
     return (
         <OverlayTrigger
             overlay={<Tooltip id={id}>{id}</Tooltip>}
@@ -27,7 +27,10 @@ function HeaderButton({ onClick, id, children, overlay }) {
             //trigger={["hover", "hover"]}
             // trigger="hover"
         >
-            <Button className="header-button rounded-0" onClick={onClick}>
+            <Button
+                className={`header-button rounded-0 ${className}`}
+                onClick={onClick}
+            >
                 {children}
             </Button>
         </OverlayTrigger>
@@ -77,8 +80,12 @@ function Header() {
             <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
-            <HeaderButton id="Streak">
-                <FaFireAlt size={27} color={playedToday ? "orange" : "gray"} id="streak-icon"/>
+            <HeaderButton id="Streak" className="">
+                <FaFireAlt
+                    size={27}
+                    color={playedToday ? "orange" : "gray"}
+                    id="streak-icon"
+                />
                 {
                     <span
                         style={{
