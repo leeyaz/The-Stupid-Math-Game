@@ -41,6 +41,7 @@ function Instructions(props) {
                                 maxWidth: "500px",
                                 margin: "auto",
                             }}
+                            readOnly
                         ></textarea>
                         <p className="m-2">
                             =<b style={{ color: "green" }}> 41</b>
