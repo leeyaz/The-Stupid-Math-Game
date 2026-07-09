@@ -153,6 +153,7 @@
     background-color: var(--main);
     color: var(--backing);
     border-color: var(--faint);
+    transition: none;
 }
 
 .daily-numbers {

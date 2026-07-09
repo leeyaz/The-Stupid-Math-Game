@@ -9,6 +9,7 @@ import { FaClockRotateLeft } from "react-icons/fa6";
 import { FaFireAlt } from "react-icons/fa";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
+import { IoIosStats } from "react-icons/io";
 
 import Changelog from "./Changelog";
 // https://react-icons.github.io/react-icons/search/
@@ -110,6 +111,9 @@ function Header() {
                     <IoSettings size={27} />
                 </Button>
             </OverlayTrigger>
+            <HeaderButton>
+                <IoIosStats size={27} />
+            </HeaderButton>
 
             <Changelog
                 show={showChangelog}
