@@ -56,6 +56,11 @@
         -0.36px 0;
 }
 
+#root {
+    display: block;
+    overflow: auto;
+}
+
 .body {
     max-width: 576px;
     padding: 20px;

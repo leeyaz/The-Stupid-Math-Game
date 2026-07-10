@@ -40,6 +40,7 @@ function HeaderButton({ onClick, id, children, overlay, className }) {
 
 function Header() {
     const [showChangelog, setShowChangelog] = useState(false);
+    const [showStats, setShowStats] = useState(false);
     const streak = getStreak();
     const playedToday = hasPlayedToday();
     const [darkMode, setDarkMode] = useState(() => {
@@ -111,7 +112,7 @@ function Header() {
                     <IoSettings size={27} />
                 </Button>
             </OverlayTrigger>
-            <HeaderButton id="Statistics">
+            <HeaderButton id="Statistics" onClick={() => setShowStats(true)}>
                 <IoIosStats size={27} />
             </HeaderButton>
 

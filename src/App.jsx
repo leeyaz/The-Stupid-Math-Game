@@ -26,9 +26,10 @@ function App() {
 
     useEffect(() => {
         const today = new Date().toDateString();
+        const yesterday = new Date(Date.now() - 86400000).toDateString();
         const q = query(
             collection(db, "scores"),
-            where("date", "==", today),
+            where("date", "==", yesterday),
             orderBy("score", "desc"),
         );
         const unsubscribe = onSnapshot(q, (snapshot) => {

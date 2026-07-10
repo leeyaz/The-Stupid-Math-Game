@@ -9,12 +9,13 @@
                     "*New Constants 0, 10, k*\n_10 is so important that many of us have 10 fingers, and 0 is so important that many of us have 0 tails_.\n'*k*' is a dummy variable for iterative functions (_ex: summ_)",
                     "*New Operation '~'*: Bitwise Negation\nNow added for you nerds who want to do this bitwise (along with '&' and '|' that already exist)",
                     "*Dark Mode*: (available in Settings)\n_Do your eyes hurt too much? Are they strained? Take a break? No, the work must continue..._"],
-        "changed": ["Parentheses will now autocomplete themselves when you type (_Just like in a VSCode..._).",
+        "changed": ["Parentheses will now autocomplete themselves when you type (_Just like in VSCode..._).",
                     "Improved feedback will appear when an answer is not accepted.",
                     "Identical scores will be given the same ranking. Position from the top is first determined by time, then by name.",
                     "Autocorrect and Autocapitalize are now disabled for a better typing experience on mobile."],
         "fixed": ["Leaderboard submissions would not go through with certain name lengths.",
-                    "What's Allowed popup sometimes would have text offscreen"]
+                    "'What's Allowed' popup sometimes would have text offscreen.",
+                    "Background would not correctly expand if leaderboard was large."]
     },
     {
         "version": "0",

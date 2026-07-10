@@ -47,7 +47,7 @@ function ScoreSubmission(props) {
     // }}
 
     return (
-        <div className="score-submission-box d-flex justify-content-evenly mx-auto align-items-center pt-3 gap-4">
+        <div className="score-submission-box d-flex justify-content-evenly mx-auto align-items-center pt-2 pb-5 gap-4">
             <p className="p-2 m-0">
                 Most Recent Score: {props.lastScore || "nil"}
             </p>
