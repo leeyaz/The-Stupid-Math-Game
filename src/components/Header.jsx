@@ -4,7 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { FaFireAlt } from "react-icons/fa";
@@ -78,8 +78,10 @@ function Header({ ...props }) {
             </Popover.Body>
         </Popover>
     );
+
+    const contRef = useRef(null);
     return (
-        <Navbar className="header py-0" sticky="top" {...props}>
+        <Navbar ref={contRef} className="header py-0" sticky="top" {...props}>
             <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
@@ -96,6 +98,7 @@ function Header({ ...props }) {
                 </div>
             </HeaderButton>
             <OverlayTrigger
+                container={contRef}
                 overlay={settings}
                 placement={"bottom"}
                 delay={{ show: 500, hide: 0 }}
@@ -106,9 +109,6 @@ function Header({ ...props }) {
                     <IoSettings size={27} />
                 </Button>
             </OverlayTrigger>
-            <HeaderButton id="Statistics" onClick={() => setShowStats(true)}>
-                <IoIosStats size={27} />
-            </HeaderButton>
 
             <Changelog
                 show={showChangelog}
@@ -118,6 +118,11 @@ function Header({ ...props }) {
     );
 
     //... oooh maybe stats could also show like, which functions have been used more often or soemthingg...
+    /*
+            <HeaderButton id="Statistics" onClick={() => setShowStats(true)}>
+                <IoIosStats size={27} />
+            </HeaderButton>
+    */
 }
 
 export default Header;

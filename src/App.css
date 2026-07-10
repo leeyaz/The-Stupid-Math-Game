@@ -73,6 +73,7 @@ html {
     background-color: var(--backing);
     border-bottom: 1px solid var(--faint);
     color: var(--main);
+    z-index: 100;
 }
 
 .header-button {
@@ -137,7 +138,7 @@ html {
 }
 
 #settings.fade {
-    transition: opacity 0s ease !important;
+    transition: none;
 }
 
 .title {
