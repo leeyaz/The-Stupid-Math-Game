@@ -84,11 +84,12 @@ function Header({ ...props }) {
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
             <HeaderButton id="Streak">
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginLeft: "2px" }}>
                     <FaFireAlt size={27} color={streak > 0 && !hasDeclinedCookies() ? "orange" : "gray"}/>
                     {<span style={{ fontSize: "17px",
                                     fontWeight: "bold",
                                     marginLeft: "4px",
+                                    marginRight: "2px",
                                     verticalAlign: "bottom",
                                     whiteSpace: "nowrap" }}> 
                         {!hasDeclinedCookies() ? streak : "N/A"} </span>}
