@@ -89,3 +89,23 @@ export function hasPlayedToday() {
     if (!cookie) return false;
     return cookie.lastPlayed === today;
 }
+
+export function hasSeenDisclaimer() {
+    return localStorage.getItem("seenDisclaimer") === "true";
+}
+
+export function setSeenDisclaimer() {
+    localStorage.setItem("seenDisclaimer", "true");
+}
+
+export function hasDeclinedCookies() {
+    return localStorage.getItem("cookiesDeclined") === "true";
+}
+
+export function setDeclinedCookies() {
+    localStorage.setItem("cookiesDeclined", "true");
+}
+
+export function deleteStreakCookie() {
+    document.cookie = `${COOKIE_NAME}=; expires=Tue, 06 Jun 2006 00:00:00 UTC; path=/`;
+}

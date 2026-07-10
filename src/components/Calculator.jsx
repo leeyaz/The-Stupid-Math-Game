@@ -2,7 +2,7 @@ import Input from "./Input";
 import Display from "./Display";
 import { ParseExpression } from "../utils/ParseExpressionUtil";
 import { Fragment, useState } from "react";
-import { updateStreak } from "../utils/Streak";
+import { hasDeclinedCookies, deleteStreakCookie, updateStreak } from "../utils/Streak";
 
 function Calculator({ onSetLastScore }) {
     const [output, setOutput] = useState("");
@@ -20,9 +20,15 @@ function Calculator({ onSetLastScore }) {
             setValidity(true);
             onSetLastScore(score);
             
+            if (!hasDeclinedCookies()) {
+                updateStreak();
+            } else {
+                deleteStreakCookie();
+            }
+
             //streak for now
-            const newStreak = updateStreak();
-            console.log("Current streak:", newStreak);
+            // const newStreak = updateStreak();
+            // console.log("Current streak:", newStreak);
         } catch (err) {
             setOutput(err.message);
             setValidity(false);

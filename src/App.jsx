@@ -3,7 +3,8 @@ import Infobox from "./components/Infobox";
 import { useState, useEffect } from "react";
 import ScoreSubmission from "./components/ScoreSubmission";
 import Header from "./components/Header";
-import { refreshCookie, getStreak } from "./utils/Streak";
+import { refreshCookie, getStreak, hasSeenDisclaimer, setSeenDisclaimer, hasDeclinedCookies, setDeclinedCookies } from "./utils/Streak";
+import CookieDisclaimer from "./components/CookieDisclaimer";
 // import { getScores } from "./utils/Scoreboard";
 
 import {
@@ -18,11 +19,24 @@ import { db } from "./utils/firebase";
 function App() {
     const [lastScore, setLastScore] = useState(null);
     const [scores, setScores] = useState([]);
+    const [showDisclaimer, setShowDisclaimer] = useState(!hasSeenDisclaimer());
 
     useEffect(() => {
         refreshCookie();
         getStreak();
     }, []);
+
+    const handleAccept = () => {
+        //cookies true unless declined
+        setSeenDisclaimer();
+        setShowDisclaimer(false);
+    };
+
+    const handleDecline = () => {
+        setDeclinedCookies();
+        setSeenDisclaimer();
+        setShowDisclaimer(false);
+    };
 
     useEffect(() => {
         const today = new Date().toDateString();
@@ -66,6 +80,7 @@ function App() {
 
     return (
         <>
+            <CookieDisclaimer show={showDisclaimer} onAccept={handleAccept} onDecline={handleDecline} />
             <Header></Header>
             <div className="container body text-center d-flex flex-column gap-3">
                 <div className="title py-4">

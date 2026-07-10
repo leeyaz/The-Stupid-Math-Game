@@ -16,7 +16,7 @@ import Changelog from "./Changelog";
 // https://react-icons.github.io/react-icons/search/
 import Popover from "react-bootstrap/Popover";
 
-import { getStreak, hasPlayedToday } from "../utils/Streak";
+import { getStreak, hasDeclinedCookies, hasPlayedToday } from "../utils/Streak";
 
 function HeaderButton({ onClick, id, children, overlay, className }) {
     return (
@@ -83,24 +83,16 @@ function Header({ ...props }) {
             <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
-            <HeaderButton id="Streak" className="">
-                <FaFireAlt
-                    size={27}
-                    color={playedToday ? "orange" : "gray"}
-                    id="streak-icon"
-                />
-                {
-                    <span
-                        style={{
-                            fontSize: "17px",
-                            fontWeight: "bold",
-                            marginLeft: "4px",
-                            verticalAlign: "bottom",
-                        }}
-                    >
-                        {streak}
-                    </span>
-                }
+            <HeaderButton id="Streak">
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                    <FaFireAlt size={27} color={streak > 0 && !hasDeclinedCookies() ? "orange" : "gray"}/>
+                    {<span style={{ fontSize: "17px",
+                                    fontWeight: "bold",
+                                    marginLeft: "4px",
+                                    verticalAlign: "bottom",
+                                    whiteSpace: "nowrap" }}> 
+                        {!hasDeclinedCookies() ? streak : "N/A"} </span>}
+                </div>
             </HeaderButton>
             <OverlayTrigger
                 overlay={settings}
