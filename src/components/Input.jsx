@@ -28,7 +28,7 @@ function Input({ onSubmit, showDisplay }) {
     useEffect(() => {
         const ta = taRef.current;
         if (!ta) return;
-
+        // TODO: Highlight the parentheses pair when its selected? honestly seems really hard...
         const onBeforeInput = (e) => {
             const start = ta.selectionStart;
             const end = ta.selectionEnd;
@@ -52,6 +52,15 @@ function Input({ onSubmit, showDisplay }) {
                 ta.selectionEnd = end + 1;
 
                 setCurrInput(ta.value);
+            } else if (
+                e.data?.length === 1 &&
+                e.data == ")" &&
+                ta.value[end] == ")"
+            ) {
+                // ex. typing "ceil(", autofill the ")" then type the ")" which should ignore the autofill
+                e.preventDefault();
+                ta.selectionStart = end + 1;
+                ta.selectionEnd = end + 1;
             } else if (
                 start == end &&
                 ta.value[end - 1] == "(" &&
