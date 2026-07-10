@@ -22,8 +22,6 @@ function Calculator({ onSetLastScore }) {
             
             if (!hasDeclinedCookies()) {
                 updateStreak();
-            } else {
-                deleteStreakCookie();
             }
 
             //streak for now

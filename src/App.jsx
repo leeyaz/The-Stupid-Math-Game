@@ -3,7 +3,7 @@ import Infobox from "./components/Infobox";
 import { useState, useEffect } from "react";
 import ScoreSubmission from "./components/ScoreSubmission";
 import Header from "./components/Header";
-import { refreshCookie, getStreak, hasSeenDisclaimer, setSeenDisclaimer, hasDeclinedCookies, setDeclinedCookies } from "./utils/Streak";
+import { refreshCookie, getStreak, hasSeenDisclaimer, setSeenDisclaimer, hasDeclinedCookies, setDeclinedCookies, deleteStreakCookie } from "./utils/Streak";
 import CookieDisclaimer from "./components/CookieDisclaimer";
 // import { getScores } from "./utils/Scoreboard";
 
@@ -34,6 +34,7 @@ function App() {
 
     const handleDecline = () => {
         setDeclinedCookies();
+        deleteStreakCookie();
         setSeenDisclaimer();
         setShowDisclaimer(false);
     };

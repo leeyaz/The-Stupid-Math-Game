@@ -107,5 +107,5 @@ export function setDeclinedCookies() {
 }
 
 export function deleteStreakCookie() {
-    document.cookie = `${COOKIE_NAME}=; expires=Tue, 06 Jun 2006 00:00:00 UTC; path=/`;
+    document.cookie = `${COOKIE_NAME}=; expires=Tue, 06 Jun 2006 00:00:00 UTC; path=/`; //haha guess who's birthday
 }
