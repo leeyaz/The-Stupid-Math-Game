@@ -1,4 +1,5 @@
 import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
@@ -38,7 +39,7 @@ function HeaderButton({ onClick, id, children, overlay, className }) {
     );
 }
 
-function Header() {
+function Header({ ...props }) {
     const [showChangelog, setShowChangelog] = useState(false);
     const [showStats, setShowStats] = useState(false);
     const streak = getStreak();
@@ -78,7 +79,7 @@ function Header() {
         </Popover>
     );
     return (
-        <div className="header d-flex justify-content-start align-items-center">
+        <Navbar className="header py-0" sticky="top" {...props}>
             <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
@@ -120,7 +121,7 @@ function Header() {
                 show={showChangelog}
                 onHide={() => setShowChangelog(false)}
             />
-        </div>
+        </Navbar>
     );
 
     //... oooh maybe stats could also show like, which functions have been used more often or soemthingg...

@@ -26,10 +26,9 @@ function App() {
 
     useEffect(() => {
         const today = new Date().toDateString();
-        const yesterday = new Date(Date.now() - 86400000).toDateString();
         const q = query(
             collection(db, "scores"),
-            where("date", "==", yesterday),
+            where("date", "==", today),
             orderBy("score", "desc"),
         );
         const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -68,7 +67,7 @@ function App() {
     return (
         <>
             <Header></Header>
-            <div className="container body text-center vh-100 d-flex flex-column gap-3">
+            <div className="container body text-center d-flex flex-column gap-3">
                 <div className="title py-4">
                     <h1>
                         <b>STUPID MATH</b>
