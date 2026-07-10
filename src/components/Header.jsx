@@ -111,7 +111,7 @@ function Header() {
                     <IoSettings size={27} />
                 </Button>
             </OverlayTrigger>
-            <HeaderButton>
+            <HeaderButton id="Statistics">
                 <IoIosStats size={27} />
             </HeaderButton>
 
@@ -121,6 +121,8 @@ function Header() {
             />
         </div>
     );
+
+    //... oooh maybe stats could also show like, which functions have been used more often or soemthingg...
 }
 
 export default Header;

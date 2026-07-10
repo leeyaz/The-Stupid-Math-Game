@@ -1,17 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@100..900&display=swap");
 :root {
     --backing: #ffffff;
-    --lines: #e2e4ff;
+    --lines: #ebedfc;
     --main: #312f2d;
     --main-dark: #312f2d;
     --faint: #dfdfdf;
+    --accent: #ff9100;
 }
 
 :root.dark-mode {
     --backing: #1a191b;
-    --lines: #202027;
+    --lines: #221f1b;
     --main: #dfd7cf;
     --faint: #333333;
+    --accent: #ffae00;
 }
 
 * {
@@ -176,6 +178,40 @@
 .changelog .modal-content,
 .changelog a {
     color: var(--main);
+    white-space: pre-wrap;
+}
+
+.changelog ul li {
+    margin-bottom: 5px;
+}
+
+.changelog ul li::marker {
+    content: ">";
+    font-weight: bold;
+    color: var(--accent);
+    display: inline-block;
+    width: 1em;
+}
+
+.changelog ul li span {
+    position: relative;
+    left: 0.5em;
+}
+
+.changelog h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent);
+    margin: 0;
+}
+
+.changelog h2 {
+    font-size: 14px;
+}
+
+.changelog .description {
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .math-input {

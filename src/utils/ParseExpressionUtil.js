@@ -28,6 +28,8 @@ export const allowedFunctions = new Set([
 
     "log",
 
+    "sign",
+
     "sin",
     "cos",
     "tan",
@@ -42,8 +44,6 @@ export const allowedFunctions = new Set([
     "acot",
 
     "summ", //a special case here, is a custom function outside of customFunctions
-
-    // add any custom functions below here
 ]);
 
 const customFunctions = {

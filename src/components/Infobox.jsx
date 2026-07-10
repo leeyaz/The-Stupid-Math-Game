@@ -37,7 +37,7 @@ function Infobox(props) {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 700) {
+            if (window.innerWidth < 900) {
                 setPlacement("bottom");
             } else {
                 setPlacement("right-start");
