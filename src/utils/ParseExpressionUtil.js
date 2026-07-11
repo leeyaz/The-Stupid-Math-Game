@@ -172,7 +172,7 @@ export function ParseExpression(expression) {
         - not enough creativity (and too many options for functions)
             > purge the functions list
             c: keep sin, cos, tan, but maybe the rest can go
-            c: sqr and cube are pretty redundant
+            c: sqr and cube are pretty redundant edit: ACTUALLY I TAKE THAT BACK
         - too much use with pi and e
             > maybe remove pi and e?
             c: certain funcs like sin cos tan or log would have further use with it still

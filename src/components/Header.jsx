@@ -16,7 +16,7 @@ import Changelog from "./Changelog";
 // https://react-icons.github.io/react-icons/search/
 import Popover from "react-bootstrap/Popover";
 
-import { getStreak, hasDeclinedCookies, hasPlayedToday } from "../utils/Streak";
+import { getStreak, hasDeclinedCookies, hasPlayedToday, setDeclinedCookies, deleteStreakCookie } from "../utils/Streak";
 
 function HeaderButton({ onClick, id, children, overlay, className }) {
     return (
@@ -39,7 +39,7 @@ function HeaderButton({ onClick, id, children, overlay, className }) {
     );
 }
 
-function Header({ ...props }) {
+function Header({ streakEnabled, setStreakEnabled, ...props }) {
     const [showChangelog, setShowChangelog] = useState(false);
     const [showStats, setShowStats] = useState(false);
     const streak = getStreak();
@@ -49,6 +49,23 @@ function Header({ ...props }) {
         if (saved) return saved == "dark";
         return false;
     });
+    const [showStreakNotice, setShowStreakNotice] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
+    
+    const handleConfirm = () => {
+        if (streakEnabled) { // now enabled
+            localStorage.removeItem("cookiesDeclined");
+        } else { // now disabled
+            setDeclinedCookies();
+            deleteStreakCookie();
+        }
+        setShowStreakNotice(false);
+    };
+
+    const handleNotConfirm = () => {
+        setStreakEnabled(!streakEnabled);
+        setShowStreakNotice(false);
+    };
 
     useEffect(() => {
         const root = document.documentElement;
@@ -65,7 +82,7 @@ function Header({ ...props }) {
 
     const settings = (
         <Popover id="settings">
-            <Popover.Body className="p-2 d-flex flex-column align-items-center">
+            <Popover.Body className="p-2 d-flex flex-column align-items-left">
                 <Form.Check
                     type="switch"
                     id="dark-mode"
@@ -73,6 +90,16 @@ function Header({ ...props }) {
                     checked={darkMode}
                     onChange={(e) => {
                         setDarkMode(e.target.checked);
+                    }}
+                />
+                <Form.Check
+                    type="switch"
+                    id="streak-toggle"
+                    label="Streak?"
+                    checked={streakEnabled}
+                    onChange={() => {
+                        setStreakEnabled(!streakEnabled);
+                        setShowStreakNotice(true);
                     }}
                 />
             </Popover.Body>
@@ -84,12 +111,12 @@ function Header({ ...props }) {
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
             <HeaderButton id="Streak">
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginLeft: "2px" }}>
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginLeft: "4px" }}>
                     <FaFireAlt size={27} color={streak > 0 && !hasDeclinedCookies() ? "orange" : "gray"}/>
                     {<span style={{ fontSize: "17px",
                                     fontWeight: "bold",
                                     marginLeft: "4px",
-                                    marginRight: "2px",
+                                    marginRight: "4px",
                                     verticalAlign: "bottom",
                                     whiteSpace: "nowrap" }}> 
                         {!hasDeclinedCookies() ? streak : "N/A"} </span>}
@@ -114,10 +141,26 @@ function Header({ ...props }) {
                 show={showChangelog}
                 onHide={() => setShowChangelog(false)}
             />
+
+            <Modal show={showStreakNotice} centered onHide={handleNotConfirm}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{streakEnabled ? "Turning your Streak ON!!" : "Turning your Streak OFF!!"}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {streakEnabled
+                        ? "Your Streak will be be kept as a cookie across visits"
+                        : "Your Streak will be completely deleted, gone forever. If you re-enable your Streak, it will be back to 0"}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleConfirm}>Yeah I want that</Button>
+                    <Button variant="outline-secondary" onClick={handleNotConfirm}> {streakEnabled ? "No I do not want a Streak" : "No I want to keep my Streak"} </Button>
+                </Modal.Footer>
+            </Modal>
         </Navbar>
     );
 
     //... oooh maybe stats could also show like, which functions have been used more often or soemthingg...
+    // hmmm
 }
 
 export default Header;

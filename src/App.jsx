@@ -20,6 +20,7 @@ function App() {
     const [lastScore, setLastScore] = useState(null);
     const [scores, setScores] = useState([]);
     const [showDisclaimer, setShowDisclaimer] = useState(!hasSeenDisclaimer());
+    const [streakEnabled, setStreakEnabled] = useState(!hasDeclinedCookies());
 
     useEffect(() => {
         refreshCookie();
@@ -30,6 +31,7 @@ function App() {
         //cookies true unless declined
         setSeenDisclaimer();
         setShowDisclaimer(false);
+        setStreakEnabled(true);
     };
 
     const handleDecline = () => {
@@ -37,6 +39,7 @@ function App() {
         deleteStreakCookie();
         setSeenDisclaimer();
         setShowDisclaimer(false);
+        setStreakEnabled(false);
     };
 
     useEffect(() => {
@@ -82,7 +85,7 @@ function App() {
     return (
         <>
             <CookieDisclaimer show={showDisclaimer} onAccept={handleAccept} onDecline={handleDecline} />
-            <Header></Header>
+            <Header streakEnabled={streakEnabled} setStreakEnabled={setStreakEnabled} />
             <div className="container body text-center d-flex flex-column gap-3">
                 <div className="title py-4">
                     <h1>
