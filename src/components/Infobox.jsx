@@ -85,9 +85,7 @@ function Infobox(props) {
             </Collapse>
 
             <div className="pt-5">
-                <h3>
-                    <b>Todays Numbers</b>
-                </h3>
+                <h3><b>Today's Numbers</b></h3>
                 <div className="daily-numbers d-flex justify-content-evenly flex-column">
                     <span>
                         START: <b>{start}</b>
