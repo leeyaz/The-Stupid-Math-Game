@@ -4,7 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useRef } from "react";
 
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { FaFireAlt } from "react-icons/fa";
@@ -107,7 +107,10 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
     );
 
     const contRef = useRef(null);
+
+    const contRef = useRef(null);
     return (
+        <Navbar ref={contRef} className="header py-0" sticky="top" {...props}>
         <Navbar ref={contRef} className="header py-0" sticky="top" {...props}>
             <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
                 <FaClockRotateLeft size={27} />
@@ -125,6 +128,7 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
                 </div>
             </HeaderButton>
             <OverlayTrigger
+                container={contRef}
                 container={contRef}
                 overlay={settings}
                 placement={"bottom"}
