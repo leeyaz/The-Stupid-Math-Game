@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import changelogData from "../changelog.json";
 import { FaGithub } from "react-icons/fa";
 
-const specialCharacters = ["*", "_"];
+const specialCharacters = ["*", "_", ">"];
 
 function formatString(text) {
     /*
@@ -12,6 +12,7 @@ function formatString(text) {
         - Surrounding text bits with...
             - '*' => bolds inner text
             - '_' => italicizes inner text
+            - '>' => bullet point
         - To escape a specialCharacter, add '/' before it
         - Only works one level down (i.e. "_*WOoooO*_" won't work as intended)
     */
@@ -49,6 +50,13 @@ function formatString(text) {
                 return <b key={index}>{cutToken.replaceAll("/", "")}</b>;
             case "_":
                 return <i key={index}>{cutToken.replaceAll("/", "")}</i>;
+            case ">":
+                return (
+                    <span className="bullet">
+                        <b>{"\n•  "}</b>
+                        {cutToken.replaceAll("/", "")}
+                    </span>
+                );
             default:
                 return token.replaceAll("/", "");
         }

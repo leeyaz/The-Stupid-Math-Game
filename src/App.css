@@ -200,6 +200,11 @@ html {
     width: 1em;
 }
 
+.changelog .bullet b {
+    font-weight: bold;
+    color: var(--accent);
+}
+
 .changelog ul li span {
     position: relative;
     left: 0.5em;
