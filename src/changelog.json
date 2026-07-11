@@ -1,5 +1,13 @@
 [
     {
+        "version": "1.1",
+        "date": "July 99, 2026",
+        "description": "",
+        "added": [],
+        "changed": [],
+        "fixed": ["Fixed the bug when you toggle streak off and on, the streak no longer updates without reload. _Konami code ahh bug -E_"]
+    },
+    {
         "version": "1",
         "date": "July 10, 2026",
         "description": "Finally, *NEW CONTENT*. _What a predictable creature!_",
