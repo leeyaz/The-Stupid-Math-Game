@@ -18,7 +18,7 @@ function Leaderboard(props) {
     return (
         <div className="leaderboard ">
             <table className="table table-striped table-sm">
-                <thead className="sticky-top">
+                <thead className="">
                     <tr className="leaderboard-header">
                         <th colSpan={4} className="p-0 border-0">
                             <div className="bg-info p-2 m d-flex align-items-center justify-content-between">
