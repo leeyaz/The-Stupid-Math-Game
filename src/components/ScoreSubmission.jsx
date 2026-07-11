@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useState, useRef } from "react";
-import { saveScore, getScores } from "../utils/Scoreboard";
+import { saveScore } from "../utils/Scoreboard";
 
 function ScoreSubmission(props) {
     const [showInput, setShowInput] = useState(false);
@@ -14,8 +14,6 @@ function ScoreSubmission(props) {
     const handleAddScore = async () => {
         if (playerName && props.lastScore != null) {
             await saveScore(playerName, props.lastScore);
-            const updated = await getScores();
-            props.onScoreAdded(updated);
         }
     };
 
@@ -49,7 +47,7 @@ function ScoreSubmission(props) {
     // }}
 
     return (
-        <div className="score-submission-box d-flex justify-content-evenly mx-auto align-items-center pt-3 gap-4">
+        <div className="score-submission-box d-flex justify-content-evenly mx-auto align-items-center pt-2 pb-5 gap-4">
             <p className="p-2 m-0">
                 Most Recent Score: {props.lastScore || "nil"}
             </p>
@@ -71,7 +69,7 @@ function ScoreSubmission(props) {
                             required
                             maxLength={40}
                             type="name"
-                            placeholder="your name here"
+                            placeholder="Your name here"
                             autoFocus
                             onChange={handleChange}
                         />

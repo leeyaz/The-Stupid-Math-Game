@@ -7,6 +7,7 @@ import {
     query,
     limit,
     where,
+    onSnapshot
 } from "firebase/firestore";
 
 const timeFormatter = new Intl.DateTimeFormat("en-US", {
@@ -17,9 +18,6 @@ const timeFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 export async function saveScore(name, score) {
-    if (name.length > 32) {
-        throw new Error("Name must be less than 32 characters long.");
-    }
     await addDoc(collection(db, "scores"), {
         name,
         score,
@@ -28,14 +26,26 @@ export async function saveScore(name, score) {
     });
 }
 
-export async function getScores() {
-    const today = new Date().toDateString();
-    let q = query(
-        collection(db, "scores"),
-        where("date", "==", today),
-        orderBy("score", "desc"),
-    );
+//below is in App.jsx now!!
 
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map((doc) => doc.data());
-}
+// export async function getScores() {
+//     const today = new Date().toDateString();
+//     let q = query(
+//         collection(db, "scores"),
+//         where("date", "==", today),
+//         orderBy("score", "desc"),
+//     );
+
+//     const snapshot = await getDocs(q);
+//     const scores = snapshot.docs.map((doc) => doc.data());
+
+//     let rank = 0;
+//     let lastScore = null;
+//     return scores.map((entry) => {
+//         if (entry.score !== lastScore) {
+//             rank += 1;
+//             lastScore= entry.score;
+//         }
+//         return { ...entry, rank }
+//     })
+// }

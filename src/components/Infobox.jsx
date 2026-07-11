@@ -37,7 +37,7 @@ function Infobox(props) {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 700) {
+            if (window.innerWidth < 900) {
                 setPlacement("bottom");
             } else {
                 setPlacement("right-start");
@@ -70,21 +70,32 @@ function Infobox(props) {
                     delay={{ show: 0, hide: 0 }}
                     overlay={renderAllowed}
                 >
-                    <Button variant="outline-dark">What's Allowed?</Button>
+                    <Button variant="outline-dark" id="allowed-list-button">
+                        What's Allowed?
+                    </Button>
                 </OverlayTrigger>
             </div>
             <Collapse in={open}>
                 <div>
-                    <Leaderboard lastScore={props.lastScore} scores={props.scores} />
+                    <Leaderboard
+                        lastScore={props.lastScore}
+                        scores={props.scores}
+                    />
                 </div>
             </Collapse>
-            
+
             <div className="pt-5">
                 <h3><b>Today's Numbers</b></h3>
                 <div className="daily-numbers d-flex justify-content-evenly flex-column">
-                    <span>START: <b>{start}</b></span>
-                    <span>PROPAGATE: <b>{continuing}</b></span>
-                    <span>TARGET: <b>{target}</b></span>
+                    <span>
+                        START: <b>{start}</b>
+                    </span>
+                    <span>
+                        PROPAGATE: <b>{continuing}</b>
+                    </span>
+                    <span>
+                        TARGET: <b>{target}</b>
+                    </span>
                 </div>
             </div>
             <Instructions
