@@ -97,6 +97,7 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
                     id="streak-toggle"
                     label="Streak?"
                     checked={streakEnabled}
+                    disabled={showStreakNotice}
                     onChange={() => {
                         setStreakEnabled(!streakEnabled);
                         setShowStreakNotice(true);
