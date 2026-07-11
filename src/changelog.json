@@ -1,7 +1,7 @@
 [
     {
         "version": "1",
-        "date": "July 9, 2026",
+        "date": "July 10, 2026",
         "description": "Finally, *NEW CONTENT*. _What a predictable creature!_",
         "added": ["*Overhauled Scoring*\nScores are now based off of the *amount of tokens* in your expression. In other words, your scores is calculated from the number of functions, operators, and numbers used (_without regard for their individual lengths_).",
                     "*Streak System*\nTrack your daily wins and aim for the longest streak!\nThe flame will burn when you've achieved your win for the day. _Check it out in the top-left corner!_>You can toggle it on and off in Settings!>",
