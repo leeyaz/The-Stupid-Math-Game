@@ -4,7 +4,7 @@ import { ParseExpression } from "../utils/ParseExpressionUtil";
 import { Fragment, useState } from "react";
 import { hasDeclinedCookies, deleteStreakCookie, updateStreak } from "../utils/Streak";
 
-function Calculator({ onSetLastScore }) {
+function Calculator({ onSetLastScore, streakEnabled }) {
     const [output, setOutput] = useState("");
     const [valid, setValidity] = useState(false);
     const [displayActive, setDisplayActive] = useState(false);
@@ -20,7 +20,7 @@ function Calculator({ onSetLastScore }) {
             setValidity(true);
             onSetLastScore(score);
             
-            if (!hasDeclinedCookies()) {
+            if (streakEnabled) {
                 updateStreak();
             }
 

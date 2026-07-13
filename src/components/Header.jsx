@@ -116,7 +116,7 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
             </HeaderButton>
             <HeaderButton id="Streak">
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", marginLeft: "4px" }}>
-                    <FaFireAlt size={27} color={streak > 0 && !hasDeclinedCookies() ? "orange" : "gray"}/>
+                    <FaFireAlt size={27} color={!hasDeclinedCookies() && hasPlayedToday() && streak > 0 ? "orange" : "gray"}/>
                     {<span style={{ fontSize: "17px",
                                     fontWeight: "bold",
                                     marginLeft: "4px",

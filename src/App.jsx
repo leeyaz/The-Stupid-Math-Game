@@ -97,7 +97,7 @@ function App() {
 
                 <Infobox lastScore={lastScore} scores={scores} />
                 {/*at the centre*/}
-                <Calculator onSetLastScore={setLastScore} />
+                <Calculator onSetLastScore={setLastScore} streakEnabled={streakEnabled} />
 
                 <ScoreSubmission lastScore={lastScore} />
             </div>
