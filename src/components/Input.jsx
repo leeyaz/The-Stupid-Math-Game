@@ -2,7 +2,6 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { evaluate, ParseExpression } from "../utils/ParseExpressionUtil.js";
 import { GetDailyNumbers } from "../utils/DailyNumbers.js";
 import { Button } from "react-bootstrap";
-import { flushSync } from "react-dom";
 
 function Input({ onSubmit, showDisplay }) {
     const { start, continuing, target } = GetDailyNumbers();
@@ -32,7 +31,11 @@ function Input({ onSubmit, showDisplay }) {
         const onBeforeInput = (e) => {
             const start = ta.selectionStart;
             const end = ta.selectionEnd;
-            if (e.data?.length === 1 && e.data === "(") {
+            if (
+                e.data?.length === 1 &&
+                e.data === "(" &&
+                (ta.value[end] === " " || !ta.value[end])
+            ) {
                 e.preventDefault();
                 const selected = ta.value.slice(start, end);
                 console.log(
