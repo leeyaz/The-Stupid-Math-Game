@@ -212,16 +212,25 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            
+            {/* ... oooh maybe stats could also show like, which functions have been used more often or soemthingg...
+            hmmm */}
+            <HeaderButton id="Statistics" onClick={() => setShowStats(true)}>
+                <div
+                    style={{
+                        // to be edited
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        marginLeft: "8px"
+                    }}
+                >
+                    <IoIosStats size={27} />
+                </div>
+            </HeaderButton>
         </Navbar>
     );
 
-    //... oooh maybe stats could also show like, which functions have been used more often or soemthingg...
-    // hmmm
-    /*
-            <HeaderButton id="Statistics" onClick={() => setShowStats(true)}>
-                <IoIosStats size={27} />
-            </HeaderButton>
-    */
 }
 
 export default Header;
