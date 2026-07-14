@@ -38,13 +38,7 @@ function Input({ onSubmit, showDisplay }) {
             ) {
                 e.preventDefault();
                 const selected = ta.value.slice(start, end);
-                console.log(
-                    start,
-                    end,
-                    ta.value.slice(0, start),
-                    selected,
-                    ta.value.slice(end, ta.value.length),
-                );
+                
                 ta.value =
                     ta.value.slice(0, start) +
                     "(" +

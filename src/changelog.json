@@ -4,8 +4,10 @@
         "date": "July 13, 2026",
         "description": "",
         "added": [],
-        "changed": ["Parentheses only autocomplete if there is not a character directly to the right of the cursor."],
-        "fixed": ["Fixed date on update 1.1."]        
+        "changed": ["Parentheses only autocomplete if there is not a character directly to the right of the cursor.",
+                    "Removed leftover print statements."],
+        "fixed": ["Date on update 1.1 was incorrect.",
+                    "Streak text and icon would not update in a very specific scenario. _Konami code part II_."]        
     },
     {
         "version": "1.1",
