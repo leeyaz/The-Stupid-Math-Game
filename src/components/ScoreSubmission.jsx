@@ -39,13 +39,6 @@ function ScoreSubmission(props) {
         // handleAddScore();
     };
 
-    //     onClick={() => {
-    //     if (playerName.length < 32) {
-    //         setShowInput(false);
-    //         handleAddScore();
-    //     }
-    // }}
-
     return (
         <div className="score-submission-box d-flex justify-content-evenly mx-auto align-items-center pt-2 pb-5 gap-4">
             <p className="p-2 m-0">
@@ -64,7 +57,15 @@ function ScoreSubmission(props) {
                     <Modal.Title>Submit to Leaderboard</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form ref={formRef} noValidate validated={valid}>
+                    <Form
+                        ref={formRef}
+                        noValidate
+                        validated={valid}
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            handleSubmit();
+                        }}
+                    >
                         <Form.Control
                             required
                             maxLength={40}
