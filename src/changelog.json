@@ -7,7 +7,8 @@
         "changed": ["Parentheses only autocomplete if there is not a character directly to the right of the cursor.",
                     "Removed leftover print statements."],
         "fixed": ["Date on update 1.1 was incorrect.",
-                    "Streak text and icon would not update in a very specific scenario. _Konami code part II_."]        
+                    "Streak text and icon would not update when toggling the streak after already submitting a score.",
+                    "Autofilled parentheses now supports input history."]        
     },
     {
         "version": "1.1",
@@ -16,7 +17,7 @@
         "added": [],
         "changed": [],
         "fixed": ["Fixed the bug when you toggle streak off and on, the streak no longer updates without reload. _Konami code ahh bug -E_",
-                  "The flame of the streak will be grey until each day's submission no matter what the previous streak amount is (Previously, the streak flame would only be grey if there was previously no streak)"]
+                    "The flame of the streak will be grey until each day's submission no matter what the previous streak amount is (Previously, the streak flame would only be grey if there was previously no streak)"]
     },
     {
         "version": "1",

@@ -36,15 +36,20 @@ function Input({ onSubmit, showDisplay }) {
                 e.data === "(" &&
                 (ta.value[end] === " " || !ta.value[end])
             ) {
+                // pressed "(", now insert ")" at end
                 e.preventDefault();
+
                 const selected = ta.value.slice(start, end);
-                
-                ta.value =
-                    ta.value.slice(0, start) +
-                    "(" +
-                    selected +
-                    ")" +
-                    ta.value.slice(end, ta.value.length);
+
+                const wrappedText = "(" + selected + ")";
+
+                if (!document.execCommand("insertText", false, wrappedText)) {
+                    // if for some reason execCommand doesn't go through
+                    ta.value =
+                        ta.value.slice(0, start) +
+                        wrappedText +
+                        ta.value.slice(end, ta.value.length);
+                }
                 ta.selectionStart = start + 1;
                 ta.selectionEnd = end + 1;
 
@@ -64,14 +69,21 @@ function Input({ onSubmit, showDisplay }) {
                 ta.value[end] == ")" &&
                 e.inputType == "deleteContentBackward"
             ) {
+                // remove parentheses pair that was just created.
                 e.preventDefault();
-                ta.value =
-                    ta.value.slice(0, start - 1) +
-                    ta.value.substring(start + 1);
+
+                ta.setSelectionRange(end - 1, end + 1);
+
+                if (!document.execCommand("insertText", false, "")) {
+                    ta.value =
+                        ta.value.slice(0, start - 1) +
+                        ta.value.substring(start + 1);
+                }
                 ta.selectionStart = start - 1;
                 ta.selectionEnd = start - 1;
                 setCurrInput(ta.value);
             }
+
             try {
                 setCurrResult(evaluate(ta.value));
             } catch (e) {
