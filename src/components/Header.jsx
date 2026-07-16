@@ -37,7 +37,10 @@ function HeaderButton({ onClick, id, children, overlay, className }) {
         >
             <Button
                 className={`header-button rounded-0 ${className}`}
-                onClick={onClick}
+                onClick={(e) => {
+                    e.currentTarget.blur();
+                    onClick();
+                }}
             >
                 {children}
             </Button>
