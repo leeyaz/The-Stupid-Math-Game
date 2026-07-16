@@ -8,8 +8,9 @@
                     "Removed leftover print statements."],
         "fixed": ["Date on update 1.1 was incorrect.",
                     "Streak text and icon would not update when toggling the streak after already submitting a score.",
-                    "Autofilled parentheses now supports input history.",
-                    "Pressing enter on the score submission screen would refresh the page."]        
+                    "Autofilled parentheses now correctly supports input history.",
+                    "Pressing enter on the score submission screen would refresh the page.",
+                    "Using the starting number more than once was incorrectly allowed."]        
     },
     {
         "version": "1.1",

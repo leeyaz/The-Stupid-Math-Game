@@ -1,4 +1,4 @@
-import { all, create, exp } from "mathjs";
+import { all, create, exp, number } from "mathjs";
 import { GetDailyNumbers } from "./DailyNumbers";
 
 const math = create(all);
@@ -145,6 +145,7 @@ export function ParseExpression(expression) {
             b: Only contains the continuing number afterwards
             c: Calculate score
     */
+    // TODO: fix problem with being able to use starting number more than once!?
     const numbersFound = trimmedExpr.match(/\d+/g) || []; //trimmedExpr.match(/-?\d+/g) || [];
     if (numbersFound.length === 0) {
         throw new Error(
@@ -152,7 +153,17 @@ export function ParseExpression(expression) {
         );
     }
     if (numbersFound[0] != startingNumber) {
-        throw new Error("Does not start with " + startingNumber.toString());
+        throw new Error("The first number is not " + startingNumber.toString());
+    }
+
+    if (
+        numbersFound
+            .slice(1, numbersFound.length)
+            .includes(startingNumber.toString())
+    ) {
+        throw new Error(
+            "Cannot use " + startingNumber.toString() + " more than once!",
+        );
     }
 
     // check if output equals the target number
