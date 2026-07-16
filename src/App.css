@@ -1,19 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@100..900&display=swap");
-:root {
+
+:root,
+[data-bs-theme="light"] {
     --backing: #ffffff;
     --lines: #ebedfc;
     --main: #312f2d;
     --main-dark: #312f2d;
+    --secondary: #807a75;
     --faint: #dfdfdf;
     --accent: #ff9100;
 }
 
-:root.dark-mode {
+[data-bs-theme="dark"] {
     --backing: #1a191b;
     --lines: #221f1b;
     --main: #dfd7cf;
+    --secondary: #b1aaa3;
     --faint: #333333;
     --accent: #ffae00;
+}
+
+[data-bs-theme="dark-contrast"] {
+    --backing: #000000;
+    --lines: #000000;
+    --main: #ffffff;
+    --secondary: #ffffff;
+    --faint: #7a7a7a;
+    --accent: #ff9900;
 }
 
 * {
@@ -122,25 +135,6 @@ html {
     transform-origin: bottom;
 }
 
-#settings {
-    background-color: var(--backing);
-    border-color: var(--faint);
-    border-radius: 8px;
-    border-width: 1px;
-}
-
-#settings .popover-body {
-    color: var(--main);
-}
-
-#settings .popover-arrow {
-    display: none !important;
-}
-
-#settings.fade {
-    transition: none;
-}
-
 .title {
     white-space: nowrap;
 }
@@ -224,6 +218,98 @@ html {
 .changelog .description {
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+#settings {
+    margin: auto;
+
+    * {
+        color: var(--main);
+    }
+
+    .modal-header {
+        padding: 0.5em;
+        border-bottom: 0;
+        padding-bottom: 0;
+
+        button {
+            background-color: rgba(0, 0, 0, 0);
+            border: 0;
+            padding: 0;
+
+            svg {
+                fill: var(--secondary);
+
+                &:hover {
+                    fill: var(--main);
+                }
+            }
+        }
+    }
+
+    .modal-body {
+        padding-top: 0;
+    }
+
+    .row {
+        padding-top: 0.8em;
+        padding-bottom: 0.8em;
+        border-bottom: 1px solid var(--faint);
+    }
+
+    label {
+        font-size: 18px;
+    }
+
+    p {
+        color: var(--secondary);
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .form-check-input {
+        height: 40%;
+        width: auto;
+        aspect-ratio: 1/1;
+        border-color: var(--faint);
+
+        &:not(:checked) {
+            background-color: var(--backing);
+        }
+    }
+
+    #theme-dropdown {
+        .dropdown-toggle {
+            border-color: var(--faint);
+            background-color: var(--backing);
+            color: var(--main) !important;
+            border-radius: 0;
+            padding: 0.5em 1em;
+        }
+
+        .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0);
+            border: 0;
+            padding: 0;
+            min-width: fit-content;
+            .dropdown-item {
+                background-color: var(--backing);
+                border: 1px solid var(--faint);
+                padding: 3px 0.5em;
+                text-align: start;
+                font-size: 14px;
+            }
+
+            .dropdown-item:focus {
+                outline: 2px solid #007bff !important;
+                outline-offset: -1px !important;
+            }
+        }
+    }
+
+    .modal-content {
+        border-color: var(--faint);
+    }
 }
 
 .math-input {

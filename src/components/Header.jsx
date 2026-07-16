@@ -4,6 +4,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import Popover from "react-bootstrap/Popover";
 import { useState, useEffect, useRef } from "react";
 
 import { FaClockRotateLeft } from "react-icons/fa6";
@@ -13,8 +14,7 @@ import { IoSettings } from "react-icons/io5";
 import { IoIosStats } from "react-icons/io";
 
 import Changelog from "./Changelog";
-// https://react-icons.github.io/react-icons/search/
-import Popover from "react-bootstrap/Popover";
+import Settings from "./Settings";
 
 import {
     getStreak,
@@ -38,6 +38,7 @@ function HeaderButton({ onClick, id, children, overlay, className }) {
             <Button
                 className={`header-button rounded-0 ${className}`}
                 onClick={onClick}
+                aria-label={id}
             >
                 {children}
             </Button>
@@ -76,19 +77,6 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
         setStreakEnabled(!streakEnabled);
         setShowStreakNotice(false);
     };
-
-    useEffect(() => {
-        const root = document.documentElement;
-        if (darkMode) {
-            root.classList.add("dark-mode");
-            root.setAttribute("data-bs-theme", "dark");
-            localStorage.setItem("theme", "dark");
-        } else {
-            root.classList.remove("dark-mode");
-            root.setAttribute("data-bs-theme", "light");
-            localStorage.setItem("theme", "light");
-        }
-    }, [darkMode]);
 
     useEffect(() => {
         window.addEventListener("streakChanged", () => {
@@ -166,22 +154,18 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
                     }
                 </div>
             </HeaderButton>
-            <OverlayTrigger
-                container={contRef}
-                overlay={settings}
-                placement={"bottom"}
-                delay={{ show: 500, hide: 0 }}
-                trigger="click"
-                rootClose
-            >
-                <Button className="header-button rounded-0">
-                    <IoSettings size={27} />
-                </Button>
-            </OverlayTrigger>
+            <HeaderButton id="Settings" onClick={() => setShowSettings(true)}>
+                <IoSettings size={27} />
+            </HeaderButton>
 
             <Changelog
                 show={showChangelog}
                 onHide={() => setShowChangelog(false)}
+            />
+
+            <Settings
+                show={showSettings}
+                onHide={() => setShowSettings(false)}
             />
 
             <Modal show={showStreakNotice} centered onHide={handleNotConfirm}>

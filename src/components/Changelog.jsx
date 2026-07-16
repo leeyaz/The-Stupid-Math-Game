@@ -63,13 +63,14 @@ function formatString(text) {
     });
 }
 
-function Changelog({ show, onHide }) {
+function Changelog({ show, onHide, ...props }) {
     return (
         <Modal
             className="changelog"
             show={show}
             fullscreen={false}
             onHide={onHide}
+            {...props}
         >
             <Modal.Header closeButton>
                 <Modal.Title>Changelog</Modal.Title>
