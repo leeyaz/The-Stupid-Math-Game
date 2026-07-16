@@ -39,6 +39,10 @@ function HeaderButton({ onClick, id, children, overlay, className }) {
                 className={`header-button rounded-0 ${className}`}
                 onClick={onClick}
                 aria-label={id}
+                onClick={(e) => {
+                    e.currentTarget.blur();
+                    onClick();
+                }}
             >
                 {children}
             </Button>
