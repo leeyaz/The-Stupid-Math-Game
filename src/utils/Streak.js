@@ -10,6 +10,7 @@ function getCookie() {
     } catch {
         return null;
     }
+    
 }
 
 function setCookie(data) {

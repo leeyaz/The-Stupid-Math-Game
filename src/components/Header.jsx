@@ -167,35 +167,6 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
                 show={showSettings}
                 onHide={() => setShowSettings(false)}
             />
-
-            <Modal show={showStreakNotice} centered onHide={handleNotConfirm}>
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        {streakEnabled
-                            ? "Turning your Streak ON!!"
-                            : "Turning your Streak OFF!!"}
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {streakEnabled
-                        ? "Your Streak will be be kept as a cookie across visits"
-                        : "Your Streak will be completely deleted, gone forever. If you re-enable your Streak, it will be back to 0"}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleConfirm}>
-                        Yeah I want that
-                    </Button>
-                    <Button
-                        variant="outline-secondary"
-                        onClick={handleNotConfirm}
-                    >
-                        {" "}
-                        {streakEnabled
-                            ? "No I do not want a Streak"
-                            : "No I want to keep my Streak"}{" "}
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </Navbar>
     );
 

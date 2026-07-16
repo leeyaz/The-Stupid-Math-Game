@@ -3,8 +3,16 @@ import Infobox from "./components/Infobox";
 import { useState, useEffect } from "react";
 import ScoreSubmission from "./components/ScoreSubmission";
 import Header from "./components/Header";
-import { refreshCookie, getStreak, hasSeenDisclaimer, setSeenDisclaimer, hasDeclinedCookies, setDeclinedCookies, deleteStreakCookie } from "./utils/Streak";
-import CookieDisclaimer from "./components/CookieDisclaimer";
+import {
+    refreshCookie,
+    getStreak,
+    hasSeenDisclaimer,
+    setSeenDisclaimer,
+    hasDeclinedCookies,
+    setDeclinedCookies,
+    deleteStreakCookie,
+} from "./utils/Streak";
+import { CookieDisclaimer } from "./components/CookieDisclaimer";
 // import { getScores } from "./utils/Scoreboard";
 
 import {
@@ -84,8 +92,15 @@ function App() {
 
     return (
         <>
-            <CookieDisclaimer show={showDisclaimer} onAccept={handleAccept} onDecline={handleDecline} />
-            <Header streakEnabled={streakEnabled} setStreakEnabled={setStreakEnabled} />
+            <CookieDisclaimer
+                show={showDisclaimer}
+                onAccept={handleAccept}
+                onDecline={handleDecline}
+            />
+            <Header
+                streakEnabled={streakEnabled}
+                setStreakEnabled={setStreakEnabled}
+            />
             <div className="container body text-center d-flex flex-column gap-3">
                 <div className="title py-4">
                     <h1>
@@ -97,7 +112,10 @@ function App() {
 
                 <Infobox lastScore={lastScore} scores={scores} />
                 {/*at the centre*/}
-                <Calculator onSetLastScore={setLastScore} streakEnabled={streakEnabled} />
+                <Calculator
+                    onSetLastScore={setLastScore}
+                    streakEnabled={streakEnabled}
+                />
 
                 <ScoreSubmission lastScore={lastScore} />
             </div>
