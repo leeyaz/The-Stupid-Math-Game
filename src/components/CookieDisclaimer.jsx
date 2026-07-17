@@ -1,5 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import { useState } from "react";
 
 function CookieDisclaimer({ show, onAccept, onDecline }) {
     return (
@@ -24,35 +25,67 @@ function CookieDisclaimer({ show, onAccept, onDecline }) {
     );
 }
 
-function CookieConfirmationDialog({ show, onHide, streakEnabled, ...props }) {
-    return (
-        <Modal show={show} centered onHide={() => onHide(false)}>
+function CookieConfirmationDialog({
+    show,
+    onHide,
+    setStreakEnabled,
+    streakEnabled,
+    ...props
+}) {
+    const [streakState, setStreakState] = useState(streakEnabled);
+    const footer = (
+        <Modal.Footer>
+            <Button
+                variant="primary"
+                onClick={() => {
+                    onHide();
+                    setStreakState(!streakState);
+                }}
+            >
+                Yeah I want that
+            </Button>
+            <Button variant="outline-secondary" onClick={() => onHide()}>
+                {!streakEnabled
+                    ? "No I do not want a Streak"
+                    : "No I want to keep my Streak"}{" "}
+            </Button>
+        </Modal.Footer>
+    );
+
+    return streakEnabled ? (
+        <Modal
+            show={show}
+            onHide={() => onHide()}
+            onExited={() => {
+                setStreakEnabled(streakState);
+            }}
+        >
             <Modal.Header closeButton>
-                <Modal.Title>
-                    {streakEnabled
-                        ? "Turning your Streak ON!!"
-                        : "Turning your Streak OFF!!"}
-                </Modal.Title>
+                <Modal.Title>Turning your streak OFF!!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {streakEnabled
-                    ? "Your Streak will be be kept as a cookie across visits"
-                    : "Your Streak will be completely deleted, gone forever. If you re-enable your Streak, it will be back to 0"}
+                <p>
+                    Your streak will be completely deleted, gone forever. If you
+                    re-enable your streak, it will be back to 0.
+                </p>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="primary" onClick={() => onHide(true)}>
-                    Yeah I want that
-                </Button>
-                <Button
-                    variant="outline-secondary"
-                    onClick={() => onHide(false)}
-                >
-                    {" "}
-                    {streakEnabled
-                        ? "No I do not want a Streak"
-                        : "No I want to keep my Streak"}{" "}
-                </Button>
-            </Modal.Footer>
+            {footer}
+        </Modal>
+    ) : (
+        <Modal
+            show={show}
+            onHide={() => onHide()}
+            onExited={() => {
+                setStreakEnabled(streakState);
+            }}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title>Turning your streak ON!!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <p>Your streak will be kept as a cookie across visits.</p>
+            </Modal.Body>
+            {footer}
         </Modal>
     );
 }

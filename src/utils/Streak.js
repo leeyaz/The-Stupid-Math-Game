@@ -1,4 +1,5 @@
 const COOKIE_NAME = "streak";
+const STREAK_UPDATE_EVENT = new CustomEvent("streakChanged");
 
 function getCookie() {
     const match = document.cookie
@@ -10,7 +11,6 @@ function getCookie() {
     } catch {
         return null;
     }
-    
 }
 
 function setCookie(data) {
@@ -19,100 +19,79 @@ function setCookie(data) {
     document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(data))}; expires=${expires.toUTCString()}; path=/`;
 }
 
-// export function getStreak() {
-//     const cookie = getCookie();
-//     if (!cookie) return 0;
-//     return cookie.streak;
-// }
-
 export function getStreak() {
-    const today = new Date().toDateString();
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (!isStreakEnabled()) return "N/A";
     const cookie = getCookie();
 
-    if (!cookie) return 0;
+    const today = new Date().toDateString();
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
 
-    // if last played was today or yesterday, streak is still valid
-    if (cookie.lastPlayed === today || cookie.lastPlayed === yesterday) {
+    if (
+        cookie &&
+        (cookie.lastPlayed === yesterday || cookie.lastPlayed === today)
+    ) {
         return cookie.streak;
+    } else {
+        setCookie({ streak: 0, lastPlayed: yesterday });
+        return 0;
     }
-
-    // missed a day — reset
-    setCookie({ streak: 0, lastPlayed: cookie.lastPlayed });
-    return 0;
 }
 
 export function updateStreak() {
-    const animateStreak = () => {
-        const streakFlame = document.getElementById("streak-icon");
-        if (streakFlame) {
-            streakFlame.classList.add("animate");
-        }
-    };
+    if (isStreakActive()) return;
+    console.log("UPDATE STREAK");
 
     const today = new Date().toDateString();
     const yesterday = new Date(Date.now() - 86400000).toDateString();
     const cookie = getCookie();
+    // { streak: 0, lastPlayed: yesterday }
 
-    if (!cookie) {
-        // first time ever
-        setCookie({ streak: 1, lastPlayed: today });
-        animateStreak();
-        window.dispatchEvent(new Event("streakChanged"));
-        return 1;
+    if (cookie && cookie.lastPlayed === yesterday) {
+        setCookie({ streak: cookie.streak + 1, lastPlayed: today });
+
+        window.dispatchEvent(STREAK_UPDATE_EVENT);
+    } else {
+        return false;
     }
-
-    if (cookie.lastPlayed === today) {
-        // already played today, don't change streak
-        return cookie.streak;
-    }
-
-    if (cookie.lastPlayed === yesterday) {
-        // played yesterday, increment
-        const newStreak = cookie.streak + 1;
-        setCookie({ streak: newStreak, lastPlayed: today });
-        animateStreak();
-        return newStreak;
-    }
-
-    // missed a day, reset
-    setCookie({ streak: 1, lastPlayed: today });
-    return 1;
-}
-
-export function refreshCookie() {
-    const cookie = getCookie();
-    if (cookie) setCookie(cookie); // rewrites same data with fresh expiry to make cookies last forever
-}
-
-export function hasPlayedToday() {
-    const today = new Date().toDateString();
-    const cookie = getCookie();
-    if (!cookie) return false;
-    return cookie.lastPlayed === today;
 }
 
 export function hasSeenDisclaimer() {
-    return localStorage.getItem("seenDisclaimer") === "true";
+    return localStorage.getItem("seenDisclaimer");
 }
 
 export function setSeenDisclaimer() {
     localStorage.setItem("seenDisclaimer", "true");
 }
 
-export function hasDeclinedCookies() {
-    return localStorage.getItem("cookiesDeclined") === "true";
+export function isStreakActive() {
+    console.log("IS STREAK ACTIVE");
+    const today = new Date().toDateString();
+    const cookie = getCookie();
+
+    return cookie && cookie.lastPlayed === today;
 }
 
-export function setDeclinedCookies() {
+export function isStreakEnabled() {
+    console.log("IS STREAK ENABLE");
+    return !localStorage.getItem("cookiesDeclined");
+}
+
+export function disableStreak() {
+    if (!isStreakEnabled()) return;
+    console.log("DISABLE STREAK");
     localStorage.setItem("cookiesDeclined", "true");
-    const streakFlame = document.getElementById("streak-icon");
-    if (streakFlame && streakFlame.classList.contains("animate")) {
-        streakFlame.classList.remove("animate");
-    }
-}
-
-export function deleteStreakCookie() {
     document.cookie = `${COOKIE_NAME}=; expires=Tue, 06 Jun 2006 00:00:00 UTC; path=/`; //haha guess who's birthday
     //... it couldn't be.. could it?
+
+    window.dispatchEvent(STREAK_UPDATE_EVENT);
+}
+
+export function enableStreak() {
+    if (isStreakEnabled()) return;
+    console.log("ENABLE STREAK");
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    localStorage.removeItem("cookiesDeclined");
+    setCookie({ streak: 0, lastPlayed: yesterday });
+
+    window.dispatchEvent(STREAK_UPDATE_EVENT);
 }

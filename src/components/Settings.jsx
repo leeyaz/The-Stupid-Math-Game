@@ -5,12 +5,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { IoMdClose } from "react-icons/io";
 
 import { CookieConfirmationDialog } from "./CookieDisclaimer";
 
+import { enableStreak, disableStreak, isStreakEnabled } from "../utils/Streak";
 import { THEMES_LIST, getColourTheme, setColourTheme } from "../utils/Theme";
 
 function toTitleCase(str) {
@@ -21,8 +22,12 @@ function Settings({ show, onHide, ...props }) {
     const [theme, setTheme] = useState(getColourTheme());
     useEffect(() => setColourTheme(theme), [theme]);
 
-    const [showStreakNotice, setShowStreakNotice] = useState(false);
+    const [streakEnabled, setStreakEnabled] = useState(isStreakEnabled());
+    useEffect(() => {
+        streakEnabled ? enableStreak() : disableStreak();
+    }, [streakEnabled]);
 
+    const [showStreakConfirmation, setShowStreakConfirmation] = useState(false);
     return (
         <>
             <Modal
@@ -30,7 +35,6 @@ function Settings({ show, onHide, ...props }) {
                 id="settings"
                 show={show}
                 onHide={onHide}
-                centered
                 aria-labelledby="settings-title"
                 size="md"
                 style={{ zIndex: 1050 }}
@@ -56,13 +60,13 @@ function Settings({ show, onHide, ...props }) {
                             xs={7}
                             className="d-flex flex-column align-items-start"
                         >
-                            <Form.Check.Label
-                                htmlFor="theme-dropdown"
+                            <label
+                                id="theme-label"
                                 className="align-middle"
                                 aria-describedby="theme-description"
                             >
                                 Theme
-                            </Form.Check.Label>
+                            </label>
                             <p id="theme-description">
                                 Colour themes ranging from calm, subtle hues to
                                 eye-piercing neons.
@@ -74,6 +78,7 @@ function Settings({ show, onHide, ...props }) {
                                 className="d-inline-block"
                                 drop="down"
                                 align="end"
+                                aria-labelledby="theme-label"
                             >
                                 <Dropdown.Toggle size="sm">
                                     {toTitleCase(theme)}
@@ -115,16 +120,18 @@ function Settings({ show, onHide, ...props }) {
                             <Form.Check.Input
                                 id="streak-checkbox"
                                 type="checkbox"
-                                onChange={() => setShowStreakNotice(true)}
+                                checked={streakEnabled}
+                                onChange={() => setShowStreakConfirmation(true)}
                             />
                         </Col>
                     </Row>
                 </Modal.Body>
             </Modal>
             <CookieConfirmationDialog
-                show={showStreakNotice}
-                onHide={(val) => setShowStreakNotice(false)}
-                streakEnabled={true}
+                show={showStreakConfirmation}
+                onHide={() => setShowStreakConfirmation(false)}
+                setStreakEnabled={(val) => setStreakEnabled(val)}
+                streakEnabled={streakEnabled}
             />
         </>
     );

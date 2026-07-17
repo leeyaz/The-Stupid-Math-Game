@@ -16,33 +16,20 @@ import { IoIosStats } from "react-icons/io";
 import Changelog from "./Changelog";
 import Settings from "./Settings";
 
-import {
-    getStreak,
-    hasDeclinedCookies,
-    hasPlayedToday,
-    setDeclinedCookies,
-    deleteStreakCookie,
-} from "../utils/Streak";
-
-function HeaderButton({ onClick, id, children, overlay, className }) {
+function HeaderButton({ onClick, name, children, overlay, className }) {
     return (
         <OverlayTrigger
-            overlay={<Tooltip id={id}>{id}</Tooltip>}
+            overlay={<Tooltip id={name} className="position-fixed">{name}</Tooltip>}
             placement={"bottom"}
             delay={{ show: 500, hide: 0 }}
-            // below: hacky workaround the warnings in console...
-            // fine b/c tooltip isn't very important anyways
-            //trigger={["hover", "hover"]}
-            // trigger="hover"
         >
             <Button
                 className={`header-button rounded-0 ${className}`}
-                onClick={onClick}
-                aria-label={id}
                 onClick={(e) => {
                     e.currentTarget.blur();
-                    onClick();
+                    onClick && onClick();
                 }}
+                aria-label={name}
             >
                 {children}
             </Button>
@@ -50,115 +37,32 @@ function HeaderButton({ onClick, id, children, overlay, className }) {
     );
 }
 
-function Header({ streakEnabled, setStreakEnabled, ...props }) {
+function Header({ streak, streakActive, ...props }) {
     const [showChangelog, setShowChangelog] = useState(false);
     const [showStats, setShowStats] = useState(false);
-    const [streak, setStreak] = useState(getStreak());
-
-    const playedToday = hasPlayedToday();
-    const [darkMode, setDarkMode] = useState(() => {
-        const saved = localStorage.getItem("theme");
-        if (saved) return saved == "dark";
-        return false;
-    });
-    const [showStreakNotice, setShowStreakNotice] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
-
-    const handleConfirm = () => {
-        if (streakEnabled) {
-            // now enabled
-            localStorage.removeItem("cookiesDeclined");
-            window.dispatchEvent(new Event("streakChanged"));
-        } else {
-            // now disabled
-            setDeclinedCookies();
-            deleteStreakCookie();
-        }
-        setShowStreakNotice(false);
-    };
-
-    const handleNotConfirm = () => {
-        setStreakEnabled(!streakEnabled);
-        setShowStreakNotice(false);
-    };
-
-    useEffect(() => {
-        window.addEventListener("streakChanged", () => {
-            setStreak(getStreak());
-        });
-    }, []);
-
-    const settings = (
-        <Popover id="settings">
-            <Popover.Body className="p-2 d-flex flex-column align-items-left">
-                <Form.Check
-                    type="switch"
-                    id="dark-mode"
-                    label="Dark Mode"
-                    checked={darkMode}
-                    onChange={(e) => {
-                        setDarkMode(e.target.checked);
-                    }}
-                />
-                <Form.Check
-                    type="switch"
-                    id="streak-toggle"
-                    label="Streak?"
-                    checked={streakEnabled}
-                    disabled={showStreakNotice}
-                    onChange={() => {
-                        setStreakEnabled(!streakEnabled);
-                        setShowStreakNotice(true);
-                    }}
-                />
-            </Popover.Body>
-        </Popover>
-    );
 
     const contRef = useRef(null);
 
     return (
         <Navbar ref={contRef} className="header py-0" sticky="top" {...props}>
-            <HeaderButton id="Changelog" onClick={() => setShowChangelog(true)}>
+            <HeaderButton
+                name="Changelog"
+                onClick={() => setShowChangelog(true)}
+            >
                 <FaClockRotateLeft size={27} />
             </HeaderButton>
-            <HeaderButton id="Streak">
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginLeft: "4px",
-                    }}
-                >
+            <HeaderButton name="Streak">
+                <div className="d-flex flex-row align-items-center">
                     <FaFireAlt
-                        size={27}
-                        color={
-                            !hasDeclinedCookies() &&
-                            hasPlayedToday() &&
-                            streak > 0
-                                ? "orange"
-                                : "gray"
-                        }
+                        size={30}
                         id="streak-icon"
+                        className={streakActive ? "active" : ""}
                     />
-                    {
-                        <span
-                            style={{
-                                fontSize: "17px",
-                                fontWeight: "bold",
-                                marginLeft: "4px",
-                                marginRight: "4px",
-                                verticalAlign: "bottom",
-                                whiteSpace: "nowrap",
-                            }}
-                        >
-                            {!hasDeclinedCookies() ? streak : "N/A"}{" "}
-                        </span>
-                    }
+                    <span id="streak-number">{streak}</span>
                 </div>
             </HeaderButton>
-            <HeaderButton id="Settings" onClick={() => setShowSettings(true)}>
+            <HeaderButton name="Settings" onClick={() => setShowSettings(true)}>
                 <IoSettings size={27} />
             </HeaderButton>
 
@@ -169,6 +73,7 @@ function Header({ streakEnabled, setStreakEnabled, ...props }) {
 
             <Settings
                 show={showSettings}
+                centered
                 onHide={() => setShowSettings(false)}
             />
         </Navbar>
