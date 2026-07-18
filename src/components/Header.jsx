@@ -1,5 +1,4 @@
 import Button from "react-bootstrap/Button";
-import Navbar from "react-bootstrap/Navbar";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
@@ -16,20 +15,32 @@ import { IoIosStats } from "react-icons/io";
 import Changelog from "./Changelog";
 import Settings from "./Settings";
 
-function HeaderButton({ onClick, name, children, overlay, className }) {
+function HeaderButton({
+    onClick,
+    name,
+    children,
+    overlay,
+    className,
+    ...props
+}) {
     return (
         <OverlayTrigger
-            overlay={<Tooltip id={name} className="position-fixed">{name}</Tooltip>}
+            overlay={
+                <Tooltip id={name} className="position-fixed" aria-hidden>
+                    {name}
+                </Tooltip>
+            }
             placement={"bottom"}
             delay={{ show: 500, hide: 0 }}
         >
             <Button
                 className={`header-button rounded-0 ${className}`}
+                type="button"
                 onClick={(e) => {
                     e.currentTarget.blur();
                     onClick && onClick();
                 }}
-                aria-label={name}
+                {...props}
             >
                 {children}
             </Button>
@@ -45,25 +56,35 @@ function Header({ streak, streakActive, ...props }) {
     const contRef = useRef(null);
 
     return (
-        <Navbar ref={contRef} className="header py-0" sticky="top" {...props}>
+        <header ref={contRef} className="header sticky-top" {...props}>
             <HeaderButton
                 name="Changelog"
                 onClick={() => setShowChangelog(true)}
+                aria-label="changelog"
+                aria-controls="changelog"
+                aria-haspopup="dialog"
             >
-                <FaClockRotateLeft size={27} />
+                <FaClockRotateLeft size={27} aria-hidden />
             </HeaderButton>
-            <HeaderButton name="Streak">
+            <HeaderButton name="Streak" aria-label={`${streak} day streak`}>
                 <div className="d-flex flex-row align-items-center">
                     <FaFireAlt
                         size={30}
                         id="streak-icon"
+                        aria-hidden
                         className={streakActive ? "active" : ""}
                     />
                     <span id="streak-number">{streak}</span>
                 </div>
             </HeaderButton>
-            <HeaderButton name="Settings" onClick={() => setShowSettings(true)}>
-                <IoSettings size={27} />
+            <HeaderButton
+                name="Settings"
+                onClick={() => setShowSettings(true)}
+                aria-label="settings"
+                aria-controls="settings"
+                aria-haspopup="dialog"
+            >
+                <IoSettings size={27} aria-hidden />
             </HeaderButton>
 
             <Changelog
@@ -76,7 +97,7 @@ function Header({ streak, streakActive, ...props }) {
                 centered
                 onHide={() => setShowSettings(false)}
             />
-        </Navbar>
+        </header>
     );
 
     //... oooh maybe stats could also show like, which functions have been used more often or soemthingg...

@@ -101,12 +101,12 @@ function App() {
     return (
         <>
             <Header streak={streak} streakActive={streakActive} />
-            <div className="container body text-center d-flex flex-column gap-3">
-                <div className="title py-4">
+            <main className="container body text-center d-flex flex-column">
+                <div className="title">
                     <h1>
-                        <b>STUPID MATH</b>
+                        STUPID MATH
                         <span style={{ fontSize: "10px" }}> the </span>
-                        <b>GAME</b>™
+                        GAME™
                     </h1>
                 </div>
 
@@ -115,7 +115,7 @@ function App() {
                 <Calculator onSetLastScore={setLastScore} />
 
                 <ScoreSubmission lastScore={lastScore} />
-            </div>
+            </main>
             <CookieDisclaimer
                 show={cookiesDisclaimer}
                 onHide={(val) => {

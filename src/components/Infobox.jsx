@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Leaderboard from "./Leaderboard";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GetDailyNumbers } from "../utils/DailyNumbers";
 
 import Collapse from "react-bootstrap/Collapse";
@@ -15,7 +15,7 @@ import {
 } from "../utils/ParseExpressionUtil";
 
 const renderAllowed = (props) => (
-    <Tooltip {...props}>
+    <Tooltip role="tooltip" {...props}>
         <div className="text-start">
             <b>Operations</b>:{" "}
             <small>{[...allowedOperations].join(", ")}</small>
@@ -32,8 +32,8 @@ function Infobox(props) {
 
     const [placement, setPlacement] = useState("right");
     const [showInstructions, setShowInstructions] = useState(false);
-
-    const [open, setOpen] = useState(false);
+    const [showLeaderboard, setShowLeaderboard] = useState(false);
+    const [showAllowed, setShowAllowed] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
@@ -49,43 +49,47 @@ function Infobox(props) {
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-
+    const targ = useRef(null);
     return (
-        <div className="info">
-            <div className="top-buttons d-flex gap-3 justify-content-center mb-3">
+        <div id="info">
+            <div className="d-flex gap-3 justify-content-center mb-3">
                 <Button
                     variant="warning"
+                    role="button"
+                    aria-controls="instructions"
+                    aria-haspopup="dialog"
                     onClick={() => {
                         setShowInstructions(true);
                     }}
                 >
                     How to Play
                 </Button>
-                <Button variant="info" onClick={() => setOpen(!open)}>
+                <Button
+                    variant="info"
+                    role="button"
+                    aria-controls="leaderboard"
+                    onClick={() => setShowLeaderboard(!showLeaderboard)}
+                    aria-expanded={showLeaderboard}
+                >
                     Daily Leaderboard
-                </Button>
+                </Button>{" "}
                 <OverlayTrigger
                     placement={placement}
                     trigger="focus"
                     delay={{ show: 0, hide: 0 }}
                     overlay={renderAllowed}
                 >
-                    <Button variant="outline-dark" id="allowed-list-button">
-                        What's Allowed?
-                    </Button>
+                    <Button id="allowed-list-button">What's Allowed?</Button>
                 </OverlayTrigger>
             </div>
-            <Collapse in={open}>
+            <Collapse in={showLeaderboard}>
                 <div>
-                    <Leaderboard
-                        lastScore={props.lastScore}
-                        scores={props.scores}
-                    />
+                    <Leaderboard scores={props.scores} />
                 </div>
             </Collapse>
 
             <div className="pt-5">
-                <h3><b>Today's Numbers</b></h3>
+                <h2>Today's Numbers</h2>
                 <div className="daily-numbers d-flex justify-content-evenly flex-column">
                     <span>
                         START: <b>{start}</b>

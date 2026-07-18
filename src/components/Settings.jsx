@@ -50,7 +50,7 @@ function Settings({ show, onHide, ...props }) {
                             aria-label="Close"
                             onClick={() => onHide()}
                         >
-                            <IoMdClose size={27} />
+                            <IoMdClose size={30} />
                         </Button>
                     </Col>
                 </Modal.Header>

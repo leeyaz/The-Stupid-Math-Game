@@ -5,7 +5,7 @@ const { start, continuing, target } = GetDailyNumbers();
 
 function Instructions(props) {
     return (
-        <Modal {...props} className="instructions" size="lg" centered>
+        <Modal {...props} id="instructions" size="lg" centered>
             <Modal.Header className="bg-warning" closeButton>
                 <Modal.Title>How to Play</Modal.Title>
             </Modal.Header>

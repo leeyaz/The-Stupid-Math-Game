@@ -66,15 +66,19 @@ function formatString(text) {
 function Changelog({ show, onHide, ...props }) {
     return (
         <Modal
-            className="changelog"
+            id="changelog"
+            aria-labelledby="changelog-title"
             show={show}
             fullscreen={false}
             onHide={onHide}
             {...props}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Changelog</Modal.Title>
-                <a href="https://github.com/leeyaz/The-Stupid-Math-Game">
+                <Modal.Title id="changelog-title">Changelog</Modal.Title>
+                <a
+                    href="https://github.com/leeyaz/The-Stupid-Math-Game"
+                    aria-label="github page"
+                >
                     <FaGithub className="mx-2" size={25} />
                 </a>
             </Modal.Header>
@@ -82,9 +86,9 @@ function Changelog({ show, onHide, ...props }) {
                 {changelogData.map((data, i) => {
                     return (
                         <div key={i}>
-                            <h1 className="update">Update {data.version}</h1>
+                            <h2 className="update">Update {data.version}</h2>
 
-                            <h2>{data.date}</h2>
+                            <span className="date">{data.date}</span>
 
                             {data.description && (
                                 <p className="description">
@@ -93,14 +97,12 @@ function Changelog({ show, onHide, ...props }) {
                             )}
                             {data.added.length > 0 && (
                                 <div className="added">
-                                    <b>Added:</b>
+                                    <h3>Added:</h3>
                                     <ul>
                                         {data.added.map((d, i) => {
                                             return (
                                                 <li key={i}>
-                                                    <span>
-                                                        {formatString(d)}
-                                                    </span>
+                                                    <p>{formatString(d)}</p>
                                                 </li>
                                             );
                                         })}
@@ -109,14 +111,12 @@ function Changelog({ show, onHide, ...props }) {
                             )}
                             {data.changed.length > 0 && (
                                 <div className="changed">
-                                    <b>Changed:</b>
+                                    <h3>Changed:</h3>
                                     <ul>
                                         {data.changed.map((d, i) => {
                                             return (
                                                 <li key={i}>
-                                                    <span>
-                                                        {formatString(d)}
-                                                    </span>
+                                                    <p>{formatString(d)}</p>
                                                 </li>
                                             );
                                         })}
@@ -125,14 +125,12 @@ function Changelog({ show, onHide, ...props }) {
                             )}
                             {data.fixed.length > 0 && (
                                 <div className="fixed">
-                                    <b>Fixed:</b>
+                                    <h3>Fixed:</h3>
                                     <ul>
                                         {data.fixed.map((d, i) => {
                                             return (
                                                 <li key={i}>
-                                                    <span>
-                                                        {formatString(d)}
-                                                    </span>
+                                                    <p>{formatString(d)}</p>
                                                 </li>
                                             );
                                         })}
