@@ -214,10 +214,8 @@ html {
 .submit-message {
     width: fit-content;
     max-width: 400px;
-}
-
-.offcanvas {
-    background-color: var(--backing);
+    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
 .modal-content {
@@ -399,40 +397,41 @@ html {
     overflow: hidden;
 }
 
-.info-bracket {
-    background-color: lightgreen;
-    padding: 10px;
-    border-radius: 8px;
+.math-response {
+    b {
+        color: var(--secondary);
+
+        &.valid {
+            color: #00ff00;
+        }
+
+        &.invalid {
+            color: #ff0000;
+        }
+    }
 }
 
-.btn-outline-dark {
-    color: var(--main);
-    border-color: var(--main);
-}
+#score-submission-modal .modal-content {
+    outline: 1px solid var(--faint);
+    .modal-header {
+        color: var(--main);
+    }
+    .modal-body {
+        label {
+            color: var(--main);
+            font-weight: bold;
+            text-align: center;
+        }
+        input {
+            background-color: var(--backing);
+            color: var(--main);
 
-.nameInput {
-    margin-top: -10vh;
-    grid-column: 3;
-    grid-row: 3;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    height: 7vh;
-}
-
-.nameInput input {
-    padding: 6px;
-    font-size: 1rem;
-}
-
-.nameInput button {
-    padding: 6px 12px;
-    font-size: 0.7rem;
-}
-
-.nameInputDisclaimer {
-    grid-column: 3;
-    grid-row: 4;
-    margin-top: -4vh;
+            &::placeholder {
+                color: var(--secondary);
+            }
+        }
+        .invalid-feedback {
+            color: #ff0000;
+        }
+    }
 }

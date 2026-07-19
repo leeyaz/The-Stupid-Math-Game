@@ -115,27 +115,26 @@ function Input({ onSubmit, showDisplay }) {
                 autoCapitalize="none"
                 rows="1"
             ></textarea>
-            <p className="m-2">
-                {" "}
-                {currResult.length === 0 ? "" : "="}{" "}
+            <div className="math-response m-2">
+                <span> = </span>
                 <b
-                    style={{
-                        color:
-                            currResult === "~"
-                                ? "gray"
-                                : currResult == target
-                                  ? "green"
-                                  : "red",
-                    }}
+                    className={`${
+                        currResult === "~"
+                            ? ""
+                            : currResult == target
+                              ? "valid"
+                              : "invalid"
+                    }`}
                 >
                     {currResult}
                 </b>
-            </p>
+            </div>
             <div>
                 <Button
                     variant="primary"
                     onClick={() => onSubmit(currInput)}
                     disabled={currInput == ""}
+                    aria-hidden={currInput == ""}
                 >
                     Submit
                 </Button>

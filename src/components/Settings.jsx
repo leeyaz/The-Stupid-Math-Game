@@ -64,6 +64,7 @@ function Settings({ show, onHide, ...props }) {
                                 id="theme-label"
                                 className="align-middle"
                                 aria-describedby="theme-description"
+                                htmlFor="theme-dropdown"
                             >
                                 Theme
                             </label>
@@ -78,12 +79,18 @@ function Settings({ show, onHide, ...props }) {
                                 className="d-inline-block"
                                 drop="down"
                                 align="end"
-                                aria-labelledby="theme-label"
                             >
-                                <Dropdown.Toggle size="sm">
+                                <Dropdown.Toggle
+                                    size="sm"
+                                    aria-haspopup
+                                    aria-controls="theme-menu"
+                                >
                                     {toTitleCase(theme)}
                                 </Dropdown.Toggle>
-                                <Dropdown.Menu className="w-100">
+                                <Dropdown.Menu
+                                    id="theme-menu"
+                                    className="w-100"
+                                >
                                     {THEMES_LIST.map((themeID) => {
                                         return (
                                             <Dropdown.Item

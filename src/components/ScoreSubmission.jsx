@@ -3,6 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useState, useRef } from "react";
 import { saveScore } from "../utils/Scoreboard";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function ScoreSubmission(props) {
     const [showInput, setShowInput] = useState(false);
@@ -25,22 +27,22 @@ function ScoreSubmission(props) {
     };
 
     const handleSubmit = (e) => {
-        const form = formRef.current;
+        const form = e.currentTarget;
         if (form) {
             if (form.checkValidity() === false) {
                 setValid(true);
+                e.preventDefault();
+                e.stopPropogation();
             } else {
                 setValid(false);
                 setShowInput(false);
-                handleAddScore();
+                // handleAddScore();
             }
         }
-        // setShowInput(false);
-        // handleAddScore();
     };
 
     return (
-        <div className="score-submission-box d-flex justify-content-evenly mx-auto align-items-center pt-2 pb-5 gap-4">
+        <div className="score-submission-box d-flex  justify-content-evenly mx-auto align-items-center pt-2 pb-5 gap-4">
             <p className="p-2 m-0">
                 Most Recent Score: {props.lastScore || "nil"}
             </p>
@@ -48,42 +50,61 @@ function ScoreSubmission(props) {
                 variant="secondary"
                 disabled={!props.lastScore}
                 onClick={() => setShowInput(true)}
+                aria-controls="score-submission-modal"
+                aria-haspopup="dialog"
             >
                 Submit Score to Leaderboard
             </Button>
 
-            <Modal show={showInput} onHide={() => setShowInput(false)} centered>
+            <Modal
+                id="score-submission-modal"
+                show={showInput}
+                onHide={() => setShowInput(false)}
+                centered
+                aria-labelledby="submission-title"
+            >
                 <Modal.Header closeButton>
-                    <Modal.Title>Submit to Leaderboard</Modal.Title>
+                    <Modal.Title id="submission-title">
+                        Submit to Leaderboard
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form
                         ref={formRef}
                         noValidate
                         validated={valid}
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            handleSubmit();
-                        }}
+                        onSubmit={handleSubmit}
+                        className="d-flex flex-column"
                     >
-                        <Form.Control
-                            required
-                            maxLength={40}
-                            type="name"
-                            placeholder="Your name here"
-                            autoFocus
-                            onChange={handleChange}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Please input a name.
-                        </Form.Control.Feedback>
+                        <Form.Group as={Row}>
+                            <Form.Label column sm="2" htmlFor="name-input">
+                                Name
+                            </Form.Label>
+
+                            <Col sm="10">
+                                <Form.Control
+                                    required
+                                    maxLength={40}
+                                    type="name"
+                                    id="name-input"
+                                    placeholder="Your name here"
+                                    autoFocus
+                                    onChange={handleChange}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Please input a name.
+                                </Form.Control.Feedback>
+                            </Col>
+                        </Form.Group>
+                        <Button
+                            className="mt-3"
+                            variant="primary"
+                            type="submit"
+                        >
+                            Submit
+                        </Button>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleSubmit}>
-                        Submit
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </div>
     );

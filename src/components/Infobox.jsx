@@ -16,14 +16,14 @@ import {
 
 const renderAllowed = (props) => (
     <Tooltip role="tooltip" {...props}>
-        <div className="text-start">
+        <aside className="text-start">
             <b>Operations</b>:{" "}
             <small>{[...allowedOperations].join(", ")}</small>
             <br></br>
             <b>Functions</b>: <small>{[...allowedFunctions].join(", ")}</small>
             <br></br>
             <b>Constants</b>: <small>{[...allowedConstants].join(", ")}</small>
-        </div>
+        </aside>
     </Tooltip>
 );
 
