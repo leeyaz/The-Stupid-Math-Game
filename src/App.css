@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@100..900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@300..700&family=Roboto+Slab:wght@100..900&display=swap");
 :root,
 [data-bs-theme="light"] {
     --backing: #ffffff;
@@ -11,6 +10,7 @@
     --accent: #ff9100;
     --success: #34c209;
     --invalid: #c5400b;
+    --font-family: "Roboto Slab";
 }
 
 [data-bs-theme="dark"] {
@@ -47,6 +47,20 @@
     --invalid: #ff0000;
 }
 
+[data-bs-theme="haxer"] {
+    --backing: #000000;
+    --lines: #0f550f;
+    --main: #00ff00;
+    --main-dark: #000000;
+    --secondary: #00bb00;
+    --faint: #00ff00;
+    --accent: #00ff00;
+    --success: #00ff00;
+    --invalid: #ff0000;
+
+    --font-family: "Fira Code", monospace;
+}
+
 @keyframes jump {
     0%,
     100% {
@@ -70,7 +84,7 @@
 }
 
 * {
-    font-family: "Roboto Slab";
+    font-family: var(--font-family);
     font-weight: 400;
 }
 
@@ -159,6 +173,10 @@ html {
     }
 }
 #info {
+    * {
+        border-radius: 0;
+    }
+
     #leaderboard {
         #leaderboard-header th {
             color: var(--main-dark);
@@ -389,6 +407,7 @@ html {
                 padding: 3px 0.5em;
                 text-align: start;
                 font-size: 14px;
+                font-family: var(--font-family) !important;
             }
 
             .dropdown-item:focus {

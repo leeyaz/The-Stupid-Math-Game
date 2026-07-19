@@ -1,8 +1,8 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function CookieDisclaimer({ show, onAccept, onDecline }) {
+function CookieDisclaimer({ show, onHide }) {
     return (
         <Modal show={show} centered backdrop="static" keyboard={false}>
             <Modal.Header>
@@ -14,10 +14,13 @@ function CookieDisclaimer({ show, onAccept, onDecline }) {
                 DATA AT ALL!!!!
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={onAccept}>
+                <Button variant="primary" onClick={() => onHide(true)}>
                     I want to have my streak saved
                 </Button>
-                <Button variant="outline-secondary" onClick={onDecline}>
+                <Button
+                    variant="outline-secondary"
+                    onClick={() => onHide(false)}
+                >
                     Nah
                 </Button>
             </Modal.Footer>
@@ -33,6 +36,11 @@ function CookieConfirmationDialog({
     ...props
 }) {
     const [streakState, setStreakState] = useState(streakEnabled);
+
+    useEffect(() => {
+        setStreakState(streakEnabled);
+    }, [streakEnabled]);
+
     const footer = (
         <Modal.Footer>
             <Button

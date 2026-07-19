@@ -20,42 +20,41 @@ function Instructions(props) {
                     The goal is to use the <i>START</i> number, along with the{" "}
                     <i>PROPAGATE</i> number, to reach the <i>TARGET</i> with the{" "}
                     <b>shortest</b> mathematical expression you can find.
-                    <br></br>
-                    <br></br>
-                    <div
-                        className="p-3 background m-auto"
-                        style={{ width: "80%" }}
-                        inert
-                    >
-                        <div className="daily-numbers d-flex justify-content-evenly flex-column pb-3">
-                            <span>
-                                START: <b>36</b>
-                            </span>
-                            <span>
-                                PROPAGATE: <b>33</b>
-                            </span>
-                            <span>
-                                TARGET: <b>41</b>
-                            </span>
-                        </div>
-                        <div className="d-flex flex-column">
-                            <textarea
-                                type="text"
-                                className="math-input text-center rounded-3"
-                                value="ceil(sqr(36)/33 + 33/33)"
-                                rows="1"
-                                style={{
-                                    maxWidth: "500px",
-                                    margin: "auto",
-                                }}
-                                readOnly
-                            ></textarea>
-                            <p className="m-2">
-                                =<b style={{ color: "var(--success)" }}> 41</b>
-                            </p>
-                        </div>
+                </p>
+                <div
+                    className="p-3 background m-auto"
+                    style={{ width: "80%" }}
+                    inert
+                >
+                    <div className="daily-numbers d-flex justify-content-evenly flex-column pb-3">
+                        <span>
+                            START: <b>36</b>
+                        </span>
+                        <span>
+                            PROPAGATE: <b>33</b>
+                        </span>
+                        <span>
+                            TARGET: <b>41</b>
+                        </span>
                     </div>
-                    <br></br>
+                    <div className="d-flex flex-column">
+                        <textarea
+                            type="text"
+                            className="math-input text-center rounded-3"
+                            value="ceil(sqr(36)/33 + 33/33)"
+                            rows="1"
+                            style={{
+                                maxWidth: "500px",
+                                margin: "auto",
+                            }}
+                            readOnly
+                        ></textarea>
+                        <p className="m-2">
+                            =<b style={{ color: "var(--success)" }}> 41</b>
+                        </p>
+                    </div>
+                </div>
+                <p>
                     <div style={{ maxWidth: "90%", margin: "auto" }}>
                         <mark>
                             Today, <b>{start}</b> must be the first number to

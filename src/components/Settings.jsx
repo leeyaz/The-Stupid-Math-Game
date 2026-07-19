@@ -24,7 +24,13 @@ function Settings({ show, onHide, ...props }) {
 
     const [streakEnabled, setStreakEnabled] = useState(isStreakEnabled());
     useEffect(() => {
+        console.log("USE ERFFECT");
         streakEnabled ? enableStreak() : disableStreak();
+
+        window.addEventListener("streakChanged", () => {
+            console.log("FOUND STREAK CHANGE", isStreakEnabled());
+            setStreakEnabled(isStreakEnabled());
+        });
     }, [streakEnabled]);
 
     const [showStreakConfirmation, setShowStreakConfirmation] = useState(false);
@@ -137,7 +143,7 @@ function Settings({ show, onHide, ...props }) {
             <CookieConfirmationDialog
                 show={showStreakConfirmation}
                 onHide={() => setShowStreakConfirmation(false)}
-                setStreakEnabled={(val) => setStreakEnabled(val)}
+                setStreakEnabled={setStreakEnabled}
                 streakEnabled={streakEnabled}
             />
         </>

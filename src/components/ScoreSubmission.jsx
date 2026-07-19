@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 function ScoreSubmission(props) {
     const [showInput, setShowInput] = useState(false);
     const [playerName, setPlayerName] = useState("");
-    const [valid, setValid] = useState(false);
+    const [validated, setValidated] = useState(false);
 
     const formRef = useRef(null);
 
@@ -20,23 +20,21 @@ function ScoreSubmission(props) {
     };
 
     const handleChange = (e) => {
-        if (valid) {
-            setValid(false);
+        if (validated) {
+            setValidated(false);
         }
         setPlayerName(e.target.value);
     };
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         const form = e.currentTarget;
         if (form) {
             if (form.checkValidity() === false) {
-                setValid(true);
-                e.preventDefault();
-                e.stopPropogation();
+                setValidated(true);
             } else {
-                setValid(false);
                 setShowInput(false);
-                // handleAddScore();
+                handleAddScore();
             }
         }
     };
@@ -72,7 +70,7 @@ function ScoreSubmission(props) {
                     <Form
                         ref={formRef}
                         noValidate
-                        validated={valid}
+                        validated={validated}
                         onSubmit={handleSubmit}
                         className="d-flex flex-column"
                     >
