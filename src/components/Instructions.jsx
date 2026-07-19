@@ -51,7 +51,7 @@ function Instructions(props) {
                                 readOnly
                             ></textarea>
                             <p className="m-2">
-                                =<b style={{ color: "#00ff00" }}> 41</b>
+                                =<b style={{ color: "var(--success)" }}> 41</b>
                             </p>
                         </div>
                     </div>

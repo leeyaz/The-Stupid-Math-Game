@@ -1,4 +1,4 @@
-export const THEMES_LIST = ["light", "dark", "dark-contrast"];
+export const THEMES_LIST = ["light", "light-contrast", "dark", "dark-contrast"];
 
 export function getColourTheme() {
     const theme = localStorage.getItem("theme");
