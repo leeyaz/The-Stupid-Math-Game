@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@300..700&family=Roboto+Slab:wght@100..900&display=swap");
-:root,
+@import url("https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@300..700&family=Playwrite+NZ+Basic:wght@100..400&family=Playwrite+NZ+Guides&family=Playwrite+NZ:wght@100..400&family=Roboto+Slab:wght@100..900&family=Schoolbell&family=Sixtyfour&family=The+Girl+Next+Door&display=swap");
 [data-bs-theme="light"] {
     --backing: #ffffff;
     --lines: #ebedfc;
@@ -10,6 +9,7 @@
     --accent: #ff9100;
     --success: #34c209;
     --invalid: #c5400b;
+    --bg-image: none;
     --font-family: "Roboto Slab";
 }
 
@@ -22,6 +22,34 @@
     --accent: #ffae00;
     --success: #34c209;
     --invalid: #c5400b;
+    --bg-image: none;
+    --font-family: "Roboto Slab";
+}
+
+[data-bs-theme="blue"] {
+    --backing: #a1c2ee;
+    --lines: #7ea5c9;
+    --main: #1a1074;
+    --secondary: #08043f;
+    --faint: #7e93d8;
+    --accent: #001aff;
+    --success: #3700ff;
+    --invalid: #c5400b;
+    --bg-image: none;
+    --font-family: "Roboto Slab";
+}
+
+[data-bs-theme="red"] {
+    --backing: #e68585;
+    --lines: #a05757;
+    --main: #3b0606;
+    --secondary: #290910;
+    --faint: #6b103d;
+    --accent: #bb2121;
+    --success: #1d800a;
+    --invalid: #8f1212;
+    --bg-image: none;
+    --font-family: "Roboto Slab";
 }
 
 [data-bs-theme="light-contrast"] {
@@ -33,6 +61,8 @@
     --accent: #004cff;
     --success: #005200;
     --invalid: #c20000;
+    --bg-image: none;
+    --font-family: "Roboto Slab";
 }
 
 [data-bs-theme="dark-contrast"] {
@@ -45,6 +75,8 @@
     --accent: #ff9900;
     --success: #00ff00;
     --invalid: #ff0000;
+    --bg-image: none;
+    --font-family: "Roboto Slab";
 }
 
 [data-bs-theme="haxer"] {
@@ -53,12 +85,155 @@
     --main: #00ff00;
     --main-dark: #000000;
     --secondary: #00bb00;
-    --faint: #00ff00;
+    --faint: #053d00;
     --accent: #00ff00;
     --success: #00ff00;
     --invalid: #ff0000;
+    --bg-image: none;
+    --font-family: "Fira Code";
+}
 
-    --font-family: "Fira Code", monospace;
+[data-bs-theme="sketch"] {
+    --backing: #ffffff;
+    --lines: #acdced;
+    --main: #494853;
+    --secondary: #929090;
+    --faint: #f48377;
+    --accent: #f48377;
+    --success: #00ff00;
+    --invalid: #ff0000;
+
+    --font-family: "Schoolbell", cursive;
+
+    --bg-image: none;
+}
+
+[data-bs-theme="frutiger-aero"] {
+    --backing: #111111;
+    --main: #dadada;
+    --secondary: #b4b4b4;
+    --faint: #6b6969;
+    --accent: #70ff4c;
+    --success: #00ff00;
+    --invalid: #ff0000;
+
+    --font-family: "Arial";
+
+    --bg-image: linear-gradient(
+        to bottom,
+        rgba(180, 180, 180, 0.8) 0,
+        rgba(128, 128, 128, 0.8) 3%,
+        rgba(78, 78, 78, 0.8) 20%,
+        rgba(41, 41, 41, 0.8) 50%,
+        rgba(10, 10, 10, 0.8) 51%,
+        rgba(8, 8, 8, 0.8) 60%,
+        rgba(31, 31, 31, 0.8) 100%
+    );
+    #leaderboard {
+        th {
+            background-image: var(--bg-image);
+        }
+
+        td {
+            background: linear-gradient(
+                to bottom,
+                rgba(66, 66, 66, 0.3),
+                rgba(39, 39, 39, 0.7)
+            );
+        }
+    }
+    h1,
+    h2,
+    h3 {
+        background-image: var(--bg-image);
+        border-top: 1px solid #424242;
+        border-left: 1px solid #424242;
+        border-bottom: 1px solid #131313;
+        border-right: 1px solid #424242;
+    }
+    header {
+        background: linear-gradient(
+            180deg,
+            rgba(172, 172, 172, 0.9) 0,
+            rgba(71, 71, 71, 0.9) 20%,
+            rgba(19, 19, 19, 0.9) 40%,
+            rgba(7, 7, 7, 0.93) 100%
+        );
+    }
+    .background {
+        background-image: url("fa_wallpaper.jpg");
+        background-size: cover;
+    }
+    #changelog,
+    #settings,
+    #instructions {
+        mark b {
+            color: black;
+        }
+        .modal-content {
+            background: rgba(0, 0, 0, 0);
+            border-radius: 20px !important;
+        }
+        .modal-header {
+            background: linear-gradient(
+                180deg,
+                rgba(172, 172, 172, 0.9) 0,
+                rgba(71, 71, 71, 0.9) 20%,
+                rgba(19, 19, 19, 0.9) 40%,
+                rgba(7, 7, 7, 0.93) 100%
+            );
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .modal-body {
+            background: linear-gradient(
+                180deg,
+                rgba(172, 172, 172, 0.9) 0,
+                rgba(71, 71, 71, 0.9) 20%,
+                rgba(19, 19, 19, 0.9) 40%,
+                rgba(7, 7, 7, 0.93) 100%
+            );
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+    }
+    button {
+        background-image: var(--bg-image);
+        border-top: 1px solid #424242;
+        border-left: 1px solid #424242;
+        border-bottom: 1px solid #131313;
+        border-right: 1px solid #424242;
+        color: var(--main);
+        --bs-btn-hover-color: white;
+        --bs-btn-hover-border-color: black;
+    }
+    main,
+    .main {
+        background: linear-gradient(
+            to bottom,
+            rgba(66, 66, 66, 0.3),
+            rgba(39, 39, 39, 0.7)
+        );
+        border-radius: 50px;
+        border: 1px solid rgba(236, 242, 249, 0.5);
+        box-shadow:
+            2px 2px 3px rgba(0, 0, 0, 0.8),
+            inset -1px -1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .header-button {
+        background: var(--bg-image);
+        border-right: 1px solid rgba(0, 0, 0, 0.5) !important;
+    }
+    .math-input {
+        background-image: linear-gradient(
+            to bottom,
+            rgba(146, 145, 145, 0.993) -25%,
+            rgba(231, 231, 231, 0.993) 40%,
+            rgba(231, 231, 231, 0.993) 60%,
+            rgba(122, 122, 122, 0.993) 125%
+        );
+        color: rgb(53, 53, 53);
+    }
 }
 
 @keyframes jump {
@@ -86,6 +261,7 @@
 * {
     font-family: var(--font-family);
     font-weight: 400;
+    color: var(--main);
 }
 
 .background {
@@ -174,7 +350,6 @@ html {
 }
 #info {
     * {
-        border-radius: 0;
     }
 
     #leaderboard {
@@ -198,6 +373,10 @@ html {
 
 #allowed-list {
     z-index: 0;
+    --bs-tooltip-bg: var(--main);
+    aside * {
+        color: var(--backing);
+    }
 }
 
 #instructions {
@@ -380,9 +559,10 @@ html {
         height: 40%;
         width: auto;
         aspect-ratio: 1/1;
-        border-color: var(--faint);
-
+        border-color: var(--accent);
+        background-color: var(--accent);
         &:not(:checked) {
+            border-color: var(--faint);
             background-color: var(--backing);
         }
     }
@@ -403,6 +583,7 @@ html {
             min-width: fit-content;
             .dropdown-item {
                 background-color: var(--backing);
+                background-image: var(--bg-image, none);
                 border: 1px solid var(--faint);
                 padding: 3px 0.5em;
                 text-align: start;
@@ -475,5 +656,11 @@ html {
         .invalid-feedback {
             color: #ff0000;
         }
+    }
+}
+
+#streak-confirmation-dialog {
+    .modal-content {
+        border-color: var(--faint);
     }
 }

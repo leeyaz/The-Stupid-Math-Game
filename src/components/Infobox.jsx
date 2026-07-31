@@ -15,7 +15,7 @@ import {
 } from "../utils/ParseExpressionUtil";
 
 const renderAllowed = (props) => (
-    <Tooltip role="tooltip" {...props}>
+    <Tooltip role="tooltip" id="allowed-list" {...props}>
         <aside className="text-start">
             <b>Operations</b>:{" "}
             <small>{[...allowedOperations].join(", ")}</small>
@@ -75,11 +75,16 @@ function Infobox(props) {
                 </Button>{" "}
                 <OverlayTrigger
                     placement={placement}
-                    trigger="focus"
+                    trigger="click"
                     delay={{ show: 0, hide: 0 }}
                     overlay={renderAllowed}
                 >
-                    <Button id="allowed-list-button">What's Allowed?</Button>
+                    <Button
+                        id="allowed-list-button"
+                        aria-controls="allowed-list"
+                    >
+                        What's Allowed?
+                    </Button>
                 </OverlayTrigger>
             </div>
             <Collapse in={showLeaderboard}>

@@ -22,7 +22,7 @@ function Instructions(props) {
                     <b>shortest</b> mathematical expression you can find.
                 </p>
                 <div
-                    className="p-3 background m-auto"
+                    className="p-3 background m-auto main"
                     style={{ width: "80%" }}
                     inert
                 >

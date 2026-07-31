@@ -60,8 +60,9 @@ function CookieConfirmationDialog({
         </Modal.Footer>
     );
 
-    return streakEnabled ? (
+    return (
         <Modal
+            id="streak-confirmation-dialog"
             show={show}
             onHide={() => onHide()}
             onExited={() => {
@@ -69,29 +70,19 @@ function CookieConfirmationDialog({
             }}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Turning your streak OFF!!</Modal.Title>
+                <Modal.Title>
+                    {streakEnabled
+                        ? "Turning your streak OFF!"
+                        : "Turning your streak ON!!"}
+                    !
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <p>
-                    Your streak will be completely deleted, gone forever. If you
-                    re-enable your streak, it will be back to 0.
+                    {streakEnabled
+                        ? "Your streak will be completely deleted, gone forever. If you re-enable your streak, it will be back to 0."
+                        : "Your streak will be kept as a cookie across visits."}
                 </p>
-            </Modal.Body>
-            {footer}
-        </Modal>
-    ) : (
-        <Modal
-            show={show}
-            onHide={() => onHide()}
-            onExited={() => {
-                setStreakEnabled(streakState);
-            }}
-        >
-            <Modal.Header closeButton>
-                <Modal.Title>Turning your streak ON!!</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <p>Your streak will be kept as a cookie across visits.</p>
             </Modal.Body>
             {footer}
         </Modal>

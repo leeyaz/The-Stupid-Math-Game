@@ -2,6 +2,10 @@ export const THEMES_LIST = [
     "light",
     "dark",
     "haxer",
+    "blue",
+    "red",
+    "sketch",
+    "frutiger-aero",
     "light-contrast",
     "dark-contrast",
 ];
