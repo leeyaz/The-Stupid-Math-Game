@@ -1,10 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { evaluate, ParseExpression } from "../utils/ParseExpressionUtil.js";
-import { GetDailyNumbers } from "../utils/DailyNumbers.js";
+import { useDailyNumbers } from "../utils/DailyNumbers.js";
 import { Button } from "react-bootstrap";
 
 function Input({ onSubmit, showDisplay }) {
-    const { start, continuing, target } = GetDailyNumbers();
+    const { start, continuing, target } = useDailyNumbers();
     const [currInput, setCurrInput] = useState("");
     const [currResult, setCurrResult] = useState("~");
     const taRef = useRef(null);

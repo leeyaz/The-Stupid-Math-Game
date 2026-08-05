@@ -14,6 +14,7 @@ import {
 } from "./utils/Streak";
 import CookieDisclaimer from "./components/CookieDisclaimer";
 // import { getScores } from "./utils/Scoreboard";
+import { useDailyNumbers } from "./utils/DailyNumbers";
 
 import {
     onSnapshot,
@@ -29,6 +30,7 @@ function App() {
     const [scores, setScores] = useState([]);
     const [showDisclaimer, setShowDisclaimer] = useState(!hasSeenDisclaimer());
     const [streakEnabled, setStreakEnabled] = useState(!hasDeclinedCookies());
+    const { start, continuing, target, dayKey } = useDailyNumbers();
 
     useEffect(() => {
         refreshCookie();
@@ -88,7 +90,7 @@ function App() {
             setScores(ranked);
         });
         return () => unsubscribe();
-    }, []);
+    }, [dayKey]);
 
     return (
         <>
@@ -110,7 +112,11 @@ function App() {
                     </h1>
                 </div>
 
-                <Infobox lastScore={lastScore} scores={scores} />
+                <Infobox lastScore={lastScore}
+                        scores={scores}
+                        start={start}
+                        continuing={continuing}
+                        target={target} />
                 {/*at the centre*/}
                 <Calculator
                     onSetLastScore={setLastScore}
