@@ -2,7 +2,7 @@ import { all, create, exp, number } from "mathjs";
 import { GetDailyNumbers } from "./DailyNumbers";
 
 const math = create(all);
-const { start, continuing, target } = GetDailyNumbers();
+//const { start, continuing, target } = GetDailyNumbers();
 
 export const allowedOperations = new Set([
     "+",
@@ -67,18 +67,26 @@ function summ(args, math, scope) {
 summ.rawArgs = true;
 math.import({ summ });
 
-export const allowedNumConstants = new Set([
-    0,
-    10,
-    Number(start),
-    Number(continuing),
-]);
+// export const allowedNumConstants = new Set([
+//     0,
+//     10,
+//     Number(start),
+//     Number(continuing),
+// ]);
+
+function getAllowedNumConstants() {
+    const { start, continuing } = GetDailyNumbers();
+    return new Set([0, 10, Number(start), Number(continuing)]);
+}
+
+
 export const allowedConstants = new Set(["pi", "e", "k", 0, 10]); // 10 does not get parsed as an allowed constant. it's here for the ui
 // it get filters out via allowedNumConstants (never gets checked for invalid number/etc)
 
 const allowedSymbols = allowedFunctions.union(allowedConstants);
 
 function checkAllowed(expression) {
+    const allowedNumConstants = getAllowedNumConstants();
     let nodeTree;
     try {
         nodeTree = math.parse(expression);
@@ -129,6 +137,7 @@ export function evaluate(expression) {
 
 // will return an array: [0] is the output string, [1] is the score
 export function ParseExpression(expression) {
+    const { start, continuing, target } = GetDailyNumbers(); 
     let output;
     let startingNumber = start;
     let continuingNumber = continuing;
