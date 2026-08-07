@@ -1,12 +1,13 @@
 [
     {
         "version": "1.2",
-        "date": "July 30, 2026",
+        "date": "August 6, 2026",
         "description": "",
         "added": [],
         "changed": ["Parentheses only autocomplete if there is not a character directly to the right of the cursor.",
                     "Removed leftover print statements.",
-                    "Changed colouring of leaderboard to be based on rank (same rank = same colour)"],
+                    "Changed colouring of leaderboard to be based on rank (same rank = same colour).",
+                    "Game automatically updates at midnight."],
         "fixed": ["Date on update 1.1 was incorrect.",
                     "Streak text and icon would not update when toggling the streak after already submitting a score.",
                     "Autofilled parentheses now correctly supports input history.",
