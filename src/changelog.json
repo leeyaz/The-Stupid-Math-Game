@@ -1,15 +1,31 @@
 [
     {
+        "version": "1.2",
+        "date": "August 6, 2026",
+        "description": "",
+        "added": [],
+        "changed": ["Parentheses only autocomplete if there is not a character directly to the right of the cursor.",
+                    "Removed leftover print statements.",
+                    "Changed colouring of leaderboard to be based on rank (same rank = same colour).",
+                    "Game automatically updates at midnight."],
+        "fixed": ["Date on update 1.1 was incorrect.",
+                    "Streak text and icon would not update when toggling the streak after already submitting a score.",
+                    "Autofilled parentheses now correctly supports input history.",
+                    "Pressing enter on the score submission screen would refresh the page.",
+                    "Using the starting number more than once was incorrectly allowed.",
+                    "Changelog tooltip would reappear after closing the changelog."]        
+    },
+    {
         "version": "1.1",
-        "date": "July 99, 2026",
+        "date": "July 12, 2026",
         "description": "",
         "added": [],
         "changed": [],
         "fixed": ["Fixed the bug when you toggle streak off and on, the streak no longer updates without reload. _Konami code ahh bug -E_",
-                  "The flame of the streak will be grey until each day's submission no matter what the previous streak amount is (Previously, the streak flame would only be grey if there was previously no streak)"]
+                    "The flame of the streak will be grey until each day's submission no matter what the previous streak amount is (Previously, the streak flame would only be grey if there was previously no streak)"]
     },
     {
-        "version": "1",
+        "version": "1.0",
         "date": "July 10, 2026",
         "description": "Finally, *NEW CONTENT*. _What a predictable creature!_",
         "added": ["*Overhauled Scoring*\nScores are now based off of the *amount of tokens* in your expression. In other words, your scores is calculated from the number of functions, operators, and numbers used (_without regard for their individual lengths_).",

@@ -57,6 +57,7 @@ export function updateStreak() {
         // first time ever
         setCookie({ streak: 1, lastPlayed: today });
         animateStreak();
+        window.dispatchEvent(new Event("streakChanged"));
         return 1;
     }
 
@@ -104,8 +105,13 @@ export function hasDeclinedCookies() {
 
 export function setDeclinedCookies() {
     localStorage.setItem("cookiesDeclined", "true");
+    const streakFlame = document.getElementById("streak-icon");
+    if (streakFlame && streakFlame.classList.contains("animate")) {
+        streakFlame.classList.remove("animate");
+    }
 }
 
 export function deleteStreakCookie() {
     document.cookie = `${COOKIE_NAME}=; expires=Tue, 06 Jun 2006 00:00:00 UTC; path=/`; //haha guess who's birthday
+    //... it couldn't be.. could it?
 }

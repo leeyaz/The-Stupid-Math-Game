@@ -1,11 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { evaluate, ParseExpression } from "../utils/ParseExpressionUtil.js";
-import { GetDailyNumbers } from "../utils/DailyNumbers.js";
+import { useDailyNumbers } from "../utils/DailyNumbers.js";
 import { Button } from "react-bootstrap";
-import { flushSync } from "react-dom";
 
 function Input({ onSubmit, showDisplay }) {
-    const { start, continuing, target } = GetDailyNumbers();
+    const { start, continuing, target } = useDailyNumbers();
     const [currInput, setCurrInput] = useState("");
     const [currResult, setCurrResult] = useState("~");
     const taRef = useRef(null);
@@ -32,22 +31,25 @@ function Input({ onSubmit, showDisplay }) {
         const onBeforeInput = (e) => {
             const start = ta.selectionStart;
             const end = ta.selectionEnd;
-            if (e.data?.length === 1 && e.data === "(") {
+            if (
+                e.data?.length === 1 &&
+                e.data === "(" &&
+                (ta.value[end] === " " || !ta.value[end])
+            ) {
+                // pressed "(", now insert ")" at end
                 e.preventDefault();
+
                 const selected = ta.value.slice(start, end);
-                console.log(
-                    start,
-                    end,
-                    ta.value.slice(0, start),
-                    selected,
-                    ta.value.slice(end, ta.value.length),
-                );
-                ta.value =
-                    ta.value.slice(0, start) +
-                    "(" +
-                    selected +
-                    ")" +
-                    ta.value.slice(end, ta.value.length);
+
+                const wrappedText = "(" + selected + ")";
+
+                if (!document.execCommand("insertText", false, wrappedText)) {
+                    // if for some reason execCommand doesn't go through
+                    ta.value =
+                        ta.value.slice(0, start) +
+                        wrappedText +
+                        ta.value.slice(end, ta.value.length);
+                }
                 ta.selectionStart = start + 1;
                 ta.selectionEnd = end + 1;
 
@@ -67,14 +69,21 @@ function Input({ onSubmit, showDisplay }) {
                 ta.value[end] == ")" &&
                 e.inputType == "deleteContentBackward"
             ) {
+                // remove parentheses pair that was just created.
                 e.preventDefault();
-                ta.value =
-                    ta.value.slice(0, start - 1) +
-                    ta.value.substring(start + 1);
+
+                ta.setSelectionRange(end - 1, end + 1);
+
+                if (!document.execCommand("insertText", false, "")) {
+                    ta.value =
+                        ta.value.slice(0, start - 1) +
+                        ta.value.substring(start + 1);
+                }
                 ta.selectionStart = start - 1;
                 ta.selectionEnd = start - 1;
                 setCurrInput(ta.value);
             }
+
             try {
                 setCurrResult(evaluate(ta.value));
             } catch (e) {

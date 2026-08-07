@@ -158,6 +158,11 @@ html {
     color: var(--main-dark);
 }
 
+.leaderboard-row-even * {
+    --bs-table-color-type: var(--bs-table-striped-color);
+    --bs-table-bg-type: var(--bs-table-striped-bg);
+}
+
 #allowed-list-button {
     background-color: var(--main);
     color: var(--backing);

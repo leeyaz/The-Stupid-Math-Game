@@ -17,7 +17,7 @@ function Leaderboard(props) {
     // console.log(scores);
     return (
         <div className="leaderboard ">
-            <table className="table table-striped table-sm">
+            <table className="table table-sm">
                 <thead className="">
                     <tr className="leaderboard-header">
                         <th colSpan={4} className="p-0 border-0">
@@ -25,15 +25,6 @@ function Leaderboard(props) {
                                 <h5 className="m-0 p-0">
                                     <b>LEADERBOARD</b>
                                 </h5>
-                                {/* <Button
-                                    variant="outline-dark"
-                                    size="sm"
-                                    onClick={handleRefresh}
-                                >
-                                    <small>
-                                        <b>REFRESH</b>
-                                    </small>
-                                </Button> */}
                             </div>
                         </th>
                     </tr>
@@ -47,7 +38,7 @@ function Leaderboard(props) {
                 </thead>
                 <tbody>
                     {props.scores.map((entry, i) => (
-                        <tr key={i}>
+                        <tr key={i} className={"leaderboard-row" + (entry.rank % 2 == 0 ? "-even" : "")}>
                             <td>{entry.rank}</td>
                             <td className="text-break">
                                 {entry.name.slice(0, 39)}

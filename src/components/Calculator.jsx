@@ -2,7 +2,11 @@ import Input from "./Input";
 import Display from "./Display";
 import { ParseExpression } from "../utils/ParseExpressionUtil";
 import { Fragment, useState } from "react";
-import { hasDeclinedCookies, deleteStreakCookie, updateStreak } from "../utils/Streak";
+import {
+    hasDeclinedCookies,
+    deleteStreakCookie,
+    updateStreak,
+} from "../utils/Streak";
 
 function Calculator({ onSetLastScore, streakEnabled }) {
     const [output, setOutput] = useState("");
@@ -13,13 +17,10 @@ function Calculator({ onSetLastScore, streakEnabled }) {
         setDisplayActive(true);
         try {
             const [output, score] = ParseExpression(value);
-            // const noWhiteSpace = value.replace(/\s/g, "");
-            // const score = Math.round(50000 / noWhiteSpace.length ** 2);
-
             setOutput("Yay you did it! Your score is " + score.toString());
             setValidity(true);
             onSetLastScore(score);
-            
+
             if (streakEnabled) {
                 updateStreak();
             }
@@ -31,19 +32,8 @@ function Calculator({ onSetLastScore, streakEnabled }) {
             setOutput(err.message);
             setValidity(false);
         }
-        // if (numContinuing !== -1) {
-        //     const noWhiteSpace = value.replace(/\s/g, "");
-        //     const score = Math.round(50000 / noWhiteSpace.length ** 2);
-
-        //     setOutput("Yay you did it! Your score is " + score.toString());
-        //     setValidity(true);
-        //     onSetLastScore(score);
-        // } else {
-        //     setOutput(output);
-        //     setValidity(false);
-        // }
     };
-    
+
     return (
         <div className="calculator">
             <Input

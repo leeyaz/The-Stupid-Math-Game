@@ -1,0 +1,26 @@
+name: One-Way Auto Merge
+
+on:
+  push:
+    branches:
+      - edit # The branch you are listening to for new commits
+
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history so git can merge properly
+
+      - name: Set up Git User
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge and Push
+        run: |
+          git checkout stats-panel # The branch receiving the changes
+          git merge origin/edit --no-edit
+          git push origin stats-panel
