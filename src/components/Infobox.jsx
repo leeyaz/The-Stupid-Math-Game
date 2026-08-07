@@ -4,7 +4,6 @@ import Leaderboard from "./Leaderboard";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { useState, useEffect, useRef } from "react";
-import { GetDailyNumbers } from "../utils/DailyNumbers";
 
 import Collapse from "react-bootstrap/Collapse";
 
@@ -28,7 +27,7 @@ const renderAllowed = (props) => (
 );
 
 function Infobox(props) {
-    const { start, continuing, target } = GetDailyNumbers();
+    const { start, continuing, target } = props;
 
     const [placement, setPlacement] = useState("right");
     const [showInstructions, setShowInstructions] = useState(false);
@@ -111,6 +110,9 @@ function Infobox(props) {
                 show={showInstructions}
                 onHide={() => setShowInstructions(false)}
                 fullscreen={"sm-down"}
+                start={start}
+                continuing={continuing}
+                target={target}
             />
         </div>
     );

@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 function mulberry32(a) {
     return function () {
         let t = (a += 0x6d2b79f5);
@@ -27,6 +29,8 @@ export function GetDailyNumbers() {
     };
 
     // ensure that the solution can never just be the starting number
+    // can't this be abused by sign()? could be revamped ig
+    // i think is fine cuz target = start + 1 can alrdy happen w/o it.
     if (numbers.target === numbers.start) {
         numbers.target = numbers.start + 1;
     }
@@ -36,4 +40,41 @@ export function GetDailyNumbers() {
         JSON.stringify({ date: today, numbers }),
     );*/
     return numbers;
+}
+
+function msUntilMidnight() {
+    const now = new Date();
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0);
+    return midnight.getTime() - now.getTime();
+}
+
+export function useDailyNumbers() {
+    const [numbers, setNumbers] = useState(() => GetDailyNumbers());
+    const [dayKey, setDayKey] = useState(() => new Date().toDateString());
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setNumbers(GetDailyNumbers());
+            setDayKey(new Date().toDateString());
+        }, msUntilMidnight() + 500);
+
+        function handleVisibility() {
+            if (document.visibilityState === "visible") {
+                const currentDay = new Date().toDateString();
+                if (currentDay !== dayKey) {
+                    setNumbers(GetDailyNumbers());
+                    setDayKey(currentDay);
+                }
+            }
+        }
+        document.addEventListener("visibilitychange", handleVisibility);
+
+        return () => {
+            clearTimeout(timeout);
+            document.removeEventListener("visibilitychange", handleVisibility);
+        };
+    }, [numbers, dayKey]);
+
+    return { ...numbers, dayKey };
 }

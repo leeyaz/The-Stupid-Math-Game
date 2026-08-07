@@ -13,7 +13,7 @@ import {
     isStreakActive,
     setSeenDisclaimer,
 } from "./utils/Streak";
-
+import { useDailyNumbers } from "./utils/DailyNumbers";
 import {
     onSnapshot,
     collection,
@@ -27,6 +27,7 @@ function App() {
     // SCORES
     const [lastScore, setLastScore] = useState(null);
     const [scores, setScores] = useState([]);
+    const { start, continuing, target, dayKey } = useDailyNumbers();
     useEffect(() => {
         const today = new Date().toDateString();
         const q = query(
@@ -65,7 +66,7 @@ function App() {
             setScores(ranked);
         });
         return () => unsubscribe();
-    }, []);
+    }, [dayKey]);
 
     // STREAK
     const [streak, setStreak] = useState(getStreak());
@@ -110,7 +111,11 @@ function App() {
                     </h1>
                 </div>
 
-                <Infobox lastScore={lastScore} scores={scores} />
+                <Infobox lastScore={lastScore}
+                        scores={scores}
+                        start={start}
+                        continuing={continuing}
+                        target={target} />
                 {/*at the centre*/}
                 <Calculator onSetLastScore={setLastScore} />
 

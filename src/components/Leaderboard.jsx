@@ -22,7 +22,13 @@ function Leaderboard({ scores, ...props }) {
                 </thead>
                 <tbody>
                     {scores.map((entry, i) => (
-                        <tr key={i}>
+                        <tr
+                            key={i}
+                            className={
+                                "leaderboard-row" +
+                                (entry.rank % 2 == 0 ? "-even" : "")
+                            }
+                        >
                             <td>{entry.rank}</td>
                             <td className="text-break">
                                 {entry.name.slice(0, 39)}

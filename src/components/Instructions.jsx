@@ -1,9 +1,9 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { GetDailyNumbers } from "../utils/DailyNumbers";
-const { start, continuing, target } = GetDailyNumbers();
+//import { useDailyNumbers } from "../utils/DailyNumbers";
+//const { start, continuing, target } = useDailyNumbers(); oopsies
 
-function Instructions(props) {
+function Instructions({ start, continuing, target, ...props }) {
     return (
         <Modal
             {...props}
