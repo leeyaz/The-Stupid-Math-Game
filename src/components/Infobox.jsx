@@ -81,6 +81,8 @@ function Infobox(props) {
                     <Button
                         id="allowed-list-button"
                         aria-controls="allowed-list"
+                        style={{ cursor: "pointer" }}
+                        tabIndex={0}
                     >
                         What's Allowed?
                     </Button>
