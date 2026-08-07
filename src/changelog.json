@@ -13,7 +13,8 @@
                     "Autofilled parentheses now correctly supports input history.",
                     "Pressing enter on the score submission screen would refresh the page.",
                     "Using the starting number more than once was incorrectly allowed.",
-                    "Changelog tooltip would reappear after closing the changelog."]        
+                    "Changelog tooltip would reappear after closing the changelog.",
+                    "'What's Allowed' popup wouldn't work on safari"]        
     },
     {
         "version": "1.1",

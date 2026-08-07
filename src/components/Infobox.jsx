@@ -69,7 +69,12 @@ function Infobox(props) {
                     delay={{ show: 0, hide: 0 }}
                     overlay={renderAllowed}
                 >
-                    <Button variant="outline-dark" id="allowed-list-button">
+                    <Button
+                        variant="outline-dark"
+                        id="allowed-list-button"
+                        style={{ cursor: "pointer" }}
+                        tabIndex={0}
+                    >
                         What's Allowed?
                     </Button>
                 </OverlayTrigger>
@@ -84,7 +89,9 @@ function Infobox(props) {
             </Collapse>
 
             <div className="pt-5">
-                <h3><b>Today's Numbers</b></h3>
+                <h3>
+                    <b>Today's Numbers</b>
+                </h3>
                 <div className="daily-numbers d-flex justify-content-evenly flex-column">
                     <span>
                         START: <b>{start}</b>
