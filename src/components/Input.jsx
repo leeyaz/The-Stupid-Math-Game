@@ -34,7 +34,7 @@ function Input({ onSubmit, showDisplay }) {
             if (
                 e.data?.length === 1 &&
                 e.data === "(" &&
-                (ta.value[end] === " " || !ta.value[end])
+                (ta.value[end] === " " || ta.value[end] === ")" ||!ta.value[end])
             ) {
                 // pressed "(", now insert ")" at end
                 e.preventDefault();
