@@ -71,6 +71,7 @@ export function updateStreak() {
         const newStreak = cookie.streak + 1;
         setCookie({ streak: newStreak, lastPlayed: today });
         animateStreak();
+        window.dispatchEvent(new Event("streakChanged"));
         return newStreak;
     }
 
